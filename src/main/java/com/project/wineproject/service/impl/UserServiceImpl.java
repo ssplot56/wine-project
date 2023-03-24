@@ -20,6 +20,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User update(Long id, User user) {
+        user.setId(id);
+        return userRepository.save(user);
+    }
+
+    @Override
     public User findById(Long id) {
         return userRepository.findById(id).orElseThrow(
                 () -> new RuntimeException("User with id: " + id + " not found."));

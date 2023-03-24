@@ -6,10 +6,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import java.time.LocalDate;
-import java.util.List;
 import java.util.Set;
 import jakarta.persistence.Table;
 import lombok.Getter;
@@ -32,7 +30,7 @@ public class User {
     @OneToOne(cascade = CascadeType.ALL)
     private Address address;
     @OneToOne(cascade = CascadeType.ALL)
-    Card card;
+    private Card card;
     @ManyToMany
-    Set<Role> roles;
+    private Set<Role> roles;
 }

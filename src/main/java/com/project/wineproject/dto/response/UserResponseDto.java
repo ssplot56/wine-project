@@ -2,6 +2,7 @@ package com.project.wineproject.dto.response;
 
 import com.project.wineproject.model.Address;
 import com.project.wineproject.model.Card;
+import com.project.wineproject.model.ShoppingCart;
 import com.project.wineproject.model.Role;
 import java.time.LocalDate;
 import java.util.Set;
@@ -19,6 +20,7 @@ public class UserResponseDto {
     private String phoneNumber;
     private LocalDate birthDate;
     private Address address;
+    private ShoppingCart shoppingCart;
     private Card card;
     private Set<Role> roles;
 }

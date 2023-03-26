@@ -19,5 +19,5 @@ public class Card {
     private String cardNumber;
     private int expiredMonth;
     private int expiredYear;
-    private int cvc;
+    private int cvv;
 }

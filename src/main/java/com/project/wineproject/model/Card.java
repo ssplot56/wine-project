@@ -7,7 +7,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
-import java.time.LocalDate;
 
 @Getter
 @Setter
@@ -17,8 +16,8 @@ public class Card {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String number;
-    private LocalDate expiredDate;
-    private Integer CVV;
-    private Double balance;
+    private String cardNumber;
+    private int expiredMonth;
+    private int expiredYear;
+    private int cvc;
 }

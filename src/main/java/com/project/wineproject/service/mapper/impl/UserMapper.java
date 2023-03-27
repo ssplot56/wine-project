@@ -20,7 +20,6 @@ public class UserMapper implements RequestDtoMapper<User, UserRequestDto>,
         user.setPhoneNumber(requestDto.getPhoneNumber());
         user.setBirthDate(requestDto.getBirthDate());
         user.setAddress(requestDto.getAddress());
-        user.setShoppingCart(requestDto.getShoppingCart());
         user.setRoles(requestDto.getRoles());
         return user;
     }
@@ -36,7 +35,6 @@ public class UserMapper implements RequestDtoMapper<User, UserRequestDto>,
         responseDto.setPhoneNumber(user.getPhoneNumber());
         responseDto.setBirthDate(user.getBirthDate());
         responseDto.setAddress(user.getAddress());
-        responseDto.setShoppingCart(user.getShoppingCart());
         responseDto.setRoles(user.getRoles());
         return responseDto;
     }

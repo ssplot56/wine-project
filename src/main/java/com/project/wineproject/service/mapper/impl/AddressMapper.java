@@ -12,7 +12,7 @@ public class AddressMapper implements RequestDtoMapper<Address, AddressRequestDt
         Address address = new Address();
         address.setCity(addressRequestDto.getCity());
         address.setStreet(addressRequestDto.getStreet());
-        address.setHouseNumber(address.getHouseNumber());
+        address.setHouseNumber(addressRequestDto.getHouseNumber());
         return address;
     }
 }

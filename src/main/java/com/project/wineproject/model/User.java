@@ -1,7 +1,6 @@
 package com.project.wineproject.model;
 
 import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -34,8 +33,6 @@ public class User {
     private LocalDate birthDate;
     @OneToOne(cascade = CascadeType.ALL)
     private Address address;
-    @OneToOne(cascade = CascadeType.ALL)
-    private ShoppingCart shoppingCart;
     @OneToMany
     @JoinTable(name = "users_cards",
             joinColumns = @JoinColumn(name = "user_id"),

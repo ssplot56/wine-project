@@ -1,7 +1,5 @@
 package com.project.wineshop.model;
 
-import com.project.wineshop.model.enums.ProductColor;
-import com.project.wineshop.model.enums.ProductType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -28,15 +26,30 @@ public class Product {
 
     @Column(length = 20)
     @Enumerated(EnumType.STRING)
-    private ProductColor productColor;
+    private Color color;
 
     @Column(length = 20)
     @Enumerated(EnumType.STRING)
-    private ProductType productType;
+    private Type type;
 
     @ManyToOne
     @JoinColumn(name = "manufacturer_id")
     private Manufacturer manufacturer;
 
     private Boolean inStock;
+
+    public enum Color {
+        RED,
+        WHITE,
+        PINK
+    }
+
+    public enum Type {
+        DRY,
+        SEMIDRY,
+        SEMISWEET,
+        SWEET,
+        BRUT,
+        SPARCLING
+    }
 }

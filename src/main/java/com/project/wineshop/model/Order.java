@@ -1,6 +1,5 @@
 package com.project.wineshop.model;
 
-import com.project.wineshop.model.enums.OrderStatus;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -36,5 +35,10 @@ public class Order {
 
     @Column(length = 20)
     @Enumerated(EnumType.STRING)
-    private OrderStatus orderStatus = OrderStatus.CREATED;
+    private Status status = Status.CREATED;
+
+    public enum Status {
+        CREATED,
+        FULFILLED
+    }
 }

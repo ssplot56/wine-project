@@ -24,6 +24,8 @@ public class Product {
 
     private String name;
 
+    private Double price;
+
     @Column(length = 20)
     @Enumerated(EnumType.STRING)
     private ProductColor productColor;

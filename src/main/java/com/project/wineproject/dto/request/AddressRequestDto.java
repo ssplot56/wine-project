@@ -6,7 +6,9 @@ import lombok.Setter;
 @Getter
 @Setter
 public class AddressRequestDto {
+    private String region;
     private String city;
     private String street;
-    private Integer houseNumber;
+    private String houseNumber;
+    private String flatNumber;
 }

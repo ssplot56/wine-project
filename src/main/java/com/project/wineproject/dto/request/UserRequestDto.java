@@ -19,7 +19,6 @@ public class UserRequestDto {
     private String phoneNumber;
     private LocalDate birthDate;
     private Address address;
-    private ShoppingCart shoppingCart;
     private Card card;
     private Set<Role> roles;
 }

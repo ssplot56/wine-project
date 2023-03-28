@@ -17,7 +17,7 @@ public class Card {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String cardNumber;
-    private int expiredMonth;
-    private int expiredYear;
-    private int cvv;
+    private String expiredMonth;
+    private String expiredYear;
+    private String cvv;
 }

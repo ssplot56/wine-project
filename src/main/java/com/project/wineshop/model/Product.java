@@ -22,8 +22,6 @@ public class Product {
 
     private String name;
 
-    private Double price;
-
     @Column(length = 20)
     @Enumerated(EnumType.STRING)
     private Color color;
@@ -37,6 +35,9 @@ public class Product {
     private Manufacturer manufacturer;
 
     private Boolean inStock;
+
+    private String grape;
+    private String taste;
 
     public enum Color {
         RED,

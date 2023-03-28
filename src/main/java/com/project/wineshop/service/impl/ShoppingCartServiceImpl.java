@@ -5,7 +5,6 @@ import com.project.wineshop.model.User;
 import com.project.wineshop.repository.ShoppingCartRepository;
 import com.project.wineshop.service.ShoppingCartService;
 import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 
 @Service

@@ -5,6 +5,7 @@ import com.project.wineshop.model.User;
 import com.project.wineshop.repository.ShoppingCartRepository;
 import com.project.wineshop.service.ShoppingCartService;
 import org.springframework.stereotype.Service;
+import java.util.ArrayList;
 
 @Service
 public class ShoppingCartServiceImpl implements ShoppingCartService {
@@ -16,9 +17,9 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 
     @Override
     public ShoppingCart registerNewShoppingCart(User user) {
-        ShoppingCart cart = cartRepository.findByUser(user).orElseThrow(
-                () -> new RuntimeException("Shopping cart not found!"));
+        ShoppingCart cart = new ShoppingCart();
         cart.setUser(user);
+        cart.setProducts(new ArrayList<>());
         return cartRepository.save(cart);
     }
 }

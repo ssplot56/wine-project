@@ -12,6 +12,8 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Data;
 
+import java.math.BigDecimal;
+
 @Data
 @Entity
 @Table(name = "products")
@@ -22,7 +24,7 @@ public class Product {
 
     private String name;
 
-    private Double price;
+    private BigDecimal price;
 
     @Column(length = 20)
     @Enumerated(EnumType.STRING)
@@ -37,6 +39,9 @@ public class Product {
     private Manufacturer manufacturer;
 
     private Boolean inStock;
+
+    private String grape;
+    private String taste;
 
     public enum Color {
         RED,

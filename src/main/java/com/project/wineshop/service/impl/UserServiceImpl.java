@@ -28,7 +28,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public User findById(Long id) {
         return userRepository.findById(id).orElseThrow(
-                () -> new RuntimeException("User with id: " + id + " not found."));
+                () -> new RuntimeException("Can't find user with id: " + id));
     }
 
     @Override

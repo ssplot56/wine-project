@@ -32,7 +32,13 @@ public class AddressServiceImpl implements AddressService {
     }
 
     @Override
-    public void delete(Long id) {
+    public Address update(Long id, Address address) {
+        address.setId(id);
+        return addressRepository.save(address);
+    }
+
+    @Override
+    public void deleteById(Long id) {
         addressRepository.deleteById(id);
     }
 }

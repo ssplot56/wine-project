@@ -18,4 +18,6 @@ public class Manufacturer {
     private String name;
 
     private String country;
+
+    private String vintage;
 }

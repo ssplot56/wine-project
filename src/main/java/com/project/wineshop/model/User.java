@@ -33,8 +33,6 @@ public class User {
     private LocalDate birthDate;
     @OneToOne(cascade = CascadeType.ALL)
     private Address address;
-    @OneToOne(cascade = CascadeType.ALL)
-    private ShoppingCart shoppingCart;
     @OneToMany
     @JoinTable(name = "users_cards",
             joinColumns = @JoinColumn(name = "user_id"),

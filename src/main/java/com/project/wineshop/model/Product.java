@@ -19,23 +19,18 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String name;
-
+    private Double price;
     @Column(length = 20)
     @Enumerated(EnumType.STRING)
     private Color color;
-
     @Column(length = 20)
     @Enumerated(EnumType.STRING)
     private Type type;
-
     @ManyToOne
     @JoinColumn(name = "manufacturer_id")
     private Manufacturer manufacturer;
-
     private Boolean inStock;
-
     private String grape;
     private String taste;
 

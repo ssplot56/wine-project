@@ -10,9 +10,11 @@ public class AddressMapper implements RequestDtoMapper<Address, AddressRequestDt
     @Override
     public Address mapToModel(AddressRequestDto addressRequestDto) {
         Address address = new Address();
+        address.setRegion(addressRequestDto.getRegion());
         address.setCity(addressRequestDto.getCity());
         address.setStreet(addressRequestDto.getStreet());
         address.setHouseNumber(addressRequestDto.getHouseNumber());
+        address.setFlatNumber(address.getFlatNumber());
         return address;
     }
 }

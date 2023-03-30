@@ -35,7 +35,7 @@ public class ProductController {
     }
 
     @PostMapping
-    public ResponseEntity<ProductResponseDto> create(@Valid @RequestBody ProductRequestDto requestDto) {
+    public ResponseEntity<ProductResponseDto> create(@RequestBody @Valid ProductRequestDto requestDto) {
         Product savedProduct = productService.save(productMapper.mapToModel(requestDto));
         return ResponseEntity.ok(productMapper.mapToDto(savedProduct));
     }
@@ -56,7 +56,7 @@ public class ProductController {
 
     @PostMapping("/{id}")
     public ResponseEntity<ProductResponseDto> update(@PathVariable("id") @Positive Long id,
-                                                     @Valid @RequestBody ProductRequestDto requestDto) {
+                                                     @RequestBody @Valid ProductRequestDto requestDto) {
         Product updatedProduct = productService.update(id, productMapper.mapToModel(requestDto));
         ProductResponseDto updatedDto = productMapper.mapToDto(updatedProduct);
         return ResponseEntity.ok(updatedDto);

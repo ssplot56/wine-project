@@ -1,5 +1,6 @@
 package com.project.wineshop.service.impl;
 
+import com.project.wineshop.dto.request.ManufacturerRequestDto;
 import com.project.wineshop.model.Manufacturer;
 import com.project.wineshop.repository.ManufacturerRepository;
 import com.project.wineshop.service.ManufacturerService;
@@ -26,12 +27,18 @@ public class ManufacturerServiceImpl implements ManufacturerService {
     }
 
     @Override
-    public Manufacturer getByName(String name) {
-        return manufacturerRepository.findByName(name);
+    public List<Manufacturer> findAll() {
+        return manufacturerRepository.findAll();
     }
 
     @Override
-    public List<Manufacturer> findAll() {
-        return manufacturerRepository.findAll();
+    public Manufacturer update(Long id, Manufacturer manufacturer) {
+        manufacturer.setId(id);
+        return manufacturerRepository.save(manufacturer);
+    }
+
+    @Override
+    public void deleteById(Long id) {
+        manufacturerRepository.deleteById(id);
     }
 }

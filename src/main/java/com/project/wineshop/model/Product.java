@@ -12,6 +12,8 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Data;
 
+import java.math.BigDecimal;
+
 @Data
 @Entity
 @Table(name = "products")
@@ -19,33 +21,22 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String name;
-    private Double price;
+
+    private BigDecimal price;
+
     @Column(length = 20)
     @Enumerated(EnumType.STRING)
-    private Color color;
+    private ProductColor.Color color;
+
     @Column(length = 20)
     @Enumerated(EnumType.STRING)
-    private Type type;
+    private ProductType.Type type;
+
     @ManyToOne
     @JoinColumn(name = "manufacturer_id")
     private Manufacturer manufacturer;
+
     private Boolean inStock;
-    private String grape;
-    private String taste;
-
-    public enum Color {
-        RED,
-        WHITE,
-        PINK
-    }
-
-    public enum Type {
-        DRY,
-        SEMIDRY,
-        SEMISWEET,
-        SWEET,
-        BRUT,
-        SPARCLING
-    }
 }

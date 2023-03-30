@@ -4,6 +4,7 @@ import com.project.wineshop.model.Manufacturer;
 import com.project.wineshop.repository.ManufacturerRepository;
 import com.project.wineshop.service.ManufacturerService;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 
 @Service
@@ -20,9 +21,8 @@ public class ManufacturerServiceImpl implements ManufacturerService {
     }
 
     @Override
-    public Manufacturer findById(Long id) {
-        return manufacturerRepository.findById(id).orElseThrow(
-                () -> new RuntimeException("Can't find manufacturer with id: " + id));
+    public Manufacturer getById(Long id) {
+        return manufacturerRepository.findById(id).orElseThrow();
     }
 
     @Override
@@ -33,16 +33,5 @@ public class ManufacturerServiceImpl implements ManufacturerService {
     @Override
     public List<Manufacturer> findAll() {
         return manufacturerRepository.findAll();
-    }
-
-    @Override
-    public Manufacturer update(Long id, Manufacturer manufacturer) {
-        manufacturer.setId(id);
-        return manufacturerRepository.save(manufacturer);
-    }
-
-    @Override
-    public void deleteById(Long id) {
-        manufacturerRepository.deleteById(id);
     }
 }

@@ -9,7 +9,10 @@ public interface ManufacturerService {
 
     Manufacturer getById(Long id);
 
-    Manufacturer getByName(String name);
-
     List<Manufacturer> findAll();
+
+    Manufacturer update(Long id, Manufacturer manufacturer);
+
+    void deleteById(Long id);
+
 }

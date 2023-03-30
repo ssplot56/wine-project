@@ -2,14 +2,23 @@ package com.project.wineshop.service.mapper.impl;
 
 import com.project.wineshop.dto.request.UserRequestDto;
 import com.project.wineshop.dto.response.UserResponseDto;
+import com.project.wineshop.model.Role;
 import com.project.wineshop.model.User;
+import com.project.wineshop.service.RoleService;
 import com.project.wineshop.service.mapper.RequestDtoMapper;
 import com.project.wineshop.service.mapper.ResponseDtoMapper;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
+import java.util.Set;
 
-@Component
+@Service
 public class UserMapper implements RequestDtoMapper<User, UserRequestDto>,
         ResponseDtoMapper<User, UserResponseDto> {
+    private final RoleService roleService;
+
+    public UserMapper(RoleService roleService) {
+        this.roleService = roleService;
+    }
+
     @Override
     public User mapToModel(UserRequestDto requestDto) {
         User user = new User();
@@ -19,8 +28,7 @@ public class UserMapper implements RequestDtoMapper<User, UserRequestDto>,
         user.setPassword(requestDto.getPassword());
         user.setPhoneNumber(requestDto.getPhoneNumber());
         user.setBirthDate(requestDto.getBirthDate());
-        user.setAddress(requestDto.getAddress());
-        user.setRoles(requestDto.getRoles());
+        user.setRoles(Set.of(roleService.findByName(Role.RoleName.USER)));
         return user;
     }
 

@@ -9,5 +9,5 @@ import java.util.Optional;
 public interface ImageRepository extends JpaRepository<Image, Long> {
     Optional<Image> findByProductId(Long productId);
 
-    boolean deleteByProductId(Long productId);
+    void deleteByProductId(Long productId);
 }

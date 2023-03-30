@@ -34,6 +34,13 @@ public class Product {
     @Enumerated(EnumType.STRING)
     private ProductType.Type type;
 
+    @Column(length = 4)
+    private Integer vintage;
+
+    private String grape;
+
+    private String taste;
+
     @ManyToOne
     @JoinColumn(name = "manufacturer_id")
     private Manufacturer manufacturer;

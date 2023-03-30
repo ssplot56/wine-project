@@ -17,6 +17,12 @@ public class ProductResponseDto {
 
     private String type;
 
+    private Integer vintage;
+
+    private String grape;
+
+    private String taste;
+
     private Manufacturer manufacturer;
 
     private Boolean inStock;

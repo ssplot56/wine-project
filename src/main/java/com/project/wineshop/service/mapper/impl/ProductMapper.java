@@ -28,6 +28,9 @@ public class ProductMapper implements
         product.setPrice(productRequestDto.getPrice());
         product.setColor(ProductColor.Color.valueOf(productRequestDto.getColor()));
         product.setType(ProductType.Type.valueOf(productRequestDto.getType()));
+        product.setVintage(productRequestDto.getVintage());
+        product.setGrape(productRequestDto.getGrape());
+        product.setTaste(productRequestDto.getTaste());
         Manufacturer manufacturer = manufacturerService.getById(productRequestDto.getManufacturerId());
         product.setManufacturer(manufacturer);
         product.setInStock(productRequestDto.getInStock());
@@ -42,6 +45,9 @@ public class ProductMapper implements
         responseDto.setPrice(product.getPrice());
         responseDto.setColor(product.getColor().name());
         responseDto.setType(product.getType().name());
+        responseDto.setVintage(product.getVintage());
+        responseDto.setGrape(product.getGrape());
+        responseDto.setTaste(product.getTaste());
         responseDto.setManufacturer(product.getManufacturer());
         responseDto.setInStock(product.getInStock());
         return responseDto;

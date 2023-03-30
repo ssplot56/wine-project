@@ -1,20 +1,9 @@
 package com.project.wineshop.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
-import lombok.Data;
-
+import jakarta.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
+import lombok.Data;
 
 @Data
 @Entity
@@ -25,12 +14,16 @@ public class Order {
     private Long id;
 
     @OneToMany
+    @JoinTable(name = "orders_products",
+            joinColumns = @JoinColumn(name = "order_id"),
+            inverseJoinColumns = @JoinColumn(name = "product_id"))
     private List<Product> products;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
 
+    @Column(name = "order_time")
     private LocalDateTime orderDate;
 
     @Column(length = 20)

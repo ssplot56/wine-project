@@ -22,7 +22,7 @@ public class ManufacturerServiceImpl implements ManufacturerService {
 
     @Override
     public Manufacturer getById(Long id) {
-        return manufacturerRepository.getReferenceById(id);
+        return manufacturerRepository.findById(id).orElseThrow();
     }
 
     @Override

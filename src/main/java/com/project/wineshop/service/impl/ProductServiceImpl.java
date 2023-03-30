@@ -22,11 +22,16 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Product getById(Long id) {
-        return productRepository.getReferenceById(id);
+        return productRepository.findById(id).orElseThrow();
     }
 
     @Override
     public List<Product> findAll() {
         return productRepository.findAll();
+    }
+
+    @Override
+    public void deleteById(Long id) {
+        productRepository.deleteById(id);
     }
 }

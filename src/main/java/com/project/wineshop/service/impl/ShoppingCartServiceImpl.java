@@ -1,5 +1,6 @@
 package com.project.wineshop.service.impl;
 
+import com.project.wineshop.model.Product;
 import com.project.wineshop.model.ShoppingCart;
 import com.project.wineshop.model.User;
 import com.project.wineshop.repository.ShoppingCartRepository;
@@ -16,10 +17,30 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
     }
 
     @Override
-    public ShoppingCart registerNewShoppingCart(User user) {
+    public ShoppingCart addProduct(User user, Product product) {
+        ShoppingCart shoppingCart = getByUser(user);
+        shoppingCart.getProducts().add(product);
+        cartRepository.update(shoppingCart);
+        return shoppingCart;
+    }
+
+    @Override
+    public ShoppingCart getByUser(User user) {
+        return cartRepository.getByUser(user);
+    }
+
+    @Override
+    public void registerNewShoppingCart(User user) {
         ShoppingCart cart = new ShoppingCart();
         cart.setUser(user);
         cart.setProducts(new ArrayList<>());
-        return cartRepository.save(cart);
+        cartRepository.add(cart);
+    }
+
+    @Override
+    public ShoppingCart clear(ShoppingCart shoppingCart) {
+        shoppingCart.setProducts(null);
+        cartRepository.update(shoppingCart);
+        return shoppingCart;
     }
 }

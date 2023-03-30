@@ -14,9 +14,12 @@ public class ShoppingCart {
 
     @OneToOne(cascade = CascadeType.ALL)
     @MapsId
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "id")
     private User user;
 
     @OneToMany
+    @JoinTable(name = "shopping_carts_products",
+            joinColumns = @JoinColumn(name = "shopping_cart_id"),
+            inverseJoinColumns = @JoinColumn(name = "product_id"))
     private List<Product> products;
 }

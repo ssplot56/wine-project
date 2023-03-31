@@ -1,7 +1,6 @@
 package com.project.wineshop.model;
 
 import java.time.LocalDate;
-import java.util.List;
 import java.util.Set;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -12,7 +11,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.Getter;
@@ -36,11 +34,6 @@ public class User {
     private LocalDate birthDate;
     @OneToOne(cascade = CascadeType.ALL)
     private Address address;
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "users_cards",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "card_id"))
-    private List<Card> cards;
     @ManyToMany(cascade = CascadeType.MERGE)
     @JoinTable(name = "users_roles",
             joinColumns = @JoinColumn(name = "user_id"),

@@ -5,10 +5,9 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class AddressRequestDto {
+public class ShippingDetailsRequestDto {
     private String region;
     private String city;
-    private String street;
-    private String houseNumber;
-    private String flatNumber;
+    private String deliveryService;
+    private String warehouse;
 }

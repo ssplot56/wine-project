@@ -33,7 +33,7 @@ public class User {
     private String phoneNumber;
     private LocalDate birthDate;
     @OneToOne(cascade = CascadeType.ALL)
-    private Address address;
+    private ShippingDetails shippingDetails;
     @ManyToMany(cascade = CascadeType.MERGE)
     @JoinTable(name = "users_roles",
             joinColumns = @JoinColumn(name = "user_id"),

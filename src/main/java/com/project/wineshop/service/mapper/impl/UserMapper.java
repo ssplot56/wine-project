@@ -42,7 +42,7 @@ public class UserMapper implements RequestDtoMapper<User, UserRequestDto>,
         responseDto.setPassword(user.getPassword());
         responseDto.setPhoneNumber(user.getPhoneNumber());
         responseDto.setBirthDate(user.getBirthDate());
-        responseDto.setAddress(user.getAddress());
+        responseDto.setShippingDetails(user.getShippingDetails());
         responseDto.setRoles(user.getRoles());
         return responseDto;
     }

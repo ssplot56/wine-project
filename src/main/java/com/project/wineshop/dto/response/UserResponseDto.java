@@ -1,9 +1,10 @@
 package com.project.wineshop.dto.response;
 
-import com.project.wineshop.model.Address;
+import com.project.wineshop.model.ShippingDetails;
 import com.project.wineshop.model.Role;
 import java.time.LocalDate;
 import java.util.Set;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -17,6 +18,6 @@ public class UserResponseDto {
     private String password;
     private String phoneNumber;
     private LocalDate birthDate;
-    private Address address;
+    private ShippingDetails shippingDetails;
     private Set<Role> roles;
 }

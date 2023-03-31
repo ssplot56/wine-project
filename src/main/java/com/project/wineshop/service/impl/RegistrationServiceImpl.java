@@ -4,7 +4,7 @@ import com.project.wineshop.dto.request.UserRegisterDto;
 import com.project.wineshop.model.Role;
 import com.project.wineshop.model.User;
 import com.project.wineshop.service.*;
-import com.project.wineshop.service.mapper.impl.AddressMapper;
+import com.project.wineshop.service.mapper.impl.ShippingDetailsMapper;
 import org.springframework.stereotype.Service;
 import java.util.Set;
 
@@ -12,20 +12,20 @@ import java.util.Set;
 public class RegistrationServiceImpl implements RegistrationService {
     private final UserService userService;
     private final RoleService roleService;
-    private final AddressService addressService;
+    private final ShippingDetailsService shippingDetailsService;
     private final ShoppingCartService shoppingCartService;
-    private final AddressMapper addressMapper;
+    private final ShippingDetailsMapper shippingDetailsMapper;
 
     public RegistrationServiceImpl(UserService userService,
                                    RoleService roleService,
-                                   AddressService addressService,
+                                   ShippingDetailsService shippingDetailsService,
                                    ShoppingCartService shoppingCartService,
-                                   AddressMapper addressMapper) {
+                                   ShippingDetailsMapper shippingDetailsMapper) {
         this.userService = userService;
         this.roleService = roleService;
-        this.addressService = addressService;
+        this.shippingDetailsService = shippingDetailsService;
         this.shoppingCartService = shoppingCartService;
-        this.addressMapper = addressMapper;
+        this.shippingDetailsMapper = shippingDetailsMapper;
     }
 
     @Override
@@ -37,7 +37,7 @@ public class RegistrationServiceImpl implements RegistrationService {
         user.setPassword(userRegisterDto.getPassword());
         user.setPhoneNumber(userRegisterDto.getPhoneNumber());
         user.setBirthDate(userRegisterDto.getBirthDate());
-        user.setAddress(addressService.save(addressMapper
+        user.setShippingDetails(shippingDetailsService.save(shippingDetailsMapper
                 .mapToModel(userRegisterDto.getAddress())));
         user.setRoles(Set.of(roleService.findByName(Role.RoleName.USER)));
         User userWithId = userService.save(user);

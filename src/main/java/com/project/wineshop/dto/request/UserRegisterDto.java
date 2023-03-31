@@ -13,5 +13,5 @@ public class UserRegisterDto {
     private String password;
     private String phoneNumber;
     private LocalDate birthDate;
-    private AddressRequestDto address;
+    private ShippingDetailsRequestDto address;
 }

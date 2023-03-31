@@ -12,13 +12,12 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(name = "addresses")
-public class Address {
+public class ShippingDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String region;
     private String city;
-    private String street;
-    private String houseNumber;
-    private String flatNumber;
+    private String deliveryService;
+    private String warehouse;
 }

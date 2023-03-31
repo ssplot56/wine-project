@@ -20,13 +20,13 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
     public ShoppingCart addProduct(User user, Product product) {
         ShoppingCart shoppingCart = getByUser(user);
         shoppingCart.getProducts().add(product);
-        cartRepository.update(shoppingCart);
+        cartRepository.save(shoppingCart);
         return shoppingCart;
     }
 
     @Override
     public ShoppingCart getByUser(User user) {
-        return cartRepository.getByUser(user);
+        return cartRepository.findShoppingCartByUser(user);
     }
 
     @Override
@@ -34,13 +34,13 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
         ShoppingCart cart = new ShoppingCart();
         cart.setUser(user);
         cart.setProducts(new ArrayList<>());
-        cartRepository.add(cart);
+        cartRepository.save(cart);
     }
 
     @Override
     public ShoppingCart clear(ShoppingCart shoppingCart) {
-        shoppingCart.setProducts(null);
-        cartRepository.update(shoppingCart);
+        shoppingCart.setProducts(new ArrayList<>());
+        cartRepository.save(shoppingCart);
         return shoppingCart;
     }
 }

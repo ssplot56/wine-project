@@ -17,7 +17,7 @@ import java.math.BigDecimal;
 @Data
 @Entity
 @Table(name = "products")
-public class Product {
+public class Product {//equals & hashcode Lombok
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -37,13 +37,15 @@ public class Product {
     @Column(length = 4)
     private Integer vintage;
 
-    private String grape;
-
-    private String taste;
-
     @ManyToOne
     @JoinColumn(name = "manufacturer_id")
     private Manufacturer manufacturer;
 
-    private Boolean inStock;
+    private String pairing;
+
+    private String grape;
+
+    private String taste;
+
+    private Byte temperature;
 }

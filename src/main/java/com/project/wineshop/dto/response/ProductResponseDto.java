@@ -19,11 +19,13 @@ public class ProductResponseDto {
 
     private Integer vintage;
 
+    private Manufacturer manufacturer;
+
+    private String pairing;
+
     private String grape;
 
     private String taste;
 
-    private Manufacturer manufacturer;
-
-    private Boolean inStock;
+    private Byte temperature;
 }

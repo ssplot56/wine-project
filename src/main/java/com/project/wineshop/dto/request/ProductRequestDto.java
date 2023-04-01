@@ -24,13 +24,15 @@ public class ProductRequestDto {
     @Min(value = 0, message = "Рік розливу вина повинен бути додатнім числом")
     private Integer vintage;
 
+    @NotNull
+    private Long manufacturerId;
+
+    private String pairing;
+
     private String grape;
 
     private String taste;
 
-    @NotNull
-    private Long manufacturerId;
+    private Byte temperature;
 
-    @NotNull
-    private Boolean inStock;
 }

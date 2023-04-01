@@ -29,11 +29,12 @@ public class ProductMapper implements
         product.setColor(ProductColor.Color.valueOf(productRequestDto.getColor()));
         product.setType(ProductType.Type.valueOf(productRequestDto.getType()));
         product.setVintage(productRequestDto.getVintage());
-        product.setGrape(productRequestDto.getGrape());
-        product.setTaste(productRequestDto.getTaste());
         Manufacturer manufacturer = manufacturerService.getById(productRequestDto.getManufacturerId());
         product.setManufacturer(manufacturer);
-        product.setInStock(productRequestDto.getInStock());
+        product.setPairing(productRequestDto.getPairing());
+        product.setGrape(productRequestDto.getGrape());
+        product.setTaste(productRequestDto.getTaste());
+        product.setTemperature(productRequestDto.getTemperature());
         return product;
     }
 
@@ -46,10 +47,11 @@ public class ProductMapper implements
         responseDto.setColor(product.getColor().name());
         responseDto.setType(product.getType().name());
         responseDto.setVintage(product.getVintage());
+        responseDto.setManufacturer(product.getManufacturer());
+        responseDto.setPairing(product.getPairing());
         responseDto.setGrape(product.getGrape());
         responseDto.setTaste(product.getTaste());
-        responseDto.setManufacturer(product.getManufacturer());
-        responseDto.setInStock(product.getInStock());
+        responseDto.setTemperature(product.getTemperature());
         return responseDto;
     }
 }

@@ -3,6 +3,7 @@ package com.project.wineshop.model;
 import jakarta.persistence.*;
 import lombok.Data;
 import java.util.List;
+import java.util.Map;
 
 @Data
 @Entity
@@ -21,5 +22,5 @@ public class ShoppingCart {
     @JoinTable(name = "shopping_carts_products",
             joinColumns = @JoinColumn(name = "shopping_cart_id"),
             inverseJoinColumns = @JoinColumn(name = "product_id"))
-    private List<Product> products;
+    private Map<Product, Integer> products;
 }

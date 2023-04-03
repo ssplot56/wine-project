@@ -7,6 +7,7 @@ import com.project.wineshop.repository.ShoppingCartRepository;
 import com.project.wineshop.service.ShoppingCartService;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 @Service
 public class ShoppingCartServiceImpl implements ShoppingCartService {
@@ -17,9 +18,9 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
     }
 
     @Override
-    public ShoppingCart addProduct(User user, Product product) {
+    public ShoppingCart addProduct(User user, Product product, Integer value) {
         ShoppingCart shoppingCart = getByUser(user);
-        shoppingCart.getProducts().add(product);
+        shoppingCart.getProducts().put(product, value);
         cartRepository.save(shoppingCart);
         return shoppingCart;
     }
@@ -33,13 +34,13 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
     public void registerNewShoppingCart(User user) {
         ShoppingCart cart = new ShoppingCart();
         cart.setUser(user);
-        cart.setProducts(new ArrayList<>());
+        cart.setProducts(new HashMap<>());
         cartRepository.save(cart);
     }
 
     @Override
     public ShoppingCart clear(ShoppingCart shoppingCart) {
-        shoppingCart.setProducts(new ArrayList<>());
+        shoppingCart.setProducts(new HashMap<>());
         cartRepository.save(shoppingCart);
         return shoppingCart;
     }

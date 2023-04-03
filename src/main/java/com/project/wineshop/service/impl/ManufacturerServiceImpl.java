@@ -1,11 +1,9 @@
 package com.project.wineshop.service.impl;
 
-import com.project.wineshop.dto.request.ManufacturerRequestDto;
 import com.project.wineshop.model.Manufacturer;
 import com.project.wineshop.repository.ManufacturerRepository;
 import com.project.wineshop.service.ManufacturerService;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Service

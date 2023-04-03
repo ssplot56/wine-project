@@ -15,12 +15,14 @@ public class Injector {
 
     @PostConstruct
     public void inject() {
-        Role userRole = new Role();
-        userRole.setName(Role.RoleName.USER);
-        roleRepository.save(userRole);
+        if (roleRepository.findAll().size() == 0) {
+            Role userRole = new Role();
+            userRole.setName(Role.RoleName.USER);
+            roleRepository.save(userRole);
 
-        Role adminRole = new Role();
-        adminRole.setName(Role.RoleName.ADMIN);
-        roleRepository.save(adminRole);
+            Role adminRole = new Role();
+            adminRole.setName(Role.RoleName.ADMIN);
+            roleRepository.save(adminRole);
+        }
     }
 }

@@ -32,7 +32,7 @@ public class User {
     @Column(unique = true)
     private String phoneNumber;
     private LocalDate birthDate;
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     private ShippingDetails shippingDetails;
     @ManyToMany(cascade = CascadeType.MERGE)
     @JoinTable(name = "users_roles",

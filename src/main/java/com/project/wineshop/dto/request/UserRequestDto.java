@@ -13,4 +13,8 @@ public class UserRequestDto {
     private String password;
     private String phoneNumber;
     private LocalDate birthDate;
+    private String region;
+    private String city;
+    private String deliveryService;
+    private String warehouse;
 }

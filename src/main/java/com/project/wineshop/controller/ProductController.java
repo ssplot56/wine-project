@@ -69,8 +69,6 @@ public class ProductController {
     public ResponseEntity<ProductResponseDto> getById(@PathVariable("productId") @Positive Long productId) {
         Product product = productService.getById(productId);
         ProductResponseDto responseDto = productMapper.mapToDto(product);
-        //byte[] image = productService.getProductImageById(productId); // Отримання зображення продукту як масиву байтів
-        //responseDto.setImage(image); // Встановлення зображення у відповідь
         return ResponseEntity.ok(responseDto);
     }
 

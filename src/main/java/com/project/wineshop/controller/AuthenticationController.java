@@ -1,7 +1,8 @@
 package com.project.wineshop.controller;
 
 import com.project.wineshop.dto.request.UserRegisterDto;
-import com.project.wineshop.service.RegistrationService;
+import com.project.wineshop.service.AuthenticationService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -11,16 +12,16 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/sign-up")
-public class RegistrationController {
-    private final RegistrationService registrationService;
+public class AuthenticationController {
+    private final AuthenticationService authenticationService;
 
-    public RegistrationController(RegistrationService registrationService) {
-        this.registrationService = registrationService;
+    public AuthenticationController(AuthenticationService authenticationService) {
+        this.authenticationService = authenticationService;
     }
 
-    @PostMapping
-    public ResponseEntity<String> register(@RequestBody UserRegisterDto userRegisterDto) {
-        registrationService.register(userRegisterDto);
+    @PostMapping("/sign-up")
+    public ResponseEntity<String> register(@Valid @RequestBody UserRegisterDto userRegisterDto) {
+        authenticationService.register(userRegisterDto);
         return new ResponseEntity<>("The user has been registered.", HttpStatus.CREATED);
     }
 }

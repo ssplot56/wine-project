@@ -1,33 +1,35 @@
 package com.project.wineshop.service.impl;
 
-import com.project.wineshop.model.Product;
 import com.project.wineshop.model.ShoppingCart;
 import com.project.wineshop.model.User;
 import com.project.wineshop.repository.ShoppingCartRepository;
+import com.project.wineshop.service.ProductService;
 import com.project.wineshop.service.ShoppingCartService;
 import org.springframework.stereotype.Service;
-import java.util.ArrayList;
+
 import java.util.HashMap;
 
 @Service
 public class ShoppingCartServiceImpl implements ShoppingCartService {
-    private final ShoppingCartRepository cartRepository;
+    private final ShoppingCartRepository shoppingCartRepository;
+    private final ProductService productService;
 
-    public ShoppingCartServiceImpl(ShoppingCartRepository cartRepository) {
-        this.cartRepository = cartRepository;
+    public ShoppingCartServiceImpl(ShoppingCartRepository shoppingCartRepository, ProductService productService) {
+        this.shoppingCartRepository = shoppingCartRepository;
+        this.productService = productService;
     }
 
     @Override
-    public ShoppingCart addProduct(User user, Product product, Integer value) {
+    public ShoppingCart addProduct(User user, Long productId, Integer quantity) {
         ShoppingCart shoppingCart = getByUser(user);
-        shoppingCart.getProducts().put(product, value);
-        cartRepository.save(shoppingCart);
+        shoppingCart.getProducts().put(productService.getById(productId),quantity);
+        shoppingCartRepository.save(shoppingCart);
         return shoppingCart;
     }
 
     @Override
     public ShoppingCart getByUser(User user) {
-        return cartRepository.findShoppingCartByUser(user);
+        return shoppingCartRepository.findShoppingCartByUser(user);
     }
 
     @Override
@@ -35,13 +37,18 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
         ShoppingCart cart = new ShoppingCart();
         cart.setUser(user);
         cart.setProducts(new HashMap<>());
-        cartRepository.save(cart);
+        shoppingCartRepository.save(cart);
     }
 
     @Override
     public ShoppingCart clear(ShoppingCart shoppingCart) {
         shoppingCart.setProducts(new HashMap<>());
-        cartRepository.save(shoppingCart);
+        shoppingCartRepository.save(shoppingCart);
         return shoppingCart;
+    }
+
+    @Override
+    public ShoppingCart getById(Long id) {
+        return shoppingCartRepository.findById(id).orElseThrow();
     }
 }

@@ -28,10 +28,9 @@ public class Order {
 
     @Column(length = 20)
     @Enumerated(EnumType.STRING)
-    private Status status = Status.CREATED;
+    private OrderStatus.Status orderStatus = OrderStatus.Status.CREATED;
 
-    public enum Status {
-        CREATED,
-        FULFILLED
-    }
+    @Column(length = 20)
+    @Enumerated(EnumType.STRING)
+    private OrderPayment.Payment payment;
 }

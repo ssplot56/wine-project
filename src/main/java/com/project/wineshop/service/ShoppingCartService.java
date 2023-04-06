@@ -5,7 +5,7 @@ import com.project.wineshop.model.ShoppingCart;
 import com.project.wineshop.model.User;
 
 public interface ShoppingCartService {
-    ShoppingCart addProduct(User user, Product product, Integer value);
+    ShoppingCart addProduct(User user, Long productId, Integer quantity);
 
     ShoppingCart getByUser(User user);
 
@@ -13,4 +13,5 @@ public interface ShoppingCartService {
 
     ShoppingCart clear(ShoppingCart shoppingCart);
 
+    ShoppingCart getById(Long id);
 }

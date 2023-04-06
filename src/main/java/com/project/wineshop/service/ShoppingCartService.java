@@ -5,11 +5,13 @@ import com.project.wineshop.model.ShoppingCart;
 import com.project.wineshop.model.User;
 
 public interface ShoppingCartService {
-    ShoppingCart addProduct(User user, Product product);
+    ShoppingCart addProduct(User user, Long productId, Integer quantity);
 
     ShoppingCart getByUser(User user);
 
     void registerNewShoppingCart(User user);
 
     ShoppingCart clear(ShoppingCart shoppingCart);
+
+    ShoppingCart getById(Long id);
 }

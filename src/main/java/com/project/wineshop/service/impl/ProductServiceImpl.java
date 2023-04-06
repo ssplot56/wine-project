@@ -3,6 +3,7 @@ package com.project.wineshop.service.impl;
 import com.project.wineshop.model.Product;
 import com.project.wineshop.repository.ProductRepository;
 import com.project.wineshop.service.ProductService;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -28,6 +29,11 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public List<Product> findAll() {
         return productRepository.findAll();
+    }
+
+    @Override
+    public List<Product> findAll(PageRequest pageRequest) {
+        return productRepository.findAll(pageRequest).toList();
     }
 
     @Override

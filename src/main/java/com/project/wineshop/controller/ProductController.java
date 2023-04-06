@@ -12,8 +12,12 @@ import com.project.wineshop.service.DishService;
 import com.project.wineshop.service.ProductService;
 import com.project.wineshop.service.WineDishPairingService;
 import com.project.wineshop.service.mapper.impl.ProductMapper;
+import com.project.wineshop.utility.ImageReader;
+import com.project.wineshop.utility.UrlParser;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Positive;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -52,13 +56,17 @@ public class ProductController {
 
     @PostMapping
     public ResponseEntity<ProductResponseDto> create(@RequestBody @Valid ProductRequestDto requestDto) {
-        Product savedProduct = productService.save(productMapper.mapToModel(requestDto));
+        Product product = productMapper.mapToModel(requestDto);
+        Product savedProduct = productService.save(product);
         return ResponseEntity.ok(productMapper.mapToDto(savedProduct));
     }
 
     @GetMapping
-    public ResponseEntity<List<ProductResponseDto>> getAll() {
-        List<ProductResponseDto> responseDtos = productService.findAll()
+    public ResponseEntity<List<ProductResponseDto>> getAll(@RequestParam (defaultValue = "20") Integer size,
+                                                           @RequestParam (defaultValue = "0") Integer page,
+                                                           @RequestParam (defaultValue = "id") String sortBy) {
+        PageRequest pageRequest = UrlParser.formPageRequest(page, size, sortBy);
+        List<ProductResponseDto> responseDtos = productService.findAll(pageRequest)
                 .stream()
                 .map(productMapper::mapToDto)
                 .collect(Collectors.toList());
@@ -154,7 +162,7 @@ public class ProductController {
         product.setGrape("100% Cabernet Sauvignon");
         product.setTaste("Bright cherry-coloured rosé wine. Forms legs when swirled in the glass. Intense and very pleasant first impression, with the fruity aromas that are typical of the Cabernet Sauvignon variety. The aromas on the palate are intense. It is very round, fresh and elegant, with notes of strawberry and caramel. The finish is very long and complex. This is a very aromatic wine, with a complex palate and a long aromatic finish, qualities that promise very good development in the bottle.");
         product.setTemperature("Serve between 6-8ºC");
-        product.setImage(getImageBytes("images/products/pink1.png"));
+        product.setImage(ImageReader.getImageBytes("images/products/pink1.png"));
         productService.save(product);
         List<String> wineDishPairing = List.of("Pasta", "Meat", "Cheese", "Seafood", "Rice");
         injectWineDishPairing(1L, wineDishPairing);
@@ -174,7 +182,7 @@ public class ProductController {
         product.setTemperature("Serve between 6-8ºC");
         product.setEvent(ProductEvent.Event.PARTY_WITH_FRIENDS);
         product.setPairing("Perfect as an aperitif and to accompany rice, fish, seafood and braised white and red meat.");
-        product.setImage(getImageBytes("images/products/pink2.png"));
+        product.setImage(ImageReader.getImageBytes("images/products/pink2.png"));
         productService.save(product);
         List<String> wineDishPairing = List.of("Rice", "Fish", "Seafood", "Meat");
         injectWineDishPairing(2L, wineDishPairing);
@@ -194,7 +202,7 @@ public class ProductController {
         product.setTemperature("Serve between 6-8ºC");
         product.setEvent(ProductEvent.Event.FOR_SPECIAL_EVENTS);
         product.setPairing("Perfect with pasta, tender meat, cheese, seafood, rice and also as an aperitif.");
-        product.setImage(getImageBytes("images/products/pink3.png"));
+        product.setImage(ImageReader.getImageBytes("images/products/pink3.png"));
         productService.save(product);
         List<String> wineDishPairing = List.of("Pasta", "Meat", "Cheese", "Seafood", "Rice");
         injectWineDishPairing(3L, wineDishPairing);
@@ -214,7 +222,7 @@ public class ProductController {
         product.setTemperature("Serve between 16-18ºC");
         product.setEvent(ProductEvent.Event.FOR_SPECIAL_EVENTS);
         product.setPairing("Perfect with salads, chicken, rise, tender meats and barbeques.");
-        product.setImage(getImageBytes("images/products/pink4.png"));
+        product.setImage(ImageReader.getImageBytes("images/products/pink4.png"));
         productService.save(product);
         List<String> wineDishPairing = List.of("Salads", "Chicken", "Rice", "Meat", "Barbeques");
         injectWineDishPairing(4L, wineDishPairing);
@@ -234,7 +242,7 @@ public class ProductController {
         product.setTemperature("Serve between 6-8ºC");
         product.setEvent(ProductEvent.Event.FOR_LONELY_EVENING);
         product.setPairing("Perfect with pasta, tender meat, cheese, seafood, rice and also as an aperitif.");
-        product.setImage(getImageBytes("images/products/pink1.png"));
+        product.setImage(ImageReader.getImageBytes("images/products/pink1.png"));
         productService.save(product);
         List<String> wineDishPairing = List.of("Pasta", "Meat", "Cheese", "Seafood", "Rice");
         injectWineDishPairing(5L, wineDishPairing);
@@ -254,7 +262,7 @@ public class ProductController {
         product.setTemperature("Serve between 6-8ºC");
         product.setEvent(ProductEvent.Event.FOR_PRESENT);
         product.setPairing("Perfect as an aperitif or dessert. It can, also, accompany mild cheeses and rices.");
-        product.setImage(getImageBytes("images/products/pink6.png"));
+        product.setImage(ImageReader.getImageBytes("images/products/pink6.png"));
         productService.save(product);
         List<String> wineDishPairing = List.of("Cheese", "Rice");
         injectWineDishPairing(6L, wineDishPairing);
@@ -275,7 +283,7 @@ public class ProductController {
         product.setTemperature("Serve between 12-14ºC");
         product.setEvent(ProductEvent.Event.PARTY_WITH_FRIENDS);
         product.setPairing("Perfect with stewed meat, cured cheese, sausages, and dishes with personality.");
-        product.setImage(getImageBytes("images/products/red1.png"));
+        product.setImage(ImageReader.getImageBytes("images/products/red1.png"));
         productService.save(product);
         List<String> wineDishPairing = List.of("Meat", "Cheese", "Sausages");
         injectWineDishPairing(7L, wineDishPairing);
@@ -295,7 +303,7 @@ public class ProductController {
         product.setTemperature("Serve between 12-14ºC");
         product.setEvent(ProductEvent.Event.FOR_PRESENT);
         product.setPairing("Combine this wine with risottos, cheese, sausages, poultry, and stewed meats.");
-        product.setImage(getImageBytes("images/products/red2.png"));
+        product.setImage(ImageReader.getImageBytes("images/products/red2.png"));
         productService.save(product);
         List<String> wineDishPairing = List.of("Risottos", "Cheese", "Sausages", "Poultry", "Meat");
         injectWineDishPairing(8L, wineDishPairing);
@@ -315,7 +323,7 @@ public class ProductController {
         product.setTemperature("Serve between 16-18ºC");
         product.setEvent(ProductEvent.Event.FOR_SPECIAL_EVENTS);
         product.setPairing("Combine this wine with risottos, cheese, sausages, poultry, and stewed meats.");
-        product.setImage(getImageBytes("images/products/red3.png"));
+        product.setImage(ImageReader.getImageBytes("images/products/red3.png"));
         productService.save(product);
         List<String> wineDishPairing = List.of("Risottos", "Cheese", "Sausages", "Poultry", "Meat");
         injectWineDishPairing(9L, wineDishPairing);
@@ -335,7 +343,7 @@ public class ProductController {
         product.setTemperature("Serve between 16-18ºC");
         product.setEvent(ProductEvent.Event.FOR_SPECIAL_EVENTS);
         product.setPairing("This wine is perfect with cured cheeses, red meats, sausages and strong dishes.");
-        product.setImage(getImageBytes("images/products/red4.png"));
+        product.setImage(ImageReader.getImageBytes("images/products/red4.png"));
         productService.save(product);
         List<String> wineDishPairing = List.of("Cheese", "Meat", "Sausages", "Strong dishes");
         injectWineDishPairing(10L, wineDishPairing);
@@ -355,7 +363,7 @@ public class ProductController {
         product.setTemperature("Serve between 16-18ºC");
         product.setEvent(ProductEvent.Event.FOR_PRESENT);
         product.setPairing("This wine is perfect with cured cheeses, red meats, sausages and strong dishes.");
-        product.setImage(getImageBytes("images/products/red5.png"));
+        product.setImage(ImageReader.getImageBytes("images/products/red5.png"));
         productService.save(product);
         List<String> wineDishPairing = List.of("Cheese", "Meat", "Sausages", "Strong dishes");
         injectWineDishPairing(11L, wineDishPairing);
@@ -375,7 +383,7 @@ public class ProductController {
         product.setTemperature("Serve between 12-14ºC");
         product.setEvent(ProductEvent.Event.FOR_LONELY_EVENING);
         product.setPairing("Perfect with stewed meat, cured cheese, sausages, and dishes with personality.");
-        product.setImage(getImageBytes("images/products/red6.png"));
+        product.setImage(ImageReader.getImageBytes("images/products/red6.png"));
         productService.save(product);
         List<String> wineDishPairing = List.of("Meat", "Cheese", "Sausages", "Dishes with personality");
         injectWineDishPairing(12L, wineDishPairing);
@@ -396,7 +404,7 @@ public class ProductController {
         product.setTemperature("Serve between 6-8ºC");
         product.setEvent(ProductEvent.Event.PARTY_WITH_FRIENDS);
         product.setPairing("Perfect with fish, mild cheese, rice and white meats.");
-        product.setImage(getImageBytes("images/products/white1.png"));
+        product.setImage(ImageReader.getImageBytes("images/products/white1.png"));
         productService.save(product);
         List<String> wineDishPairing = List.of("Fish", "Cheese", "Rice", "Meat");
         injectWineDishPairing(13L, wineDishPairing);
@@ -416,7 +424,7 @@ public class ProductController {
         product.setTemperature("Serve between 10-12ºC");
         product.setEvent(ProductEvent.Event.FOR_LONELY_EVENING);
         product.setPairing("Perfect for all types of aperitifs, fish, rice, smoked dishes, white meat and cheese.");
-        product.setImage(getImageBytes("images/products/white2.png"));
+        product.setImage(ImageReader.getImageBytes("images/products/white2.png"));
         productService.save(product);
         List<String> wineDishPairing = List.of("Fish", "Rice", "Smoked dishes", "Meat", "Cheese");
         injectWineDishPairing(14L, wineDishPairing);
@@ -436,7 +444,7 @@ public class ProductController {
         product.setTemperature("Serve between 6-8ºC");
         product.setEvent(ProductEvent.Event.FOR_SPECIAL_EVENTS);
         product.setPairing("Combine this wine with risottos, cheese, sausages, poultry, and stewed meats.");
-        product.setImage(getImageBytes("images/products/white3.png"));
+        product.setImage(ImageReader.getImageBytes("images/products/white3.png"));
         productService.save(product);
         List<String> wineDishPairing = List.of("Risottos", "Cheese", "Sausages", "Poultry", "Meat");
         injectWineDishPairing(15L, wineDishPairing);
@@ -456,7 +464,7 @@ public class ProductController {
         product.setTemperature("Serve between 6-8ºC");
         product.setEvent(ProductEvent.Event.PARTY_WITH_FRIENDS);
         product.setPairing("This wine is perfect with cured cheeses, red meats, sausages and strong dishes.");
-        product.setImage(getImageBytes("images/products/white4.png"));
+        product.setImage(ImageReader.getImageBytes("images/products/white4.png"));
         productService.save(product);
         List<String> wineDishPairing = List.of("Cheese", "Meat", "Sausages", "Strong dishes");
         injectWineDishPairing(16L, wineDishPairing);
@@ -476,7 +484,7 @@ public class ProductController {
         product.setTemperature("Serve between 6-8ºC");
         product.setEvent(ProductEvent.Event.FOR_SPECIAL_EVENTS);
         product.setPairing("Perfect for salads, vegetables, fishes and mild cheeses. It can also be taken as an aperitif.");
-        product.setImage(getImageBytes("images/products/white5.png"));
+        product.setImage(ImageReader.getImageBytes("images/products/white5.png"));
         productService.save(product);
         List<String> wineDishPairing = List.of("Salads", "Vegetables", "Fish", "Cheese");
         injectWineDishPairing(17L, wineDishPairing);
@@ -496,7 +504,7 @@ public class ProductController {
         product.setTemperature("Serve between 6-8ºC");
         product.setEvent(ProductEvent.Event.FOR_PRESENT);
         product.setPairing("The great personality: stewed meats and fish, cheese, foie, and smoked foods");
-        product.setImage(getImageBytes("images/products/white6.png"));
+        product.setImage(ImageReader.getImageBytes("images/products/white6.png"));
         productService.save(product);
         List<String> wineDishPairing = List.of("Meat", "Fish", "Cheese", "Foie", "Smoked dishes");
         injectWineDishPairing(18L, wineDishPairing);
@@ -509,24 +517,6 @@ public class ProductController {
             wineDishPairing.setDish(dishService.getByName(pairingName));
             wineDishPairingService.save(wineDishPairing);
         }
-    }
-
-    private byte[] getImageBytes(String url) {
-        File file = new File(url);
-        byte[] imageBytes = new byte[(int) file.length()];
-        int bytesRead = 0;
-        try (FileInputStream fis = new FileInputStream(file)) {
-            bytesRead = fis.read(imageBytes);
-        } catch (IOException e) {
-            System.err.println("An error occurred while reading the file: " + e.getMessage());
-            // або можна використати логування помилок, наприклад, через log4j або slf4j
-        }
-        if(bytesRead > 0) {
-            System.out.println("ProductController.getImageBytes(" + url + "): " + bytesRead + " bytes were read.");
-        } else if(bytesRead == -1) {
-            System.out.println("During reading data from file " + url + " the end of the file has been reached.");
-        }
-        return imageBytes;
     }
 
 }

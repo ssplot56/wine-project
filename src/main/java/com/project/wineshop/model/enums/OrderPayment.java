@@ -1,4 +1,4 @@
-package com.project.wineshop.model;
+package com.project.wineshop.model.enums;
 
 import jakarta.persistence.*;
 import lombok.Data;
@@ -14,6 +14,6 @@ public class OrderPayment {
     private Payment payment;
 
    public enum Payment{
-        CREATED, FULFILLED
+        CREDIT_CARD, GOOGLE_PAY
     }
 }

@@ -1,5 +1,6 @@
 package com.project.wineshop.controller;
 
+import com.project.wineshop.dto.request.UserLoginDto;
 import com.project.wineshop.dto.request.UserRegisterDto;
 import com.project.wineshop.service.AuthenticationService;
 import jakarta.validation.Valid;
@@ -11,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/sign-up")
+@RequestMapping("/auth")
 public class AuthenticationController {
     private final AuthenticationService authenticationService;
 
@@ -23,5 +24,11 @@ public class AuthenticationController {
     public ResponseEntity<String> register(@Valid @RequestBody UserRegisterDto userRegisterDto) {
         authenticationService.register(userRegisterDto);
         return new ResponseEntity<>("The user has been registered.", HttpStatus.CREATED);
+    }
+
+    @PostMapping("log-in")
+    public ResponseEntity<String> login(@Valid @RequestBody UserLoginDto userLoginDto) {
+        authenticationService.login(userLoginDto);
+        return new ResponseEntity<>("The user has been login", HttpStatus.OK);
     }
 }

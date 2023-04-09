@@ -1,4 +1,4 @@
-package com.project.wineshop.model;
+package com.project.wineshop.model.enums;
 
 import jakarta.persistence.*;
 import lombok.Data;

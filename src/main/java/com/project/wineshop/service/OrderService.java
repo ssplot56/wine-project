@@ -7,7 +7,6 @@ import com.project.wineshop.model.User;
 import java.util.List;
 
 public interface OrderService {
-    Order completeOrder(ShoppingCart shoppingCart);
+    Order completeOrder(Order order);
 
-    List<Order> getOrdersHistory(User user);
 }

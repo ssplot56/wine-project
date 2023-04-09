@@ -1,47 +1,40 @@
 package com.project.wineshop.service.impl;
 
 import com.project.wineshop.model.Order;
-import com.project.wineshop.model.OrderStatus;
-import com.project.wineshop.model.ShoppingCart;
 import com.project.wineshop.model.User;
+import com.project.wineshop.model.enums.OrderPayment;
+import com.project.wineshop.model.enums.OrderStatus;
 import com.project.wineshop.repository.OrderRepository;
 import com.project.wineshop.service.OrderService;
-import com.project.wineshop.service.ShoppingCartService;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.project.wineshop.service.ShippingDetailsService;
+import com.project.wineshop.service.UserService;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Service
 public class OrderServiceImpl implements OrderService {
+    private final ShippingDetailsService shippingDetailsService;
+    private final UserService userService;
 
     private final OrderRepository orderRepository;
 
-    private final ShoppingCartService shoppingCartService;
-
-    public OrderServiceImpl(OrderRepository orderRepository, ShoppingCartService shoppingCartService) {
+    public OrderServiceImpl(ShippingDetailsService shippingDetailsService, UserService userService, OrderRepository orderRepository) {
+        this.shippingDetailsService = shippingDetailsService;
+        this.userService = userService;
         this.orderRepository = orderRepository;
-        this.shoppingCartService = shoppingCartService;
     }
 
     @Override
-    public Order completeOrder(ShoppingCart shoppingCart) {
-        Order order = new Order();
+    public Order completeOrder(Order order) {
+        User byEmail = userService.findByEmail(order.getUser().getEmail());
+        if(byEmail == null) {
+            shippingDetailsService.save(order.getUser().getShippingDetails());
+            userService.save(order.getUser());
+        }
         order.setOrderDate(LocalDateTime.now());
         order.setOrderStatus(OrderStatus.Status.CREATED);
-//        order.setProducts();
-        order.setUser(shoppingCart.getUser());
-//        order.setPayment();
-//        order.setOrderStatus();
         orderRepository.save(order);
-        shoppingCartService.clear(shoppingCart);
         return order;
-    }
-
-    @Override
-    public List<Order> getOrdersHistory(User user) {
-//        return orderRepository.getOrdersHistory(user);
-        return null;
     }
 }

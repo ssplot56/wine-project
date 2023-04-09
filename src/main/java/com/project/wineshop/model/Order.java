@@ -36,7 +36,7 @@ public class Order {
 
     @Column(length = 20)
     @Enumerated(EnumType.STRING)
-    private OrderStatus.Status orderStatus = OrderStatus.Status.CREATED;
+    private OrderStatus.Status orderStatus;
 
     @Column(length = 20)
     @Enumerated(EnumType.STRING)

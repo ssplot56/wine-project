@@ -10,8 +10,8 @@ import com.project.wineshop.service.UserService;
 import com.project.wineshop.service.mapper.RequestDtoMapper;
 import com.project.wineshop.service.mapper.ResponseDtoMapper;
 import org.springframework.data.jpa.repository.support.QuerydslJpaRepository;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.UserDetails;
+//import org.springframework.security.core.Authentication;
+//import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

@@ -4,6 +4,7 @@ import com.project.wineshop.dto.request.OrderRequestDto;
 import com.project.wineshop.model.Order;
 import com.project.wineshop.model.Product;
 import com.project.wineshop.model.enums.OrderPayment;
+import com.project.wineshop.model.enums.OrderStatus;
 import com.project.wineshop.service.ProductService;
 import com.project.wineshop.service.UserService;
 import com.project.wineshop.service.mapper.RequestDtoMapper;
@@ -25,18 +26,17 @@ public class OrderMapper implements RequestDtoMapper<Order, OrderRequestDto> {
     @Override
     public Order mapToModel(OrderRequestDto orderRequestDto) {
         Order order = new Order();
-        if(orderRequestDto.getPaymentId() == 1) {
+        if(orderRequestDto.getPayment().equals("Credit card")) {
             order.setPayment(OrderPayment.Payment.CREDIT_CARD);
-        } else if(orderRequestDto.getPaymentId() == 2){
-            order.setPayment(OrderPayment.Payment.GOOGLE_PAY);
         } else {
-            throw new RuntimeException("The payment by this way does not exist");
+            order.setPayment(OrderPayment.Payment.GOOGLE_PAY);
         }
         order.setIsGift(orderRequestDto.getIsGift());
         order.setUser(userService.findById(orderRequestDto.getUserId()));
         Map<Product, Integer> products = new HashMap<>();
 
         for (Map.Entry<Long, Integer> entry: orderRequestDto.getProducts().entrySet()) {
+
             products.put(productService.getById(entry.getKey()), entry.getValue());
         }
         order.setProducts(products);

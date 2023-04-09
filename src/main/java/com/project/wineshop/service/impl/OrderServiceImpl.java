@@ -1,6 +1,8 @@
 package com.project.wineshop.service.impl;
 
 import com.project.wineshop.model.Order;
+import com.project.wineshop.model.User;
+import com.project.wineshop.model.enums.OrderPayment;
 import com.project.wineshop.model.enums.OrderStatus;
 import com.project.wineshop.repository.OrderRepository;
 import com.project.wineshop.service.OrderService;
@@ -25,12 +27,13 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public Order completeOrder(Order order) {
-        order.setOrderDate(LocalDateTime.now());
-        order.setOrderStatus(OrderStatus.Status.CREATED);
-        if(order.getUser().getPassword() != null && userService.findByEmail(order.getUser().getEmail()) == null) {
+        User byEmail = userService.findByEmail(order.getUser().getEmail());
+        if(byEmail == null) {
             shippingDetailsService.save(order.getUser().getShippingDetails());
             userService.save(order.getUser());
         }
+        order.setOrderDate(LocalDateTime.now());
+        order.setOrderStatus(OrderStatus.Status.CREATED);
         orderRepository.save(order);
         return order;
     }

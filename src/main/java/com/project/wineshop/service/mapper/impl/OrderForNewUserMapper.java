@@ -6,6 +6,7 @@ import com.project.wineshop.model.Order;
 import com.project.wineshop.model.Product;
 import com.project.wineshop.model.ShippingDetails;
 import com.project.wineshop.model.User;
+import com.project.wineshop.model.enums.OrderPayment;
 import com.project.wineshop.service.ProductService;
 import com.project.wineshop.service.mapper.RequestDtoMapper;
 import org.springframework.stereotype.Component;
@@ -25,6 +26,11 @@ public class OrderForNewUserMapper implements RequestDtoMapper<Order, OrderReque
     public Order mapToModel(OrderRequestNewUserDto orderRequestNewUserDto) {
         Order order = new Order();
         order.setIsGift(orderRequestNewUserDto.getIsGift());
+        if(orderRequestNewUserDto.getPayment().equals("Credit card")) {
+            order.setPayment(OrderPayment.Payment.CREDIT_CARD);
+        } else {
+            order.setPayment(OrderPayment.Payment.GOOGLE_PAY);
+        }
         ShippingDetails shippingDetails = new ShippingDetails();
         shippingDetails.setRegion(orderRequestNewUserDto.getRegion());
         shippingDetails.setCity(orderRequestNewUserDto.getCity());
@@ -36,7 +42,6 @@ public class OrderForNewUserMapper implements RequestDtoMapper<Order, OrderReque
         user.setPhoneNumber(orderRequestNewUserDto.getPhoneNumber());
         user.setEmail(orderRequestNewUserDto.getEmail());
         user.setShippingDetails(shippingDetails);
-        user.setPassword(orderRequestNewUserDto.getPassword());
         order.setUser(user);
         Map<Product, Integer> products = new HashMap<>();
 

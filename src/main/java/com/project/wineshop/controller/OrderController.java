@@ -19,7 +19,9 @@ public class OrderController {
 
     private RequestDtoMapper<Order, OrderRequestNewUserDto> requestNewUserDtoMapper;
 
-    public OrderController(OrderService orderService, RequestDtoMapper<Order, OrderRequestDto> requestDtoMapper, RequestDtoMapper<Order, OrderRequestNewUserDto> requestNewUserDtoMapper) {
+    public OrderController(OrderService orderService,
+                           RequestDtoMapper<Order, OrderRequestDto> requestDtoMapper,
+                           RequestDtoMapper<Order, OrderRequestNewUserDto> requestNewUserDtoMapper) {
         this.orderService = orderService;
         this.requestDtoMapper = requestDtoMapper;
         this.requestNewUserDtoMapper = requestNewUserDtoMapper;
@@ -36,4 +38,5 @@ public class OrderController {
         orderService.completeOrder(requestNewUserDtoMapper.mapToModel(orderRequestNewUserDto));
         return ResponseEntity.ok().build();
     }
+
 }

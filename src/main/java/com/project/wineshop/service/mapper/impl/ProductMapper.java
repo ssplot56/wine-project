@@ -2,18 +2,18 @@ package com.project.wineshop.service.mapper.impl;
 
 import com.project.wineshop.dto.request.ProductRequestDto;
 import com.project.wineshop.dto.response.ProductResponseDto;
+import com.project.wineshop.model.Dish;
 import com.project.wineshop.model.Product;
-import com.project.wineshop.model.WineDishPairing;
-import com.project.wineshop.model.enums.ProductColor;
-import com.project.wineshop.model.enums.ProductEvent;
-import com.project.wineshop.model.enums.ProductType;
 import com.project.wineshop.service.DishService;
 import com.project.wineshop.service.mapper.RequestDtoMapper;
 import com.project.wineshop.service.mapper.ResponseDtoMapper;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.Base64;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Component
 public class ProductMapper implements
@@ -31,10 +31,16 @@ public class ProductMapper implements
         Product product = new Product();
         product.setName(productRequestDto.getName());
         product.setPrice(productRequestDto.getPrice());
-        product.setType(ProductType.Type.valueOf(productRequestDto.getType()));
-        product.setColor(ProductColor.Color.valueOf(productRequestDto.getColor()));
-        product.setEvent(ProductEvent.Event.valueOf(productRequestDto.getEvent()));
+        product.setType(productRequestDto.getType());
+        product.setColor(productRequestDto.getColor());
+        product.setEvent(productRequestDto.getEvent());
         product.setPairing(productRequestDto.getPairing());
+        Set<Dish> dishes = new HashSet<>();
+        List<String> names = productRequestDto.getDishes();
+        for (String name : names) {
+            dishes.add(dishService.getByName(name));
+        }
+        product.setDishes(dishes);
         product.setVintage(productRequestDto.getVintage());
         product.setCountry(productRequestDto.getCountry());
         product.setRegion(productRequestDto.getRegion());
@@ -51,28 +57,27 @@ public class ProductMapper implements
         responseDto.setId(product.getId());
         responseDto.setName(product.getName());
         responseDto.setPrice(product.getPrice());
-        responseDto.setColor(product.getColor().name());
-        responseDto.setType(product.getType().name());
-        responseDto.setEvent(product.getEvent().name());
+        responseDto.setColor(product.getColor());
+        responseDto.setType(product.getType());
+        responseDto.setEvent(product.getEvent());
         responseDto.setPairing(product.getPairing());
-        List<String> dishNames = new ArrayList<>();
-        List<WineDishPairing> wineDishPairings = product.getWineDishPairings();
-        for (WineDishPairing wineDishPairing : wineDishPairings) {
-            dishNames.add(wineDishPairing.getDish().getName());
+        Set<Dish> dishes = product.getDishes();
+        Set<String> dishNames = new HashSet<>();
+        for (Dish dish : dishes) {
+            dishNames.add(dish.getName());
         }
-        responseDto.setPairWith(dishNames);
+        responseDto.setDishes(dishNames);
         responseDto.setVintage(product.getVintage());
         responseDto.setCountry(product.getCountry());
         responseDto.setRegion(product.getRegion());
         responseDto.setGrape(product.getGrape());
         responseDto.setTaste(product.getTaste());
         responseDto.setTemperature(product.getTemperature());
-        responseDto.setImage(product.getImage());
-/*
-        byte[] image = imageLoader.loadImageFromDisk(product.getImageUrl());
+
+        //byte[] image = imageLoader.loadImageFromDisk(product.getImageUrl());
+        byte[] image = product.getImage();
         String base64Image = Base64.getEncoder().encodeToString(image);
-        responseDto.setBase64Image(base64Image);
-*/
+        responseDto.setImage(base64Image);
         return responseDto;
     }
 

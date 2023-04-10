@@ -174,7 +174,7 @@ public class ProductController {
         requestDto.setGrape("100% Cabernet Sauvignon");
         requestDto.setTaste("Bright cherry-coloured rosé wine. Forms legs when swirled in the glass. Intense and very pleasant first impression, with the fruity aromas that are typical of the Cabernet Sauvignon variety. The aromas on the palate are intense. It is very round, fresh and elegant, with notes of strawberry and caramel. The finish is very long and complex. This is a very aromatic wine, with a complex palate and a long aromatic finish, qualities that promise very good development in the bottle.");
         requestDto.setTemperature("Serve between 6-8ºC");
-        requestDto.setImage(ImageReader.getImageBytes("images/products/pink1.png"));
+        requestDto.setImageLink("images/products/pink1.png");
         List<String> wineDishPairing = List.of("Pasta", "Meat", "Cheese", "Seafood", "Rice");
         requestDto.setDishes(wineDishPairing);
         create(requestDto);
@@ -194,7 +194,7 @@ public class ProductController {
         requestDto.setTemperature("Serve between 6-8ºC");
         requestDto.setEvent(ProductEvent.Event.PARTY_WITH_FRIENDS.name());
         requestDto.setPairing("Perfect as an aperitif and to accompany rice, fish, seafood and braised white and red meat.");
-        requestDto.setImage(ImageReader.getImageBytes("images/products/pink2.png"));
+        requestDto.setImageLink("images/products/pink2.png");
         List<String> wineDishPairing = List.of("Rice", "Fish", "Seafood", "Meat");
         requestDto.setDishes(wineDishPairing);
         create(requestDto);
@@ -214,7 +214,7 @@ public class ProductController {
         requestDto.setTemperature("Serve between 6-8ºC");
         requestDto.setEvent(ProductEvent.Event.FOR_SPECIAL_EVENTS.name());
         requestDto.setPairing("Perfect with pasta, tender meat, cheese, seafood, rice and also as an aperitif.");
-        requestDto.setImage(ImageReader.getImageBytes("images/products/pink3.png"));
+        requestDto.setImageLink("images/products/pink3.png");
         List<String> wineDishPairing = List.of("Pasta", "Meat", "Cheese", "Seafood", "Rice");
         requestDto.setDishes(wineDishPairing);
         create(requestDto);
@@ -234,7 +234,7 @@ public class ProductController {
         requestDto.setTemperature("Serve between 16-18ºC");
         requestDto.setEvent(ProductEvent.Event.FOR_SPECIAL_EVENTS.name());
         requestDto.setPairing("Perfect with salads, chicken, rise, tender meats and barbeques.");
-        requestDto.setImage(ImageReader.getImageBytes("images/products/pink4.png"));
+        requestDto.setImageLink("images/products/pink4.png");
         List<String> wineDishPairing = List.of("Salads", "Chicken", "Rice", "Meat", "Barbeques");
         requestDto.setDishes(wineDishPairing);
         create(requestDto);
@@ -254,7 +254,7 @@ public class ProductController {
         requestDto.setTemperature("Serve between 6-8ºC");
         requestDto.setEvent(ProductEvent.Event.FOR_LONELY_EVENING.name());
         requestDto.setPairing("Perfect with pasta, tender meat, cheese, seafood, rice and also as an aperitif.");
-        requestDto.setImage(ImageReader.getImageBytes("images/products/pink1.png"));
+        requestDto.setImageLink("images/products/pink5.png");
         List<String> wineDishPairing = List.of("Pasta", "Meat", "Cheese", "Seafood", "Rice");
         requestDto.setDishes(wineDishPairing);
         create(requestDto);
@@ -274,7 +274,7 @@ public class ProductController {
         requestDto.setTemperature("Serve between 6-8ºC");
         requestDto.setEvent(ProductEvent.Event.FOR_PRESENT.name());
         requestDto.setPairing("Perfect as an aperitif or dessert. It can, also, accompany mild cheeses and rices.");
-        requestDto.setImage(ImageReader.getImageBytes("images/products/pink6.png"));
+        requestDto.setImageLink("images/products/pink6.png");
         List<String> wineDishPairing = List.of("Cheese", "Rice");
         requestDto.setDishes(wineDishPairing);
         create(requestDto);
@@ -295,7 +295,7 @@ public class ProductController {
         requestDto.setTemperature("Serve between 12-14ºC");
         requestDto.setEvent(ProductEvent.Event.PARTY_WITH_FRIENDS.name());
         requestDto.setPairing("Perfect with stewed meat, cured cheese, sausages, and dishes with personality.");
-        requestDto.setImage(ImageReader.getImageBytes("images/products/red1.png"));
+        requestDto.setImageLink("images/products/red1.png");
         List<String> wineDishPairing = List.of("Meat", "Cheese", "Sausages");
         requestDto.setDishes(wineDishPairing);
         create(requestDto);
@@ -315,7 +315,7 @@ public class ProductController {
         requestDto.setTemperature("Serve between 12-14ºC");
         requestDto.setEvent(ProductEvent.Event.FOR_PRESENT.name());
         requestDto.setPairing("Combine this wine with risottos, cheese, sausages, poultry, and stewed meats.");
-        requestDto.setImage(ImageReader.getImageBytes("images/products/red2.png"));
+        requestDto.setImageLink("images/products/red2.png");
         List<String> wineDishPairing = List.of("Risottos", "Cheese", "Sausages", "Poultry", "Meat");
         requestDto.setDishes(wineDishPairing);
         create(requestDto);
@@ -335,7 +335,7 @@ public class ProductController {
         requestDto.setTemperature("Serve between 16-18ºC");
         requestDto.setEvent(ProductEvent.Event.FOR_SPECIAL_EVENTS.name());
         requestDto.setPairing("Combine this wine with risottos, cheese, sausages, poultry, and stewed meats.");
-        requestDto.setImage(ImageReader.getImageBytes("images/products/red3.png"));
+        requestDto.setImageLink("images/products/red3.png");
         List<String> wineDishPairing = List.of("Risottos", "Cheese", "Sausages", "Poultry", "Meat");
         requestDto.setDishes(wineDishPairing);
         create(requestDto);
@@ -355,7 +355,7 @@ public class ProductController {
         requestDto.setTemperature("Serve between 16-18ºC");
         requestDto.setEvent(ProductEvent.Event.FOR_SPECIAL_EVENTS.name());
         requestDto.setPairing("This wine is perfect with cured cheeses, red meats, sausages and strong dishes.");
-        requestDto.setImage(ImageReader.getImageBytes("images/products/red4.png"));
+        requestDto.setImageLink("images/products/red4.png");
         List<String> wineDishPairing = List.of("Cheese", "Meat", "Sausages", "Strong dishes");
         requestDto.setDishes(wineDishPairing);
         create(requestDto);
@@ -375,7 +375,7 @@ public class ProductController {
         requestDto.setTemperature("Serve between 16-18ºC");
         requestDto.setEvent(ProductEvent.Event.FOR_PRESENT.name());
         requestDto.setPairing("This wine is perfect with cured cheeses, red meats, sausages and strong dishes.");
-        requestDto.setImage(ImageReader.getImageBytes("images/products/red5.png"));
+        requestDto.setImageLink("images/products/red5.png");
         List<String> wineDishPairing = List.of("Cheese", "Meat", "Sausages", "Strong dishes");
         requestDto.setDishes(wineDishPairing);
         create(requestDto);
@@ -395,7 +395,7 @@ public class ProductController {
         requestDto.setTemperature("Serve between 12-14ºC");
         requestDto.setEvent(ProductEvent.Event.FOR_LONELY_EVENING.name());
         requestDto.setPairing("Perfect with stewed meat, cured cheese, sausages, and dishes with personality.");
-        requestDto.setImage(ImageReader.getImageBytes("images/products/red6.png"));
+        requestDto.setImageLink("images/products/red6.png");
         List<String> wineDishPairing = List.of("Meat", "Cheese", "Sausages", "Dishes with personality");
         requestDto.setDishes(wineDishPairing);
         create(requestDto);
@@ -416,7 +416,7 @@ public class ProductController {
         requestDto.setTemperature("Serve between 6-8ºC");
         requestDto.setEvent(ProductEvent.Event.PARTY_WITH_FRIENDS.name());
         requestDto.setPairing("Perfect with fish, mild cheese, rice and white meats.");
-        requestDto.setImage(ImageReader.getImageBytes("images/products/white1.png"));
+        requestDto.setImageLink("images/products/white1.png");
         List<String> wineDishPairing = List.of("Fish", "Cheese", "Rice", "Meat");
         requestDto.setDishes(wineDishPairing);
         create(requestDto);
@@ -436,7 +436,7 @@ public class ProductController {
         requestDto.setTemperature("Serve between 10-12ºC");
         requestDto.setEvent(ProductEvent.Event.FOR_LONELY_EVENING.name());
         requestDto.setPairing("Perfect for all types of aperitifs, fish, rice, smoked dishes, white meat and cheese.");
-        requestDto.setImage(ImageReader.getImageBytes("images/products/white2.png"));
+        requestDto.setImageLink("images/products/white2.png");
         List<String> wineDishPairing = List.of("Fish", "Rice", "Smoked dishes", "Meat", "Cheese");
         requestDto.setDishes(wineDishPairing);
         create(requestDto);
@@ -456,7 +456,7 @@ public class ProductController {
         requestDto.setTemperature("Serve between 6-8ºC");
         requestDto.setEvent(ProductEvent.Event.FOR_SPECIAL_EVENTS.name());
         requestDto.setPairing("Combine this wine with risottos, cheese, sausages, poultry, and stewed meats.");
-        requestDto.setImage(ImageReader.getImageBytes("images/products/white3.png"));
+        requestDto.setImageLink("images/products/white3.png");
         List<String> wineDishPairing = List.of("Risottos", "Cheese", "Sausages", "Poultry", "Meat");
         requestDto.setDishes(wineDishPairing);
         create(requestDto);
@@ -476,7 +476,7 @@ public class ProductController {
         requestDto.setTemperature("Serve between 6-8ºC");
         requestDto.setEvent(ProductEvent.Event.PARTY_WITH_FRIENDS.name());
         requestDto.setPairing("This wine is perfect with cured cheeses, red meats, sausages and strong dishes.");
-        requestDto.setImage(ImageReader.getImageBytes("images/products/white4.png"));
+        requestDto.setImageLink("images/products/white4.png");
         List<String> wineDishPairing = List.of("Cheese", "Meat", "Sausages", "Strong dishes");
         requestDto.setDishes(wineDishPairing);
         create(requestDto);
@@ -496,7 +496,7 @@ public class ProductController {
         requestDto.setTemperature("Serve between 6-8ºC");
         requestDto.setEvent(ProductEvent.Event.FOR_SPECIAL_EVENTS.name());
         requestDto.setPairing("Perfect for salads, vegetables, fishes and mild cheeses. It can also be taken as an aperitif.");
-        requestDto.setImage(ImageReader.getImageBytes("images/products/white5.png"));
+        requestDto.setImageLink("images/products/white5.png");
         List<String> wineDishPairing = List.of("Salads", "Vegetables", "Fish", "Cheese");
         requestDto.setDishes(wineDishPairing);
         create(requestDto);
@@ -516,7 +516,7 @@ public class ProductController {
         requestDto.setTemperature("Serve between 6-8ºC");
         requestDto.setEvent(ProductEvent.Event.FOR_PRESENT.name());
         requestDto.setPairing("The great personality: stewed meats and fish, cheese, foie, and smoked foods");
-        requestDto.setImage(ImageReader.getImageBytes("images/products/white6.png"));
+        requestDto.setImageLink("images/products/white6.png");
         List<String> wineDishPairing = List.of("Meat", "Fish", "Cheese", "Foie", "Smoked dishes");
         requestDto.setDishes(wineDishPairing);
         create(requestDto);

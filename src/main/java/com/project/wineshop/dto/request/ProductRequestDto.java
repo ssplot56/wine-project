@@ -5,6 +5,7 @@ import com.project.wineshop.model.enums.ProductEvent;
 import com.project.wineshop.model.enums.ProductType;
 import com.project.wineshop.validation.EnumValue;
 import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
@@ -42,6 +43,7 @@ public class ProductRequestDto {
     @Min(value = 0, message = "Vintage must be greater than 0")
     private Integer vintage;
 
+    @NotBlank
     private String country;
 
     private String region;

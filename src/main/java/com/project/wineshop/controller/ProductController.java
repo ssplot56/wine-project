@@ -62,7 +62,8 @@ public class ProductController {
         return ResponseEntity.ok(productMapper.mapToDto(savedProduct));
     }
 
-/*
+    //http://localhost:8080/wine-shop/products?size=6&page=0&sortBy=price
+    //http://localhost:8080/wine-shop/products?sortBy=price:DESC;name:ASC&page=0
     @GetMapping
     public ResponseEntity<List<ProductResponseDto>> getAllProducts(@RequestParam (defaultValue = "20") Integer size,
                                                                    @RequestParam (defaultValue = "0") Integer page,
@@ -74,9 +75,10 @@ public class ProductController {
                 .collect(Collectors.toList());
         return ResponseEntity.ok(responseDtos);
     }
-*/
 
-    @GetMapping
+    //http://localhost:8080/wine-shop/products/filtered?type=DRY&event=FOR_SPECIAL_EVENTS
+    //http://localhost:8080/wine-shop/products/filtered?dish=Cheese,Meet
+    @GetMapping("/filtered")
     public ResponseEntity<List<ProductResponseDto>> getFilteredProducts(@RequestParam Map<String, String> params) {
         List<ProductResponseDto> responseDtos = productService.findAll(params)
                 .stream()

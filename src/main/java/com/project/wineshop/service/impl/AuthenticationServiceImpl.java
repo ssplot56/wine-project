@@ -4,29 +4,39 @@ import com.project.wineshop.dto.request.UserLoginDto;
 import com.project.wineshop.dto.request.UserRegisterDto;
 import com.project.wineshop.model.Role;
 import com.project.wineshop.model.User;
+import com.project.wineshop.security.jwt.JwtTokenProvider;
 import com.project.wineshop.service.AuthenticationService;
 import com.project.wineshop.service.RoleService;
 import com.project.wineshop.service.ShoppingCartService;
 import com.project.wineshop.service.UserService;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import java.util.Set;
 
 @Service
 public class AuthenticationServiceImpl implements AuthenticationService {
+    private final AuthenticationManager authenticationManager;
     private final ShoppingCartService shoppingCartService;
     private final UserService userService;
     private final RoleService roleService;
     private final PasswordEncoder passwordEncoder;
+    private final JwtTokenProvider tokenProvider;
 
-    public AuthenticationServiceImpl(UserService userService,
+    public AuthenticationServiceImpl(AuthenticationManager authenticationManager,
+                                     UserService userService,
                                      RoleService roleService,
                                      PasswordEncoder passwordEncoder,
-                                     ShoppingCartService shoppingCartService) {
+                                     ShoppingCartService shoppingCartService, JwtTokenProvider tokenProvider) {
+        this.authenticationManager = authenticationManager;
         this.userService = userService;
         this.roleService = roleService;
         this.passwordEncoder = passwordEncoder;
         this.shoppingCartService = shoppingCartService;
+        this.tokenProvider = tokenProvider;
     }
 
     @Override
@@ -35,7 +45,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         user.setFirstName(userRegisterDto.getFirstName());
         user.setLastName(userRegisterDto.getLastName());
         user.setEmail(userRegisterDto.getEmail());
-        user.setPassword(userRegisterDto.getPassword());
+        user.setPassword(passwordEncoder.encode(userRegisterDto.getPassword()));
         user.setRoles(Set.of(roleService.findByName(Role.RoleName.USER)));
         User userWithId = userService.save(user);
         shoppingCartService.registerNewShoppingCart(user);
@@ -43,12 +53,14 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     }
 
     @Override
-    public User login(UserLoginDto userLoginDto) {
-        User user = userService.findByEmail(userLoginDto.getEmail());
-        String encodedPassword = passwordEncoder.encode(userLoginDto.getPassword());
-        if (!user.getPassword().equals(encodedPassword)) {
-            throw new RuntimeException("Incorrect email or password!");
-        }
-        return user;
+    public String login(UserLoginDto userLoginDto) {
+        Authentication authentication = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(
+                        userLoginDto.getEmail(), userLoginDto.getPassword()
+                )
+        );
+
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+        return tokenProvider.createToken(authentication);
     }
 }

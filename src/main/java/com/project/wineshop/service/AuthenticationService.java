@@ -7,5 +7,5 @@ import com.project.wineshop.model.User;
 public interface AuthenticationService {
     User register(UserRegisterDto userRegisterDto);
 
-    User login(UserLoginDto userLoginDto);
+    String login(UserLoginDto userLoginDto);
 }

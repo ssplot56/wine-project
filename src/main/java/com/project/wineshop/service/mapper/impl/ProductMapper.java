@@ -9,7 +9,6 @@ import com.project.wineshop.service.mapper.RequestDtoMapper;
 import com.project.wineshop.service.mapper.ResponseDtoMapper;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
 import java.util.Base64;
 import java.util.HashSet;
 import java.util.List;
@@ -47,7 +46,7 @@ public class ProductMapper implements
         product.setGrape(productRequestDto.getGrape());
         product.setTaste(productRequestDto.getTaste());
         product.setTemperature(productRequestDto.getTemperature());
-        product.setImage(productRequestDto.getImage());
+        product.setImageLink(productRequestDto.getImageLink());
         return product;
     }
 
@@ -73,11 +72,7 @@ public class ProductMapper implements
         responseDto.setGrape(product.getGrape());
         responseDto.setTaste(product.getTaste());
         responseDto.setTemperature(product.getTemperature());
-
-        //byte[] image = imageLoader.loadImageFromDisk(product.getImageUrl());
-        byte[] image = product.getImage();
-        String base64Image = Base64.getEncoder().encodeToString(image);
-        responseDto.setImage(base64Image);
+        responseDto.setImageLink(product.getImageLink());
         return responseDto;
     }
 

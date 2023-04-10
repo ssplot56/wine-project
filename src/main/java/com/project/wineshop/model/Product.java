@@ -1,25 +1,17 @@
 package com.project.wineshop.model;
 
-import com.project.wineshop.model.enums.ProductColor;
-import com.project.wineshop.model.enums.ProductEvent;
-import com.project.wineshop.model.enums.ProductType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
-import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToMany;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Data;
 
 import java.math.BigDecimal;
-import java.util.List;
 import java.util.Set;
 
 @Data
@@ -47,11 +39,6 @@ public class Product {//equals & hashcode Lombok
     @Column(length = 200)
     private String pairing;
 
-/*
-    @OneToMany(mappedBy = "wine")
-    private List<WineDishPairing> wineDishPairings;
-*/
-
     @ManyToMany
     @JoinTable(name = "products_dishes",
             joinColumns = @JoinColumn(name = "product_id"),
@@ -72,7 +59,5 @@ public class Product {//equals & hashcode Lombok
 
     private String temperature;
 
-    @Lob // Використовуйте анотацію @Lob для зберігання масиву байтів у вигляді BLOB
-    @Column(name = "image", nullable = true, columnDefinition="MEDIUMBLOB")
-    private byte[] image;
+    private String imageLink;
 }

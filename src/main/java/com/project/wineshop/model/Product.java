@@ -13,12 +13,14 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.Lob;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Data;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Set;
 
 @Data
 @Entity
@@ -34,22 +36,27 @@ public class Product {//equals & hashcode Lombok
     private BigDecimal price;
 
     @Column(length = 20)
-    @Enumerated(EnumType.STRING)
-    private ProductType.Type type;
+    private String type;
 
     @Column(length = 20)
-    @Enumerated(EnumType.STRING)
-    private ProductColor.Color color;
+    private String color;
 
     @Column(length = 60)
-    @Enumerated(EnumType.STRING)
-    private ProductEvent.Event event;
+    private String event;
 
     @Column(length = 200)
     private String pairing;
 
+/*
     @OneToMany(mappedBy = "wine")
     private List<WineDishPairing> wineDishPairings;
+*/
+
+    @ManyToMany
+    @JoinTable(name = "products_dishes",
+            joinColumns = @JoinColumn(name = "product_id"),
+            inverseJoinColumns = @JoinColumn(name = "dish_id"))
+    private Set<Dish> dishes;
 
     @Column(length = 4)
     private Integer vintage;

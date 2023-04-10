@@ -1,9 +1,9 @@
 package com.project.wineshop.dto.response;
 
-import com.project.wineshop.model.Manufacturer;
 import lombok.Data;
 
 import java.math.BigDecimal;
+import java.util.Set;
 
 @Data
 public class ProductResponseDto {
@@ -17,15 +17,23 @@ public class ProductResponseDto {
 
     private String type;
 
-    private Integer vintage;
-
-    private Manufacturer manufacturer;
+    private String event;
 
     private String pairing;
+
+    private Set<String> dishes;
+
+    private Integer vintage;
+
+    private String country;
+
+    private String region;
 
     private String grape;
 
     private String taste;
 
-    private Byte temperature;
+    private String temperature;
+
+    private String imageLink;
 }

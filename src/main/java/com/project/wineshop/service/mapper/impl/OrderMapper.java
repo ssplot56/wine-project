@@ -26,11 +26,13 @@ public class OrderMapper implements RequestDtoMapper<Order, OrderRequestDto> {
     @Override
     public Order mapToModel(OrderRequestDto orderRequestDto) {
         Order order = new Order();
-        if(orderRequestDto.getPayment().equals("Credit card")) {
-            order.setPayment(OrderPayment.Payment.CREDIT_CARD);
-        } else {
-            order.setPayment(OrderPayment.Payment.GOOGLE_PAY);
-        }
+//        OrderPayment.Payment.valueOf("CREDIT_CARD");
+        OrderPayment.Payment.valueOf(orderRequestDto.getPayment());
+//        if(orderRequestDto.getPayment().equals("Credit card")) {
+//            order.setPayment(OrderPayment.Payment.CREDIT_CARD);
+//        } else {
+//            order.setPayment(OrderPayment.Payment.GOOGLE_PAY);
+//        }
         order.setIsGift(orderRequestDto.getIsGift());
         order.setUser(userService.findById(orderRequestDto.getUserId()));
         Map<Product, Integer> products = new HashMap<>();

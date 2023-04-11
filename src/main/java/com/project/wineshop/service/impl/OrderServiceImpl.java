@@ -11,6 +11,7 @@ import com.project.wineshop.service.UserService;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 @Service
 public class OrderServiceImpl implements OrderService {
@@ -28,7 +29,8 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public Order completeOrder(Order order) {
         User byEmail = userService.findByEmail(order.getUser().getEmail());
-        if(byEmail == null) {
+        Optional<User> user = Optional.ofNullable(byEmail);
+        if(user.isEmpty()) {
             shippingDetailsService.save(order.getUser().getShippingDetails());
             userService.save(order.getUser());
         }

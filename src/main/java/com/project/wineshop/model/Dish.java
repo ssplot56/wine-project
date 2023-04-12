@@ -12,6 +12,7 @@ import jakarta.persistence.Table;
 import lombok.Data;
 
 import java.util.List;
+import java.util.Set;
 
 @Data
 @Entity
@@ -23,9 +24,6 @@ public class Dish {
 
     private String name;
 
-    @ManyToMany
-    @JoinTable(name = "products_dishes",
-            joinColumns = @JoinColumn(name = "dish_id"),
-            inverseJoinColumns = @JoinColumn(name = "product_id"))
-    private List<Product> products;
+    @ManyToMany(mappedBy = "dishes")
+    private Set<Product> products;
 }

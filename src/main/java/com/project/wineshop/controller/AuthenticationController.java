@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping()
+@RequestMapping
 public class AuthenticationController {
     private final AuthenticationService authenticationService;
 
@@ -27,7 +27,7 @@ public class AuthenticationController {
         return new ResponseEntity<>("The user has been registered.", HttpStatus.CREATED);
     }
 
-    @PostMapping("log-in")
+    @PostMapping("/log-in")
     public ResponseEntity<JwtAuthResponse> login(@Valid @RequestBody UserLoginDto userLoginDto) {
         String token = authenticationService.login(userLoginDto);
         JwtAuthResponse jwtAuthResponse = new JwtAuthResponse();

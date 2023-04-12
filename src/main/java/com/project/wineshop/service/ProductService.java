@@ -17,13 +17,7 @@ public interface ProductService {
 
     List<Product> findAll(Map<String, String> params);
 
-    List<Product> getProducts(String type,
-                              String color,
-                              String event,
-                              String dishes,
-                              String sortBy,
-                              Integer page,
-                              Integer size);
+    //List<Product> findAll(String type, String color, String event, String dish, PageRequest pageRequest);
 
     Product update(Long id, Product product);
 

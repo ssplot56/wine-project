@@ -3,11 +3,9 @@ package com.project.wineshop.service.impl;
 import com.project.wineshop.model.Product;
 import com.project.wineshop.repository.ProductRepository;
 import com.project.wineshop.repository.specification.SpecificationManager;
-import com.project.wineshop.repository.specification2.ProductSpecifications;
 import com.project.wineshop.service.ProductService;
-import org.hibernate.Hibernate;
+import com.project.wineshop.utility.PageRequestFormer;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
@@ -49,6 +47,7 @@ public class ProductServiceImpl implements ProductService {
         return productRepository.findAll(pageRequest).toList();
     }
 
+/*
     @Override
     public List<Product> findAll(Map<String, String> params) {
         Specification<Product> specification = null;
@@ -58,6 +57,52 @@ public class ProductServiceImpl implements ProductService {
             specification = specification == null ? Specification.where(sp) : specification.and(sp);
         }
         return productRepository.findAll(specification);
+    }
+*/
+
+    @Override
+    public List<Product> findAll(Map<String, String> params) {
+        Integer page = 0;
+        if (params.containsKey("page")) {
+            page = Integer.valueOf(params.get("page"));
+            params.remove("page");
+        }
+        Integer size = 6;
+        if (params.containsKey("size")) {
+            size = Integer.valueOf(params.get("size"));
+            params.remove("size");
+        }
+        String sortBy = "id:ASC";
+        if (params.containsKey("sortBy")) {
+            sortBy = params.get("sortBy");
+            params.remove("sortBy");
+        }
+        PageRequest pageRequest = PageRequestFormer.formPageRequest(page, size, sortBy);
+
+/*
+        Specification<Product> specification = Specification.where(null);
+        if (type != null) {
+            specification = specification.and(ProductSpecification.typeEquals(type));
+        }
+        if (color != null) {
+            specification = specification.and(ProductSpecification.colorEquals(color));
+        }
+        if (event != null) {
+            specification = specification.and(ProductSpecification.eventEquals(event));
+        }
+        if (dish != null) {
+            String[] dishes = dish.split(",");
+            specification = specification.and(ProductSpecification.dishIn(dishes));
+        }
+*/
+        //Map<String, String> filters = new HashMap<>();
+        Specification<Product> specification = null;
+        for (Map.Entry<String, String> entry : params.entrySet()) {
+            Specification<Product> sp = productSpecificationManager.get(entry.getKey(),
+                    entry.getValue().split(","));
+            specification = specification == null ? Specification.where(sp) : specification.and(sp);
+        }
+        return productRepository.findAll(specification, pageRequest).toList();
     }
 
 /*
@@ -119,8 +164,9 @@ public class ProductServiceImpl implements ProductService {
     }
 */
 
+/*
     @Override
-    public List<Product> getProducts(String type,
+    public List<Product> getProducts_1(String type,
                                      String color,
                                      String event,
                                      String dishes,
@@ -151,6 +197,7 @@ public class ProductServiceImpl implements ProductService {
 
         return productRepository.findAll(spec, pageable).getContent();
     }
+*/
 
     private Sort getSort(String sortBy) {
         String[] sortArray = sortBy.split(";");

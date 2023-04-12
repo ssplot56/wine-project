@@ -6,7 +6,7 @@ import org.springframework.data.domain.Sort;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UrlParser {
+public class PageRequestFormer {
 
     public static PageRequest formPageRequest(Integer page, Integer size, String sortBy) {
         List<Sort.Order> orders = new ArrayList<>();

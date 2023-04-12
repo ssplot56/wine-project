@@ -3,21 +3,13 @@ package com.project.wineshop.controller;
 import com.project.wineshop.dto.request.ProductRequestDto;
 import com.project.wineshop.dto.response.ProductResponseDto;
 import com.project.wineshop.model.Product;
-import com.project.wineshop.model.WineDishPairing;
 import com.project.wineshop.model.enums.ProductColor;
 import com.project.wineshop.model.enums.ProductEvent;
-import com.project.wineshop.model.Dish;
 import com.project.wineshop.model.enums.ProductType;
-import com.project.wineshop.service.DishService;
 import com.project.wineshop.service.ProductService;
-import com.project.wineshop.service.WineDishPairingService;
 import com.project.wineshop.service.mapper.impl.ProductMapper;
-import com.project.wineshop.utility.ImageReader;
-import com.project.wineshop.utility.UrlParser;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Positive;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,11 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -41,17 +29,11 @@ import java.util.stream.Collectors;
 @RequestMapping("/products")
 public class ProductController {
     private final ProductService productService;
-    private final DishService dishService;
-    private final WineDishPairingService wineDishPairingService;
     private final ProductMapper productMapper;
 
     public ProductController(ProductService productService,
-                             DishService dishService,
-                             WineDishPairingService wineDishPairingService,
                              ProductMapper productMapper) {
         this.productService = productService;
-        this.dishService = dishService;
-        this.wineDishPairingService = wineDishPairingService;
         this.productMapper = productMapper;
     }
 
@@ -62,43 +44,9 @@ public class ProductController {
         return ResponseEntity.ok(productMapper.mapToDto(savedProduct));
     }
 
-    //http://localhost:8080/wine-shop/products?size=6&page=0&sortBy=price
-    //http://localhost:8080/wine-shop/products?sortBy=price:DESC;name:ASC&page=0
-    @GetMapping("/pagedsorted")
-    public ResponseEntity<List<ProductResponseDto>> getAllProducts(@RequestParam (defaultValue = "20") Integer size,
-                                                                   @RequestParam (defaultValue = "0") Integer page,
-                                                                   @RequestParam (defaultValue = "id") String sortBy) {
-        PageRequest pageRequest = UrlParser.formPageRequest(page, size, sortBy);
-        List<ProductResponseDto> responseDtos = productService.findAll(pageRequest)
-                .stream()
-                .map(productMapper::mapToDto)
-                .collect(Collectors.toList());
-        return ResponseEntity.ok(responseDtos);
-    }
-
-    //http://localhost:8080/wine-shop/products/filtered?type=DRY&event=FOR_SPECIAL_EVENTS
-    //http://localhost:8080/wine-shop/products/filtered?dish=Cheese,Meet
-    @GetMapping("/filtered")
-    public ResponseEntity<List<ProductResponseDto>> getFilteredProducts(@RequestParam Map<String, String> params) {
-        List<ProductResponseDto> responseDtos = productService.findAll(params)
-                .stream()
-                .map(productMapper::mapToDto)
-                .collect(Collectors.toList());
-        return ResponseEntity.ok(responseDtos);
-    }
-
     @GetMapping
-    public ResponseEntity<List<ProductResponseDto>> getProducts(
-            @RequestParam(required = false) String type,
-            @RequestParam(required = false) String color,
-            @RequestParam(required = false) String event,
-            @RequestParam(required = false) String dishes,
-            @RequestParam(defaultValue = "id:ASC") String sortBy,
-            @RequestParam(defaultValue = "0") Integer page,
-            @RequestParam(defaultValue = "10") Integer size) {
-
-        List<ProductResponseDto> responseDtos = productService.getProducts(
-                type, color, event, dishes, sortBy, page, size)
+    public ResponseEntity<List<ProductResponseDto>> getProducts(@RequestParam Map<String, String> params) {
+        List<ProductResponseDto> responseDtos = productService.findAll(params)
                 .stream()
                 .map(productMapper::mapToDto)
                 .collect(Collectors.toList());
@@ -194,7 +142,7 @@ public class ProductController {
 
     private void injectWinePink3() {
         ProductRequestDto requestDto = new ProductRequestDto();
-        requestDto.setName("Chardonay Rosé");
+        requestDto.setName("Chardonnay Rosé");
         requestDto.setPrice(new BigDecimal("25.99"));
         requestDto.setType(ProductType.Type.SEMISWEET.name());
         requestDto.setColor(ProductColor.Color.PINK.name());
@@ -234,7 +182,7 @@ public class ProductController {
 
     private void injectWinePink5() {
         ProductRequestDto requestDto = new ProductRequestDto();
-        requestDto.setName("Chardonay Rosé");
+        requestDto.setName("Chardonnay Rosé");
         requestDto.setPrice(new BigDecimal("57.99"));
         requestDto.setType(ProductType.Type.SEMISWEET.name());
         requestDto.setColor(ProductColor.Color.PINK.name());
@@ -355,7 +303,7 @@ public class ProductController {
 
     private void injectWineRed5() {
         ProductRequestDto requestDto = new ProductRequestDto();
-        requestDto.setName("Chardonay");
+        requestDto.setName("Chardonnay");
         requestDto.setPrice(new BigDecimal("62.99"));
         requestDto.setType(ProductType.Type.DRY.name());
         requestDto.setColor(ProductColor.Color.RED.name());
@@ -476,7 +424,7 @@ public class ProductController {
 
     private void injectWineWhite5() {
         ProductRequestDto requestDto = new ProductRequestDto();
-        requestDto.setName("Chardonay");
+        requestDto.setName("Chardonnay");
         requestDto.setPrice(new BigDecimal("62.99"));
         requestDto.setType(ProductType.Type.DRY.name());
         requestDto.setColor(ProductColor.Color.WHITE.name());

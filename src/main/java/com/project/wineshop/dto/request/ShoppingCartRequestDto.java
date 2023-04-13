@@ -1,7 +1,6 @@
 package com.project.wineshop.dto.request;
 
-import com.project.wineshop.dto.response.ProductResponseDto;
-import com.project.wineshop.dto.response.UserResponseDto;
+import com.project.wineshop.dto.request.user.UserRequestDto;
 import lombok.Data;
 
 import java.util.Map;

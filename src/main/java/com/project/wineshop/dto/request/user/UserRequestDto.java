@@ -1,4 +1,4 @@
-package com.project.wineshop.dto.request;
+package com.project.wineshop.dto.request.user;
 
 import java.time.LocalDate;
 import lombok.Getter;

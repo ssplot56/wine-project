@@ -2,7 +2,7 @@ package com.project.wineshop.service.mapper.impl;
 
 import com.project.wineshop.dto.request.ProductRequestDto;
 import com.project.wineshop.dto.request.ShoppingCartRequestDto;
-import com.project.wineshop.dto.request.UserRequestDto;
+import com.project.wineshop.dto.request.user.UserRequestDto;
 import com.project.wineshop.dto.response.ProductResponseDto;
 import com.project.wineshop.dto.response.ShoppingCartResponseDto;
 import com.project.wineshop.dto.response.UserResponseDto;
@@ -12,7 +12,6 @@ import com.project.wineshop.model.User;
 import com.project.wineshop.service.mapper.RequestDtoMapper;
 import com.project.wineshop.service.mapper.ResponseDtoMapper;
 import org.springframework.stereotype.Component;
-
 import java.util.HashMap;
 import java.util.Map;
 

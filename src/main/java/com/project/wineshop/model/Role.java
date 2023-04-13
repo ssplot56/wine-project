@@ -7,12 +7,9 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import lombok.Getter;
-import lombok.Setter;
-import java.util.Objects;
+import lombok.Data;
 
-@Getter
-@Setter
+@Data
 @Entity
 @Table(name = "roles")
 public class Role {
@@ -24,22 +21,5 @@ public class Role {
 
     public enum RoleName {
         ADMIN, USER, GUEST
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        Role role = (Role) o;
-        return Objects.equals(id, role.id) && name == role.name;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, name);
     }
 }

@@ -1,21 +1,24 @@
 package com.project.wineshop.controller;
 
-import com.project.wineshop.dto.request.UserRequestDto;
+import com.project.wineshop.dto.request.user.UserUpdateRequestDto;
 import com.project.wineshop.dto.response.UserResponseDto;
+import com.project.wineshop.model.User;
 import com.project.wineshop.service.UserService;
 import com.project.wineshop.service.mapper.impl.UserMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
 @RequestMapping("/users")
+@CrossOrigin(origins = "*")
 public class UserController {
     private final UserService userService;
     private final UserMapper userMapper;
@@ -25,11 +28,12 @@ public class UserController {
         this.userMapper = userMapper;
     }
 
-    @PutMapping("/{id}")
+    @PatchMapping("/{id}")
     public ResponseEntity<UserResponseDto> update(@PathVariable Long id,
-                                                  UserRequestDto requestDto) {
-        return new ResponseEntity<>(userMapper.mapToDto(
-                userService.update(id, userMapper.mapToModel(requestDto))), HttpStatus.OK);
+                                                  UserUpdateRequestDto requestDto) {
+        User userWithoutId = userMapper.mapToModel(requestDto);
+        User userWithId = userService.update(id, userWithoutId);
+        return new ResponseEntity<>(userMapper.mapToDto(userWithId), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")

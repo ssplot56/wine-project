@@ -11,6 +11,7 @@ import com.project.wineshop.service.mapper.impl.ProductMapper;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Positive;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,7 +20,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
@@ -27,6 +27,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/products")
+@CrossOrigin(origins = "*")
 public class ProductController {
     private final ProductService productService;
     private final ProductMapper productMapper;

@@ -1,7 +1,7 @@
 package com.project.wineshop.service.impl;
 
-import com.project.wineshop.dto.request.UserLoginDto;
-import com.project.wineshop.dto.request.UserRegisterDto;
+import com.project.wineshop.dto.request.user.UserLoginDto;
+import com.project.wineshop.dto.request.user.UserRegisterDto;
 import com.project.wineshop.model.Role;
 import com.project.wineshop.model.ShippingDetails;
 import com.project.wineshop.model.User;

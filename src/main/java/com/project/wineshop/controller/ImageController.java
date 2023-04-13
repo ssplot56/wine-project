@@ -9,6 +9,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @RequestMapping("/products")
+@CrossOrigin(origins = "*")
 public class ImageController {
     private final ImageService imageService;
 

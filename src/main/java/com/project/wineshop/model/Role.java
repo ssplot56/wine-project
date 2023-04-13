@@ -23,7 +23,7 @@ public class Role {
     private RoleName name;
 
     public enum RoleName {
-        ADMIN, USER
+        ADMIN, USER, GUEST
     }
 
     @Override

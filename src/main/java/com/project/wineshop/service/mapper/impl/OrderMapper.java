@@ -3,6 +3,7 @@ package com.project.wineshop.service.mapper.impl;
 import com.project.wineshop.dto.request.OrderRequestDto;
 import com.project.wineshop.model.Order;
 import com.project.wineshop.model.Product;
+import com.project.wineshop.model.ShippingDetails;
 import com.project.wineshop.model.enums.OrderPayment;
 import com.project.wineshop.model.enums.OrderStatus;
 import com.project.wineshop.service.ProductService;
@@ -26,22 +27,13 @@ public class OrderMapper implements RequestDtoMapper<Order, OrderRequestDto> {
     @Override
     public Order mapToModel(OrderRequestDto orderRequestDto) {
         Order order = new Order();
-//        OrderPayment.Payment.valueOf("CREDIT_CARD");
-        OrderPayment.Payment.valueOf(orderRequestDto.getPayment());
-//        if(orderRequestDto.getPayment().equals("Credit card")) {
-//            order.setPayment(OrderPayment.Payment.CREDIT_CARD);
-//        } else {
-//            order.setPayment(OrderPayment.Payment.GOOGLE_PAY);
-//        }
         order.setIsGift(orderRequestDto.getIsGift());
-        order.setUser(userService.findById(orderRequestDto.getUserId()));
-        Map<Product, Integer> products = new HashMap<>();
+        ShippingDetails shippingDetails = new ShippingDetails();
+        shippingDetails.setRegion(orderRequestDto.getRegion());
+        shippingDetails.setCity(orderRequestDto.getCity());
+        shippingDetails.setDeliveryService(orderRequestDto.getDeliveryService());
+        shippingDetails.setWarehouse(orderRequestDto.getWarehouse());
+        return null;
 
-        for (Map.Entry<Long, Integer> entry: orderRequestDto.getProducts().entrySet()) {
-
-            products.put(productService.getById(entry.getKey()), entry.getValue());
-        }
-        order.setProducts(products);
-        return order;
     }
 }

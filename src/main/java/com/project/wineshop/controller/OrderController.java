@@ -1,7 +1,6 @@
 package com.project.wineshop.controller;
 
 import com.project.wineshop.dto.request.OrderRequestDto;
-import com.project.wineshop.dto.request.OrderRequestNewUserDto;
 import com.project.wineshop.model.Order;
 import com.project.wineshop.service.OrderService;
 import com.project.wineshop.service.mapper.RequestDtoMapper;
@@ -18,14 +17,10 @@ public class OrderController {
     private OrderService orderService;
     private RequestDtoMapper<Order, OrderRequestDto> requestDtoMapper;
 
-    private RequestDtoMapper<Order, OrderRequestNewUserDto> requestNewUserDtoMapper;
-
     public OrderController(OrderService orderService,
-                           RequestDtoMapper<Order, OrderRequestDto> requestDtoMapper,
-                           RequestDtoMapper<Order, OrderRequestNewUserDto> requestNewUserDtoMapper) {
+                           RequestDtoMapper<Order, OrderRequestDto> requestDtoMapper) {
         this.orderService = orderService;
         this.requestDtoMapper = requestDtoMapper;
-        this.requestNewUserDtoMapper = requestNewUserDtoMapper;
     }
 
     @PostMapping("/complete")
@@ -34,10 +29,8 @@ public class OrderController {
         return ResponseEntity.ok().build();
     }
 
-    @PostMapping("/complete-new-user")
-    public ResponseEntity completeOrderWithNewUser(@RequestBody @Valid OrderRequestNewUserDto orderRequestNewUserDto) {
-        orderService.completeOrder(requestNewUserDtoMapper.mapToModel(orderRequestNewUserDto));
-        return ResponseEntity.ok().build();
+//    @PostMapping("/complete-new-user")
+//    public ResponseEntity completeOrderWithNewUser(@RequestBody @Valid OrderRequestNewUserDto orderRequestNewUserDto) {
+//        orderService.completeOrder(requestNewUserDtoMapper.mapToModel(orderRequestNewUserDto));
+//        return ResponseEntity.ok().build();
     }
-
-}

@@ -23,6 +23,10 @@ public class Injector {
             Role adminRole = new Role();
             adminRole.setName(Role.RoleName.ADMIN);
             roleRepository.save(adminRole);
+
+            Role guestRole = new Role();
+            guestRole.setName(Role.RoleName.GUEST);
+            roleRepository.save(guestRole);
         }
     }
 }

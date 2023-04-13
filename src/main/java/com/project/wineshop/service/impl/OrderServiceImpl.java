@@ -17,7 +17,6 @@ import java.util.Optional;
 public class OrderServiceImpl implements OrderService {
     private final ShippingDetailsService shippingDetailsService;
     private final UserService userService;
-
     private final OrderRepository orderRepository;
 
     public OrderServiceImpl(ShippingDetailsService shippingDetailsService, UserService userService, OrderRepository orderRepository) {
@@ -28,14 +27,8 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public Order completeOrder(Order order) {
-        User byEmail = userService.findByEmail(order.getUser().getEmail());
-        Optional<User> user = Optional.ofNullable(byEmail);
-        if(user.isEmpty()) {
-            shippingDetailsService.save(order.getUser().getShippingDetails());
-            userService.save(order.getUser());
-        }
-        order.setOrderDate(LocalDateTime.now());
-        order.setOrderStatus(OrderStatus.Status.CREATED);
+        shippingDetailsService.save(order.getUser().getShippingDetails());
+        userService.save(order.getUser());
         orderRepository.save(order);
         return order;
     }

@@ -24,6 +24,9 @@ public class OrderRequestDto {
     @NotEmpty
     private String email;
     @NotNull
+    @Size(min=8)
+    private String password;
+    @NotNull
     @NotBlank
     private String phoneNumber;
 

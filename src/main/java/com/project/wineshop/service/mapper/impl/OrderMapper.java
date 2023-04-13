@@ -6,6 +6,7 @@ import com.project.wineshop.model.Product;
 import com.project.wineshop.model.Role;
 import com.project.wineshop.model.ShippingDetails;
 import com.project.wineshop.model.User;
+import com.project.wineshop.model.enums.OrderPayment;
 import com.project.wineshop.model.enums.OrderStatus;
 import com.project.wineshop.service.ProductService;
 import com.project.wineshop.service.RoleService;
@@ -33,19 +34,23 @@ public class OrderMapper implements RequestDtoMapper<Order, OrderRequestDto> {
     public Order mapToModel(OrderRequestDto orderRequestDto) {
         Order order = new Order();
         order.setIsGift(orderRequestDto.getIsGift());
+        order.setPayment(OrderPayment.Payment.valueOf(orderRequestDto.getPayment()));
         ShippingDetails shippingDetails = new ShippingDetails();
         shippingDetails.setRegion(orderRequestDto.getRegion());
         shippingDetails.setCity(orderRequestDto.getCity());
         shippingDetails.setDeliveryService(orderRequestDto.getDeliveryService());
         shippingDetails.setWarehouse(orderRequestDto.getWarehouse());
-        User user = new User();
+        User user = userService.findByEmail(orderRequestDto.getEmail());
+        if(user == null) {
+            user = new User();
+        }
         user.setEmail(orderRequestDto.getEmail());
         user.setFirstName(orderRequestDto.getFirstName());
         user.setLastName(orderRequestDto.getLastName());
         user.setShippingDetails(shippingDetails);
         user.setPhoneNumber(orderRequestDto.getPhoneNumber());
         user.setRoles(Set.of(roleService.findByName(Role.RoleName.GUEST)));
-        if(orderRequestDto.getCreateAccount()) {
+        if(orderRequestDto.getCreateAccount() != null && orderRequestDto.getCreateAccount()) {
             user.setPassword(orderRequestDto.getPassword());
             user.setRoles(Set.of(roleService.findByName(Role.RoleName.USER)));
         }

@@ -27,8 +27,12 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public Order completeOrder(Order order) {
-        shippingDetailsService.save(order.getUser().getShippingDetails());
-        userService.save(order.getUser());
+        if(userService.findByEmail(order.getUser().getEmail()) == null) {
+            shippingDetailsService.save(order.getUser().getShippingDetails());
+            userService.save(order.getUser());
+        } else{
+            userService.update(order.getUser().getId(), order.getUser());
+        }
         orderRepository.save(order);
         return order;
     }

@@ -3,7 +3,7 @@ package com.project.wineshop.dto.response;
 import lombok.Data;
 
 import java.math.BigDecimal;
-import java.util.List;
+import java.util.Set;
 
 @Data
 public class ProductResponseDto {
@@ -21,7 +21,7 @@ public class ProductResponseDto {
 
     private String pairing;
 
-    private List<String> pairWith;
+    private Set<String> dishes;
 
     private Integer vintage;
 
@@ -35,5 +35,5 @@ public class ProductResponseDto {
 
     private String temperature;
 
-    private byte[] image;
+    private String imageLink;
 }

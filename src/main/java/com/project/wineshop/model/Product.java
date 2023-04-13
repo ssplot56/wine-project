@@ -1,24 +1,21 @@
 package com.project.wineshop.model;
 
-import com.project.wineshop.model.enums.ProductColor;
-import com.project.wineshop.model.enums.ProductEvent;
-import com.project.wineshop.model.enums.ProductType;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
-import jakarta.persistence.Lob;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Data;
 
 import java.math.BigDecimal;
-import java.util.List;
+import java.util.Set;
 
 @Data
 @Entity
@@ -34,22 +31,19 @@ public class Product {//equals & hashcode Lombok
     private BigDecimal price;
 
     @Column(length = 20)
-    @Enumerated(EnumType.STRING)
-    private ProductType.Type type;
+    private String type;
 
     @Column(length = 20)
-    @Enumerated(EnumType.STRING)
-    private ProductColor.Color color;
+    private String color;
 
     @Column(length = 60)
-    @Enumerated(EnumType.STRING)
-    private ProductEvent.Event event;
+    private String event;
 
     @Column(length = 200)
     private String pairing;
 
-    @OneToMany(mappedBy = "wine")
-    private List<WineDishPairing> wineDishPairings;
+    @ManyToMany
+    private Set<Dish> dishes;
 
     @Column(length = 4)
     private Integer vintage;
@@ -65,7 +59,5 @@ public class Product {//equals & hashcode Lombok
 
     private String temperature;
 
-    @Lob // Використовуйте анотацію @Lob для зберігання масиву байтів у вигляді BLOB
-    @Column(name = "image", nullable = true, columnDefinition="MEDIUMBLOB")
-    private byte[] image;
+    private String imageLink;
 }

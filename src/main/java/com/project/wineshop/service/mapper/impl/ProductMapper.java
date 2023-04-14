@@ -20,7 +20,6 @@ public class ProductMapper implements
         ResponseDtoMapper<Product, ProductResponseDto> {
     private final DishService dishService;
 
-
     public ProductMapper(DishService dishService) {
         this.dishService = dishService;
     }

@@ -43,6 +43,7 @@ public class Order {
     private OrderPayment.Payment payment;
 
     private Boolean isGift;
+    
 
     @Override
     public boolean equals(Object o) {

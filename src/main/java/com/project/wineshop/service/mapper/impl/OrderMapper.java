@@ -15,6 +15,7 @@ import com.project.wineshop.service.mapper.RequestDtoMapper;
 import org.springframework.stereotype.Component;
 import java.time.LocalDateTime;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
@@ -29,31 +30,33 @@ public class OrderMapper implements RequestDtoMapper<Order, OrderRequestDto> {
         this.productService = productService;
         this.roleService = roleService;
     }
-
     @Override
     public Order mapToModel(OrderRequestDto orderRequestDto) {
         Order order = new Order();
         order.setIsGift(orderRequestDto.getIsGift());
         order.setPayment(OrderPayment.Payment.valueOf(orderRequestDto.getPayment()));
         ShippingDetails shippingDetails = new ShippingDetails();
-        shippingDetails.setRegion(orderRequestDto.getRegion());
-        shippingDetails.setCity(orderRequestDto.getCity());
-        shippingDetails.setDeliveryService(orderRequestDto.getDeliveryService());
-        shippingDetails.setWarehouse(orderRequestDto.getWarehouse());
-        User user = userService.findByEmail(orderRequestDto.getEmail());
+        shippingDetails.setRegion(orderRequestDto.getUserRequest().getRegion());
+        shippingDetails.setCity(orderRequestDto.getUserRequest().getCity());
+        shippingDetails.setDeliveryService(orderRequestDto.getUserRequest().getDeliveryService());
+        shippingDetails.setWarehouse(orderRequestDto.getUserRequest().getWarehouse());
+        User user = userService.findByEmail(orderRequestDto.getUserRequest().getEmail());
         if(user == null) {
             user = new User();
         }
-        user.setEmail(orderRequestDto.getEmail());
-        user.setFirstName(orderRequestDto.getFirstName());
-        user.setLastName(orderRequestDto.getLastName());
+        user.setEmail(orderRequestDto.getUserRequest().getEmail());
+        user.setFirstName(orderRequestDto.getUserRequest().getFirstName());
+        user.setLastName(orderRequestDto.getUserRequest().getLastName());
         user.setShippingDetails(shippingDetails);
-        user.setPhoneNumber(orderRequestDto.getPhoneNumber());
-        user.setRoles(Set.of(roleService.findByName(Role.RoleName.GUEST)));
+        user.setPhoneNumber(orderRequestDto.getUserRequest().getPhoneNumber());
+        Set<Role> roleSet = new HashSet<>();
         if(orderRequestDto.getCreateAccount() != null && orderRequestDto.getCreateAccount()) {
-            user.setPassword(orderRequestDto.getPassword());
-            user.setRoles(Set.of(roleService.findByName(Role.RoleName.USER)));
+            user.setPassword(orderRequestDto.getUserRequest().getPassword());
+            roleSet.add(roleService.findByName(Role.RoleName.USER));
+        } else {
+            roleSet.add(roleService.findByName(Role.RoleName.GUEST));
         }
+        user.setRoles(roleSet);
         order.setUser(user);
         order.setOrderStatus(OrderStatus.Status.CREATED);
         order.setOrderDate(LocalDateTime.now());

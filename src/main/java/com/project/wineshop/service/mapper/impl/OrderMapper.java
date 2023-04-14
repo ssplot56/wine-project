@@ -25,30 +25,20 @@ public class OrderMapper implements RequestDtoMapper<Order, OrderRequestDto> {
     private ProductService productService;
     private RoleService roleService;
 
-    public OrderMapper(UserService userService, ProductService productService, RoleService roleService) {
+    private UserMapper userMapper;
+
+    public OrderMapper(UserService userService, ProductService productService, RoleService roleService, UserMapper userMapper) {
         this.userService = userService;
         this.productService = productService;
         this.roleService = roleService;
+        this.userMapper = userMapper;
     }
     @Override
     public Order mapToModel(OrderRequestDto orderRequestDto) {
         Order order = new Order();
         order.setIsGift(orderRequestDto.getIsGift());
         order.setPayment(OrderPayment.Payment.valueOf(orderRequestDto.getPayment()));
-        ShippingDetails shippingDetails = new ShippingDetails();
-        shippingDetails.setRegion(orderRequestDto.getUserRequest().getRegion());
-        shippingDetails.setCity(orderRequestDto.getUserRequest().getCity());
-        shippingDetails.setDeliveryService(orderRequestDto.getUserRequest().getDeliveryService());
-        shippingDetails.setWarehouse(orderRequestDto.getUserRequest().getWarehouse());
-        User user = userService.findByEmail(orderRequestDto.getUserRequest().getEmail());
-        if(user == null) {
-            user = new User();
-        }
-        user.setEmail(orderRequestDto.getUserRequest().getEmail());
-        user.setFirstName(orderRequestDto.getUserRequest().getFirstName());
-        user.setLastName(orderRequestDto.getUserRequest().getLastName());
-        user.setShippingDetails(shippingDetails);
-        user.setPhoneNumber(orderRequestDto.getUserRequest().getPhoneNumber());
+        User user = userMapper.mapToModel(orderRequestDto.getUserRequest());
         Set<Role> roleSet = new HashSet<>();
         if(orderRequestDto.getCreateAccount() != null && orderRequestDto.getCreateAccount()) {
             user.setPassword(orderRequestDto.getUserRequest().getPassword());
@@ -58,6 +48,7 @@ public class OrderMapper implements RequestDtoMapper<Order, OrderRequestDto> {
         }
         user.setRoles(roleSet);
         order.setUser(user);
+        order.setShippingDetails(user.getShippingDetails());
         order.setOrderStatus(OrderStatus.Status.CREATED);
         order.setOrderDate(LocalDateTime.now());
         Map<Product, Integer> products = new HashMap<>();

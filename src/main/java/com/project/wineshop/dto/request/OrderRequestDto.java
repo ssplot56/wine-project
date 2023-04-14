@@ -14,34 +14,6 @@ import java.util.Map;
 
 @Data
 public class OrderRequestDto {
-//    @NotNull
-//    @NotBlank
-//    private String firstName;
-//    @NotNull
-//    @NotBlank
-//    private String lastName;
-//    @Email
-//    @NotEmpty
-//    private String email;
-//    @NotNull
-//    @Size(min=8)
-//    private String password;
-//    @NotNull
-//    @NotBlank
-//    private String phoneNumber;
-//
-//    @NotNull
-//    @NotBlank
-//    private String region;
-//    @NotNull
-//    @NotBlank
-//    private String city;
-//    @NotNull
-//    @NotBlank
-//    private String deliveryService;
-//    @NotNull
-//    @NotBlank
-//    private String warehouse;
     @NotNull
     private Boolean createAccount;
     @NotNull
@@ -54,4 +26,5 @@ public class OrderRequestDto {
     @NotNull
     @Size(min = 1)
     private Map<Long, Integer> products;
+
 }

@@ -29,15 +29,6 @@ public class UserRequestDto {
     private String phoneNumber;
     private LocalDate birthDate;
     @NotNull
-    @NotBlank
-    private String region;
-    @NotNull
-    @NotBlank
-    private String city;
-    @NotNull
-    @NotBlank
-    private String deliveryService;
-    @NotNull
-    @NotBlank
-    private String warehouse;
+    private ShippingDetailsRequestDto shippingDetailsRequest;
+
 }

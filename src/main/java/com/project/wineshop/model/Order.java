@@ -43,7 +43,9 @@ public class Order {
     private OrderPayment.Payment payment;
 
     private Boolean isGift;
-    
+
+    @ManyToOne
+    private ShippingDetails shippingDetails;
 
     @Override
     public boolean equals(Object o) {

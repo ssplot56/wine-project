@@ -8,6 +8,7 @@ import com.project.wineshop.service.UserService;
 import com.project.wineshop.service.mapper.RequestDtoMapper;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,10 +30,9 @@ public class OrderController {
     }
 
     @PostMapping("/complete")
-    public ResponseEntity completeOrder(@RequestBody @Valid OrderRequestDto orderRequestDto) {
-//        if(auth.getName() != null) {
-//
-//        }
+    public ResponseEntity completeOrder(@RequestBody @Valid OrderRequestDto orderRequestDto, Authentication authentication) {
+//        if(authentication.getPrincipal())
+
         orderService.completeOrder(requestDtoMapper.mapToModel(orderRequestDto));
         return ResponseEntity.ok().build();
     }

@@ -6,8 +6,7 @@ import java.util.Optional;
 
 public interface UserService extends GenericService<User> {
     User findByEmail(String email);
-
-//    User regiserFromOrder(Order od)
+    User findByPhoneNumber(String phoneNumber);
 
 }
 

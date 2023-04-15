@@ -6,6 +6,7 @@ import com.project.wineshop.repository.UserRepository;
 import com.project.wineshop.service.UserService;
 import org.springframework.stereotype.Service;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -49,5 +50,24 @@ public class UserServiceImpl implements UserService {
     @Override
     public User findByEmail(String email) {
         return userRepository.findUserByEmail(email);
+    }
+
+    @Override
+    public boolean mailIsAvailable(String email) {
+        return findByEmail(email) == null;
+    }
+
+    @Override
+    public boolean phoneNumberIsAvailable(String phoneNumber, String email) {
+        User user = findByEmail(email);
+        String userPhoneNumber = (user == null) ? null : user.getPhoneNumber();
+        if (userPhoneNumber != null && userPhoneNumber.equals(phoneNumber)) {
+            return true;
+        }
+        List<String> existPhoneNumbers = userRepository.findAll().stream()
+                .map(User::getPhoneNumber)
+                .filter(Objects::nonNull)
+                .toList();
+        return !existPhoneNumbers.contains(phoneNumber);
     }
 }

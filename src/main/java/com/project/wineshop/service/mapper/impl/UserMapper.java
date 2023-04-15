@@ -41,14 +41,11 @@ public class UserMapper implements RequestDtoMapper<User, UserRequestDto>,
         user.setPhoneNumber(requestDto.getPhoneNumber());
         user.setBirthDate(requestDto.getBirthDate());
 
-        ShippingDetails shippingDetails = new ShippingDetails();
-        shippingDetails.setRegion(requestDto.getRegion());
-        shippingDetails.setCity(requestDto.getCity());
-        shippingDetails.setWarehouse(requestDto.getWarehouse());
-        shippingDetails.setDeliveryService(requestDto.getDeliveryService());
-
+        ShippingDetails shippingDetails = new ShippingDetails(requestDto.getRegion(),
+                requestDto.getCity(), requestDto.getWarehouse(),requestDto.getDeliveryService());
         user.setShippingDetails(shippingDetailsService
                 .save(shippingDetails));
+
         user.setRoles(Set.of(roleService.findByName(Role.RoleName.USER)));
         return user;
     }
@@ -67,6 +64,13 @@ public class UserMapper implements RequestDtoMapper<User, UserRequestDto>,
     }
 
     public User mapToModel(UserUpdateRequestDto requestDto) {
+        if (!userService.phoneNumberIsAvailable(requestDto.getPhoneNumber(),
+                requestDto.getEmail())) {
+            throw new RuntimeException("User with this phone number: "
+                    + requestDto.getPhoneNumber()
+                    + " already exists. Use another one.");
+        }
+
         User user = new User();
         user.setFirstName(requestDto.getFirstName());
         user.setLastName(requestDto.getLastName());
@@ -74,26 +78,28 @@ public class UserMapper implements RequestDtoMapper<User, UserRequestDto>,
         user.setPhoneNumber(requestDto.getPhoneNumber());
         user.setBirthDate(requestDto.getBirthDate());
 
-        if (requestDto.getOldPassword() != null) {
-
-            String oldPassword = userService.findByEmail(requestDto.getEmail()).getPassword();
-            String oldPasswordFromRequest = requestDto.getOldPassword();
-            if (passwordEncoder.matches(oldPasswordFromRequest, oldPassword)) {
-                user.setPassword(passwordEncoder.encode(requestDto.getNewPassword()));
-            } else {
-                throw new RuntimeException("Old password does not match the password in the database");
-            }
+        if (requestDto.getOldPassword() != null && isOldPasswordRight(requestDto)) {
+            user.setPassword(passwordEncoder.encode(requestDto.getNewPassword()));
         }
 
-        ShippingDetails shippingDetails = new ShippingDetails();
-        shippingDetails.setCity(requestDto.getCity());
-        shippingDetails.setRegion(requestDto.getRegion());
-        shippingDetails.setWarehouse(requestDto.getWarehouse());
-        shippingDetails.setDeliveryService(requestDto.getDeliveryService());
+        ShippingDetails shippingDetails = new ShippingDetails(requestDto.getRegion(),
+                requestDto.getCity(), requestDto.getWarehouse(),requestDto.getDeliveryService());
+        shippingDetails.setId(userService.findByEmail(requestDto
+                .getEmail()).getShippingDetails().getId());
         user.setShippingDetails(shippingDetailsService
                 .save(shippingDetails));
 
         user.setRoles(Set.of(roleService.findByName(Role.RoleName.USER)));
         return user;
+    }
+
+    private boolean isOldPasswordRight(UserUpdateRequestDto requestDto) {
+        String oldPassword = userService.findByEmail(requestDto.getEmail()).getPassword();
+        String oldPasswordFromRequest = requestDto.getOldPassword();
+        if (passwordEncoder.matches(oldPasswordFromRequest, oldPassword)) {
+            return true;
+        } else {
+            throw new RuntimeException("Old password does not match the password in the database");
+        }
     }
 }

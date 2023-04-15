@@ -1,5 +1,6 @@
 package com.project.wineshop.dto.request.user;
 
+import jakarta.validation.constraints.Email;
 import lombok.Getter;
 import lombok.Setter;
 import java.time.LocalDate;
@@ -9,6 +10,7 @@ import java.time.LocalDate;
 public class UserUpdateRequestDto {
     private String firstName;
     private String lastName;
+    @Email(message = "Wrong format!")
     private String email;
     private String phoneNumber;
     private LocalDate birthDate;

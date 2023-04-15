@@ -13,7 +13,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
 import java.util.Set;
 
 @Service
@@ -42,6 +41,11 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
     @Override
     public User register(UserRegisterDto userRegisterDto) {
+        if (!userService.mailIsAvailable(userRegisterDto.getEmail())) {
+            throw new RuntimeException("Account with this email: "
+                    + userRegisterDto.getEmail() + " already exists!");
+        }
+
         ShippingDetails shippingDetails = new ShippingDetails();
 
         User user = new User();

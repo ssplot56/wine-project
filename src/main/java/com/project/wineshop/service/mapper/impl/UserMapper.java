@@ -13,7 +13,9 @@ import com.project.wineshop.service.UserService;
 import com.project.wineshop.service.mapper.RequestDtoMapper;
 import com.project.wineshop.service.mapper.ResponseDtoMapper;
 import org.springframework.stereotype.Service;
+import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class UserMapper implements RequestDtoMapper<User, UserRequestDto>,
@@ -35,22 +37,22 @@ public class UserMapper implements RequestDtoMapper<User, UserRequestDto>,
     @Override
     public User mapToModel(UserRequestDto requestDto) {
         User user = userService.findByEmail(requestDto.getEmail());
-        if(user == null) {
+        if (user == null) {
             user = new User();
-            user.setFirstName(requestDto.getFirstName());
-            user.setLastName(requestDto.getLastName());
-            user.setEmail(requestDto.getEmail());
-            user.setPhoneNumber(requestDto.getPhoneNumber());
-        } else if(user.getRoles().contains(Role.RoleName.USER) || (user.getRoles().contains(Role.RoleName.ADMIN))) {
+        } else if (requestDto.getPassword() != null && isUserOrAdmin(user)) {
             throw new UserAlreadyExistException("This email is already used");
         }
-        if(userService.findByPhoneNumber(requestDto.getPhoneNumber()) != null) {
-            throw new UserWithSuchPhoneNumberExistException("The user with such phone number already exist!");
+        user.setFirstName(requestDto.getFirstName());
+        user.setLastName(requestDto.getLastName());
+        user.setEmail(requestDto.getEmail());
+        user.setPhoneNumber(requestDto.getPhoneNumber());
+        if (userService.findByPhoneNumber(user.getPhoneNumber()) != null && isUserOrAdmin(user)) {
+            throw new UserWithSuchPhoneNumberExistException("The user with such phone number" +
+                    " already exist!");
         }
-        ShippingDetails shippingDetails = shippingDetailsMapper.mapToModel(requestDto.getShippingDetailsRequest());
-
+        ShippingDetails shippingDetails =
+                shippingDetailsMapper.mapToModel(requestDto.getShippingDetailsRequest());
         user.setShippingDetails(shippingDetails);
-//        user.setRoles(Set.of(roleService.findByName(Role.RoleName.USER)));
         return user;
     }
 
@@ -65,5 +67,10 @@ public class UserMapper implements RequestDtoMapper<User, UserRequestDto>,
         responseDto.setBirthDate(user.getBirthDate());
         responseDto.setShippingDetails(user.getShippingDetails());
         return responseDto;
+    }
+
+    private boolean isUserOrAdmin(User user) {
+       return  user.getRoles().contains(roleService.findByName(Role.RoleName.USER))
+                || user.getRoles().contains(roleService.findByName(Role.RoleName.ADMIN));
     }
 }

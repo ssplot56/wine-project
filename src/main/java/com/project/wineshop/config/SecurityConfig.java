@@ -52,7 +52,6 @@ public class SecurityConfig {
                 .and()
                 .authorizeHttpRequests(
                         (authorize) -> authorize
-                                .requestMatchers("/wine-shop/orders/complete").permitAll()
                                 .anyRequest()
                                 .permitAll());
         http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);

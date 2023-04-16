@@ -4,13 +4,11 @@ import com.project.wineshop.dto.request.OrderRequestDto;
 import com.project.wineshop.model.Order;
 import com.project.wineshop.model.Product;
 import com.project.wineshop.model.Role;
-import com.project.wineshop.model.ShippingDetails;
 import com.project.wineshop.model.User;
 import com.project.wineshop.model.enums.OrderPayment;
 import com.project.wineshop.model.enums.OrderStatus;
 import com.project.wineshop.service.ProductService;
 import com.project.wineshop.service.RoleService;
-import com.project.wineshop.service.UserService;
 import com.project.wineshop.service.mapper.RequestDtoMapper;
 import org.springframework.stereotype.Component;
 import java.time.LocalDateTime;
@@ -21,14 +19,11 @@ import java.util.Set;
 
 @Component
 public class OrderMapper implements RequestDtoMapper<Order, OrderRequestDto> {
-    private UserService userService;
     private ProductService productService;
     private RoleService roleService;
-
     private UserMapper userMapper;
 
-    public OrderMapper(UserService userService, ProductService productService, RoleService roleService, UserMapper userMapper) {
-        this.userService = userService;
+    public OrderMapper(ProductService productService, RoleService roleService, UserMapper userMapper) {
         this.productService = productService;
         this.roleService = roleService;
         this.userMapper = userMapper;

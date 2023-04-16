@@ -7,5 +7,4 @@ import java.util.List;
 
 public interface OrderService {
     Order completeOrder(Order order);
-
 }

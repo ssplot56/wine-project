@@ -1,20 +1,28 @@
 package com.project.wineshop.dto.request.user;
 
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import lombok.Data;
 import java.time.LocalDate;
-import lombok.Getter;
-import lombok.Setter;
 
-@Getter
-@Setter
+@Data
 public class UserRequestDto {
+    @NotBlank
     private String firstName;
+    @NotBlank
     private String lastName;
+    @Email
+    @NotBlank
     private String email;
+
     private String password;
+    @NotBlank
     private String phoneNumber;
     private LocalDate birthDate;
-    private String region;
-    private String city;
-    private String deliveryService;
-    private String warehouse;
+    @NotNull
+    @Valid
+    private ShippingDetailsRequestDto shippingDetailsRequest;
+
 }

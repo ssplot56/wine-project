@@ -41,4 +41,14 @@ public class ShippingDetailsServiceImpl implements ShippingDetailsService {
     public void deleteById(Long id) {
         shippingDetailsRepository.deleteById(id);
     }
+
+
+    @Override
+    public ShippingDetails findShippingDetailsByRegionAndCityAndDeliveryServiceAndWarehouse(String region,
+                                                                                            String city,
+                                                                                            String deliveryService,
+                                                                                            String warehouse) {
+        return shippingDetailsRepository.findShippingDetailsByRegionAndCityAndDeliveryServiceAndWarehouse(region,
+                city,deliveryService,warehouse);
+    }
 }

@@ -18,7 +18,6 @@ import java.util.Set;
 @Service
 public class AuthenticationServiceImpl implements AuthenticationService {
     private final AuthenticationManager authenticationManager;
-    private final ShoppingCartService shoppingCartService;
     private final ShippingDetailsService shippingDetailsService;
     private final UserService userService;
     private final RoleService roleService;
@@ -29,13 +28,12 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                                      ShippingDetailsService shippingDetailsService, UserService userService,
                                      RoleService roleService,
                                      PasswordEncoder passwordEncoder,
-                                     ShoppingCartService shoppingCartService, JwtTokenProvider tokenProvider) {
+                                     JwtTokenProvider tokenProvider) {
         this.authenticationManager = authenticationManager;
         this.shippingDetailsService = shippingDetailsService;
         this.userService = userService;
         this.roleService = roleService;
         this.passwordEncoder = passwordEncoder;
-        this.shoppingCartService = shoppingCartService;
         this.tokenProvider = tokenProvider;
     }
 
@@ -56,9 +54,9 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         user.setPhoneNumber(null);
         user.setBirthDate(null);
         user.setShippingDetails(shippingDetailsService.save(shippingDetails));
+        //todo change Set.of
         user.setRoles(Set.of(roleService.findByName(Role.RoleName.USER)));
         User userWithId = userService.save(user);
-        shoppingCartService.registerNewShoppingCart(user);
         return userWithId;
     }
 

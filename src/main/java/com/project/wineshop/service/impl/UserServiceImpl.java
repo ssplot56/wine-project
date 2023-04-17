@@ -1,7 +1,6 @@
 package com.project.wineshop.service.impl;
 
 import com.project.wineshop.model.User;
-import com.project.wineshop.repository.ShoppingCartRepository;
 import com.project.wineshop.repository.UserRepository;
 import com.project.wineshop.service.UserService;
 import org.springframework.stereotype.Service;
@@ -11,12 +10,9 @@ import java.util.Objects;
 @Service
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
-    private final ShoppingCartRepository cartRepository;
 
-    public UserServiceImpl(UserRepository userRepository,
-                           ShoppingCartRepository cartRepository) {
+    public UserServiceImpl(UserRepository userRepository) {
         this.userRepository = userRepository;
-        this.cartRepository = cartRepository;
     }
 
     @Override
@@ -43,13 +39,17 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void deleteById(Long id) {
-        cartRepository.deleteById(id);
         userRepository.deleteById(id);
     }
 
     @Override
     public User findByEmail(String email) {
         return userRepository.findUserByEmail(email);
+    }
+
+    @Override
+    public User findByPhoneNumber(String phoneNumber) {
+        return userRepository.findUserByPhoneNumber(phoneNumber);
     }
 
     @Override

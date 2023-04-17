@@ -44,6 +44,9 @@ public class Order {
 
     private Boolean isGift;
 
+    @ManyToOne
+    private ShippingDetails shippingDetails;
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

@@ -1,13 +1,16 @@
 package com.project.wineshop.dto.request;
 
-import lombok.Getter;
-import lombok.Setter;
+import jakarta.validation.constraints.NotBlank;
+import lombok.Data;
 
-@Getter
-@Setter
+@Data
 public class ShippingDetailsRequestDto {
+    @NotBlank
     private String region;
+    @NotBlank
     private String city;
+    @NotBlank
     private String deliveryService;
+    @NotBlank
     private String warehouse;
 }

@@ -1,46 +1,19 @@
 package com.project.wineshop.dto.request;
 
-import com.project.wineshop.model.enums.OrderPayment;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.Min;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
-
 import java.util.Map;
 
 @Data
 public class OrderRequestDto {
     @NotNull
-    @NotBlank
-    private String firstName;
-    @NotNull
-    @NotBlank
-    private String lastName;
-    @Email
-    @NotEmpty
-    private String email;
-    @NotNull
-    @NotBlank
-    private String phoneNumber;
-
     private Boolean createAccount;
     @NotNull
-    @NotBlank
-    private String region;
-    @NotNull
-    @NotBlank
-    private String city;
-    @NotNull
-    @NotBlank
-    private String deliveryService;
-    @NotNull
-    @NotBlank
-    private String warehouse;
-    @NotNull
+    @Valid
+    private UserRequestDto userRequest;
     @NotBlank
     private String payment;
     @NotNull
@@ -48,4 +21,5 @@ public class OrderRequestDto {
     @NotNull
     @Size(min = 1)
     private Map<Long, Integer> products;
+
 }

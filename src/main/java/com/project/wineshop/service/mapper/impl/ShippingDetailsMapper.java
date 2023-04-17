@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class ShippingDetailsMapper implements RequestDtoMapper
         <ShippingDetails, ShippingDetailsRequestDto> {
-    private ShippingDetailsService shippingDetailsService;
+    private final ShippingDetailsService shippingDetailsService;
 
     public ShippingDetailsMapper(ShippingDetailsService shippingDetailsService) {
         this.shippingDetailsService = shippingDetailsService;
@@ -20,7 +20,7 @@ public class ShippingDetailsMapper implements RequestDtoMapper
         ShippingDetails shippingDetails =
                 shippingDetailsService.findShippingDetailsByRegionAndCityAndDeliveryServiceAndWarehouse(requestDto.getRegion(),
                 requestDto.getCity(),requestDto.getDeliveryService(),requestDto.getWarehouse());
-        if(shippingDetails == null) {
+        if (shippingDetails == null) {
             shippingDetails = new ShippingDetails();
             shippingDetails.setRegion(requestDto.getRegion());
             shippingDetails.setCity(requestDto.getCity());

@@ -1,5 +1,6 @@
 package com.project.wineshop.dto.request;
 
+import com.project.wineshop.dto.request.user.UserRequestDto;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -21,5 +22,4 @@ public class OrderRequestDto {
     @NotNull
     @Size(min = 1)
     private Map<Long, Integer> products;
-
 }

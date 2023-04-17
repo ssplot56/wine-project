@@ -44,7 +44,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                     + userRegisterDto.getEmail() + " already exists!");
         }
 
-        ShippingDetails shippingDetails = new ShippingDetails();
+        ShippingDetails shippingDetails = new ShippingDetails("", "", "", "");
 
         User user = new User();
         user.setFirstName(userRegisterDto.getFirstName());
@@ -56,8 +56,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         user.setShippingDetails(shippingDetailsService.save(shippingDetails));
         //todo change Set.of
         user.setRoles(Set.of(roleService.findByName(Role.RoleName.USER)));
-        User userWithId = userService.save(user);
-        return userWithId;
+        return userService.save(user);
     }
 
     @Override

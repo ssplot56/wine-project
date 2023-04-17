@@ -6,6 +6,7 @@ import com.project.wineshop.exception.UserWithSuchPhoneNumberExistException;
 import com.project.wineshop.model.Order;
 import com.project.wineshop.service.OrderService;
 import com.project.wineshop.service.mapper.RequestDtoMapper;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -18,8 +19,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/orders")
 @CrossOrigin(origins = "*")
 public class OrderController {
-    private OrderService orderService;
-    private RequestDtoMapper<Order, OrderRequestDto> requestDtoMapper;
+    private final OrderService orderService;
+    private final RequestDtoMapper<Order, OrderRequestDto> requestDtoMapper;
 
     public OrderController(OrderService orderService,
                            RequestDtoMapper<Order, OrderRequestDto> requestDtoMapper) {

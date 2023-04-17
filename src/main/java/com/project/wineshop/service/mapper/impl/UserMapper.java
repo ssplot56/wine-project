@@ -1,7 +1,6 @@
 package com.project.wineshop.service.mapper.impl;
 
 import com.project.wineshop.dto.request.user.UserRequestDto;
-import com.project.wineshop.dto.request.user.UserUpdateRequestDto;
 import com.project.wineshop.dto.response.UserResponseDto;
 import com.project.wineshop.exception.UserAlreadyExistException;
 import com.project.wineshop.exception.UserWithSuchPhoneNumberExistException;
@@ -9,8 +8,6 @@ import com.project.wineshop.model.Role;
 import com.project.wineshop.model.ShippingDetails;
 import com.project.wineshop.model.User;
 import com.project.wineshop.service.RoleService;
-import com.project.wineshop.service.ShippingDetailsService;
-import com.project.wineshop.service.UserService;
 import com.project.wineshop.service.UserService;
 import com.project.wineshop.service.mapper.RequestDtoMapper;
 import com.project.wineshop.service.mapper.ResponseDtoMapper;
@@ -24,24 +21,16 @@ import java.util.Set;
 public class UserMapper implements RequestDtoMapper<User, UserRequestDto>,
         ResponseDtoMapper<User, UserResponseDto> {
     private final RoleService roleService;
-    private final ShippingDetailsService shippingDetailsService;
     private final UserService userService;
     private final PasswordEncoder passwordEncoder;
     private final ShippingDetailsMapper shippingDetailsMapper;
-    private final UserService userService;
 
     public UserMapper(RoleService roleService,
-                      ShippingDetailsService shippingDetailsService,
+                      ShippingDetailsMapper shippingDetailsMapper,
                       UserService userService,
                       PasswordEncoder passwordEncoder) {
-    private final PasswordEncoder encoder;
-
-    public UserMapper(RoleService roleService, ShippingDetailsMapper shippingDetailsMapper, UserService userService, PasswordEncoder encoder) {
         this.roleService = roleService;
         this.shippingDetailsMapper = shippingDetailsMapper;
-        this.userService = userService;
-        this.encoder = encoder;
-        this.shippingDetailsService = shippingDetailsService;
         this.userService = userService;
         this.passwordEncoder = passwordEncoder;
     }
@@ -89,7 +78,7 @@ public class UserMapper implements RequestDtoMapper<User, UserRequestDto>,
         user.setPhoneNumber(requestDto.getPhoneNumber());
         Set<Role> roleSet = new HashSet<>();
         if (Optional.ofNullable(requestDto.getPassword()).isPresent()) {
-            user.setPassword(encoder.encode(requestDto.getPassword()));
+            user.setPassword(passwordEncoder.encode(requestDto.getPassword()));
             roleSet.add(roleService.findByName(Role.RoleName.USER));
         } else {
             roleSet.add(roleService.findByName(Role.RoleName.GUEST));
@@ -104,45 +93,5 @@ public class UserMapper implements RequestDtoMapper<User, UserRequestDto>,
             user.setBirthDate(requestDto.getBirthDate());
         }
         return user;
-    }
-
-    public User mapToModel(UserUpdateRequestDto requestDto) {
-        if (!userService.phoneNumberIsAvailable(requestDto.getPhoneNumber(),
-                requestDto.getEmail())) {
-            throw new RuntimeException("User with this phone number: "
-                    + requestDto.getPhoneNumber()
-                    + " already exists. Use another one.");
-        }
-
-        User user = new User();
-        user.setFirstName(requestDto.getFirstName());
-        user.setLastName(requestDto.getLastName());
-        user.setEmail(requestDto.getEmail());
-        user.setPhoneNumber(requestDto.getPhoneNumber());
-        user.setBirthDate(requestDto.getBirthDate());
-
-        if (requestDto.getOldPassword() != null && isOldPasswordRight(requestDto)) {
-            user.setPassword(passwordEncoder.encode(requestDto.getNewPassword()));
-        }
-
-        ShippingDetails shippingDetails = new ShippingDetails(requestDto.getRegion(),
-                requestDto.getCity(), requestDto.getWarehouse(),requestDto.getDeliveryService());
-        shippingDetails.setId(userService.findByEmail(requestDto
-                .getEmail()).getShippingDetails().getId());
-        user.setShippingDetails(shippingDetailsService
-                .save(shippingDetails));
-
-        user.setRoles(Set.of(roleService.findByName(Role.RoleName.USER)));
-        return user;
-    }
-
-    private boolean isOldPasswordRight(UserUpdateRequestDto requestDto) {
-        String oldPassword = userService.findByEmail(requestDto.getEmail()).getPassword();
-        String oldPasswordFromRequest = requestDto.getOldPassword();
-        if (passwordEncoder.matches(oldPasswordFromRequest, oldPassword)) {
-            return true;
-        } else {
-            throw new RuntimeException("Old password does not match the password in the database");
-        }
     }
 }

@@ -5,6 +5,7 @@ import com.project.wineshop.dto.response.UserResponseDto;
 import com.project.wineshop.model.User;
 import com.project.wineshop.service.UserService;
 import com.project.wineshop.service.mapper.impl.UserMapper;
+import com.project.wineshop.service.mapper.impl.UserUpdateMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -22,16 +23,19 @@ import java.util.List;
 public class UserController {
     private final UserService userService;
     private final UserMapper userMapper;
+    private final UserUpdateMapper userUpdateMapper;
 
-    public UserController(UserService userService, UserMapper userMapper) {
+    public UserController(UserService userService, UserMapper userMapper,
+                          UserUpdateMapper userUpdateMapper) {
         this.userService = userService;
         this.userMapper = userMapper;
+        this.userUpdateMapper = userUpdateMapper;
     }
 
     @PatchMapping("/{id}")
     public ResponseEntity<UserResponseDto> update(@PathVariable Long id,
                                                   UserUpdateRequestDto requestDto) {
-        User userWithoutId = userMapper.mapToModel(requestDto);
+        User userWithoutId = userUpdateMapper.mapToModel(requestDto);
         User userWithId = userService.update(id, userWithoutId);
         return new ResponseEntity<>(userMapper.mapToDto(userWithId), HttpStatus.OK);
     }

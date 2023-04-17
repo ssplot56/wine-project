@@ -1,5 +1,6 @@
 package com.project.wineshop.dto.request.user;
 
+import com.project.wineshop.dto.request.ShippingDetailsRequestDto;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;

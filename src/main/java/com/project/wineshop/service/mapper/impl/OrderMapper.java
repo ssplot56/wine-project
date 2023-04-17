@@ -10,47 +10,47 @@ import com.project.wineshop.model.enums.OrderStatus;
 import com.project.wineshop.service.ProductService;
 import com.project.wineshop.service.RoleService;
 import com.project.wineshop.service.mapper.RequestDtoMapper;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
+import java.beans.Encoder;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Component
 public class OrderMapper implements RequestDtoMapper<Order, OrderRequestDto> {
-    private ProductService productService;
-    private RoleService roleService;
-    private UserMapper userMapper;
+    private final ProductService productService;
+    private final UserMapper userMapper;
 
-    public OrderMapper(ProductService productService, RoleService roleService, UserMapper userMapper) {
+    public OrderMapper(ProductService productService, UserMapper userMapper) {
         this.productService = productService;
-        this.roleService = roleService;
         this.userMapper = userMapper;
+
     }
+
     @Override
     public Order mapToModel(OrderRequestDto orderRequestDto) {
         Order order = new Order();
         order.setIsGift(orderRequestDto.getIsGift());
         order.setPayment(OrderPayment.Payment.valueOf(orderRequestDto.getPayment()));
         User user = userMapper.mapToModel(orderRequestDto.getUserRequest());
-        Set<Role> roleSet = new HashSet<>();
-        if(orderRequestDto.getCreateAccount() != null && orderRequestDto.getCreateAccount()) {
-            user.setPassword(orderRequestDto.getUserRequest().getPassword());
-            roleSet.add(roleService.findByName(Role.RoleName.USER));
-        } else {
-            roleSet.add(roleService.findByName(Role.RoleName.GUEST));
-        }
-        user.setRoles(roleSet);
         order.setUser(user);
         order.setShippingDetails(user.getShippingDetails());
         order.setOrderStatus(OrderStatus.Status.CREATED);
         order.setOrderDate(LocalDateTime.now());
-        Map<Product, Integer> products = new HashMap<>();
-        for(Map.Entry<Long, Integer> entry: orderRequestDto.getProducts().entrySet()) {
-            products.put(productService.getById(entry.getKey()),entry.getValue());
-        }
+//        Map<Product, Integer> products = new HashMap<>();
+//        for(Map.Entry<Long, Integer> entry: orderRequestDto.getProducts().entrySet()) {
+//            products.put(productService.getById(entry.getKey()),entry.getValue());
+//        }
+        Map<Product, Integer> products = orderRequestDto.getProducts()
+                .entrySet().stream()
+                .collect(Collectors.toMap(entry -> productService.getById(entry.getKey()),
+                        Map.Entry::getValue));
         order.setProducts(products);
         return order;
+
     }
 }

@@ -8,48 +8,41 @@ import com.project.wineshop.model.Role;
 import com.project.wineshop.model.ShippingDetails;
 import com.project.wineshop.model.User;
 import com.project.wineshop.service.RoleService;
-import com.project.wineshop.service.ShippingDetailsService;
 import com.project.wineshop.service.UserService;
 import com.project.wineshop.service.mapper.RequestDtoMapper;
 import com.project.wineshop.service.mapper.ResponseDtoMapper;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 @Service
 public class UserMapper implements RequestDtoMapper<User, UserRequestDto>,
         ResponseDtoMapper<User, UserResponseDto> {
     private final RoleService roleService;
-    private final ShippingDetailsService shippingDetailsService;
-
     private final ShippingDetailsMapper shippingDetailsMapper;
     private final UserService userService;
 
-    public UserMapper(RoleService roleService,
-                      ShippingDetailsService shippingDetailsService, ShippingDetailsMapper shippingDetailsMapper, UserService userService) {
+    private final PasswordEncoder encoder;
+
+    public UserMapper(RoleService roleService, ShippingDetailsMapper shippingDetailsMapper, UserService userService, PasswordEncoder encoder) {
         this.roleService = roleService;
-        this.shippingDetailsService = shippingDetailsService;
         this.shippingDetailsMapper = shippingDetailsMapper;
         this.userService = userService;
+        this.encoder = encoder;
     }
 
     @Override
     public User mapToModel(UserRequestDto requestDto) {
-        User user = userService.findByEmail(requestDto.getEmail());
-        if (user == null) {
-            user = new User();
-        } else if (requestDto.getPassword() != null && isUserOrAdmin(user)) {
+        Optional<User> userOptional = Optional.ofNullable(userService.findByEmail(requestDto.getEmail()));
+//        boolean isUserOrAdmin = userOptional.isPresent() && isUserOrAdmin(userOptional.get());
+        if (userOptional.isEmpty()) {
+            userOptional = Optional.of(new User());
+        } else if (requestDto.getPassword() != null && isUserOrAdmin(userOptional.get())) {
             throw new UserAlreadyExistException("This email is already used");
         }
-        user.setFirstName(requestDto.getFirstName());
-        user.setLastName(requestDto.getLastName());
-        user.setEmail(requestDto.getEmail());
-        user.setPhoneNumber(requestDto.getPhoneNumber());
-        if (userService.findByPhoneNumber(user.getPhoneNumber()) != null && isUserOrAdmin(user)) {
-            throw new UserWithSuchPhoneNumberExistException("The user with such phone number" +
-                    " already exist!");
-        }
+        User user = createUserByData(userOptional, requestDto);
         ShippingDetails shippingDetails =
                 shippingDetailsMapper.mapToModel(requestDto.getShippingDetailsRequest());
         user.setShippingDetails(shippingDetails);
@@ -72,5 +65,31 @@ public class UserMapper implements RequestDtoMapper<User, UserRequestDto>,
     private boolean isUserOrAdmin(User user) {
        return  user.getRoles().contains(roleService.findByName(Role.RoleName.USER))
                 || user.getRoles().contains(roleService.findByName(Role.RoleName.ADMIN));
+    }
+
+    private User createUserByData(Optional<User> userOptional,
+                                  UserRequestDto requestDto) {
+        User user = userOptional.get();
+        user.setFirstName(requestDto.getFirstName());
+        user.setLastName(requestDto.getLastName());
+        user.setEmail(requestDto.getEmail());
+        user.setPhoneNumber(requestDto.getPhoneNumber());
+        Set<Role> roleSet = new HashSet<>();
+        if (Optional.ofNullable(requestDto.getPassword()).isPresent()) {
+            user.setPassword(encoder.encode(requestDto.getPassword()));
+            roleSet.add(roleService.findByName(Role.RoleName.USER));
+        } else {
+            roleSet.add(roleService.findByName(Role.RoleName.GUEST));
+        }
+        user.setRoles(roleSet);
+        if (userService.findByPhoneNumber(user.getPhoneNumber()) != null && isUserOrAdmin(user)) {
+            throw new UserWithSuchPhoneNumberExistException("The user with such phone number" +
+                    " already exist!");
+        }
+
+        if (Optional.ofNullable(requestDto.getBirthDate()).isPresent()) {
+            user.setBirthDate(requestDto.getBirthDate());
+        }
+        return user;
     }
 }

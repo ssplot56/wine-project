@@ -17,7 +17,8 @@ public class ShippingDetailsMapper implements RequestDtoMapper
 
     @Override
     public ShippingDetails mapToModel(ShippingDetailsRequestDto requestDto) {
-        ShippingDetails shippingDetails = shippingDetailsService.findShippingDetailsByRegionAndCityAndDeliveryServiceAndWarehouse(requestDto.getRegion(),
+        ShippingDetails shippingDetails =
+                shippingDetailsService.findShippingDetailsByRegionAndCityAndDeliveryServiceAndWarehouse(requestDto.getRegion(),
                 requestDto.getCity(),requestDto.getDeliveryService(),requestDto.getWarehouse());
         if(shippingDetails == null) {
             shippingDetails = new ShippingDetails();
@@ -25,7 +26,6 @@ public class ShippingDetailsMapper implements RequestDtoMapper
             shippingDetails.setCity(requestDto.getCity());
             shippingDetails.setDeliveryService(requestDto.getDeliveryService());
             shippingDetails.setWarehouse(requestDto.getWarehouse());
-            shippingDetailsService.save(shippingDetails);
         }
         return shippingDetails;
     }

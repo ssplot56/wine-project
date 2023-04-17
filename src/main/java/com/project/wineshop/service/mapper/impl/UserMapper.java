@@ -24,6 +24,7 @@ public class UserMapper implements RequestDtoMapper<User, UserRequestDto>,
     private final UserService userService;
     private final PasswordEncoder passwordEncoder;
     private final ShippingDetailsMapper shippingDetailsMapper;
+    private static final Set<Role.RoleName> roleNames = Set.of(Role.RoleName.USER, Role.RoleName.ADMIN);
 
     public UserMapper(RoleService roleService,
                       ShippingDetailsMapper shippingDetailsMapper,
@@ -39,9 +40,7 @@ public class UserMapper implements RequestDtoMapper<User, UserRequestDto>,
     public User mapToModel(UserRequestDto requestDto) {
         Optional<User> userOptional = Optional.ofNullable(userService.findByEmail(requestDto.getEmail()));
 //        boolean isUserOrAdmin = userOptional.isPresent() && isUserOrAdmin(userOptional.get());
-        if (userOptional.isEmpty()) {
-            userOptional = Optional.of(new User());
-        } else if (requestDto.getPassword() != null && isUserOrAdmin(userOptional.get())) {
+        if (requestDto.getPassword() != null && userOptional.isPresent() && isUserOrAdmin(userOptional.get())) {
             throw new UserAlreadyExistException("This email is already used");
         }
         User user = createUserByData(userOptional, requestDto);
@@ -64,14 +63,19 @@ public class UserMapper implements RequestDtoMapper<User, UserRequestDto>,
         return responseDto;
     }
 
+//    private boolean isUserOrAdmin(User user) {
+//        return user.getRoles().contains(roleService.findByName(Role.RoleName.USER))
+//                || user.getRoles().contains(roleService.findByName(Role.RoleName.ADMIN));
+//    }
+
     private boolean isUserOrAdmin(User user) {
-       return  user.getRoles().contains(roleService.findByName(Role.RoleName.USER))
-                || user.getRoles().contains(roleService.findByName(Role.RoleName.ADMIN));
+//        Set<Role.RoleName> roleNames = Set.of(Role.RoleName.USER, Role.RoleName.ADMIN);
+        return user.getRoles().stream().map(Role::getName).anyMatch(roleNames::contains);
     }
 
     private User createUserByData(Optional<User> userOptional,
                                   UserRequestDto requestDto) {
-        User user = userOptional.get();
+        User user = userOptional.orElse(new User());
         user.setFirstName(requestDto.getFirstName());
         user.setLastName(requestDto.getLastName());
         user.setEmail(requestDto.getEmail());

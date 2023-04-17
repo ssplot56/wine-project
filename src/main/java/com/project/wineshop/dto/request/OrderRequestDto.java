@@ -10,7 +10,6 @@ import java.util.Map;
 
 @Data
 public class OrderRequestDto {
-    @NotNull
     private Boolean createAccount;
     @NotNull
     @Valid

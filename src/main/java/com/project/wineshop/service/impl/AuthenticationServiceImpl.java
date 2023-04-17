@@ -54,7 +54,6 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         user.setPhoneNumber(null);
         user.setBirthDate(null);
         user.setShippingDetails(shippingDetailsService.save(shippingDetails));
-        //todo change Set.of
         user.setRoles(Set.of(roleService.findByName(Role.RoleName.USER)));
         return userService.save(user);
     }

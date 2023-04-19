@@ -8,10 +8,10 @@ import com.project.wineshop.model.enums.OrderPayment;
 import com.project.wineshop.model.enums.OrderStatus;
 import com.project.wineshop.service.ProductService;
 import com.project.wineshop.service.mapper.RequestDtoMapper;
+import org.springframework.stereotype.Component;
 import java.time.LocalDateTime;
 import java.util.Map;
 import java.util.stream.Collectors;
-import org.springframework.stereotype.Component;
 
 @Component
 public class OrderMapper implements RequestDtoMapper<Order, OrderRequestDto> {
@@ -21,7 +21,6 @@ public class OrderMapper implements RequestDtoMapper<Order, OrderRequestDto> {
     public OrderMapper(ProductService productService, UserMapper userMapper) {
         this.productService = productService;
         this.userMapper = userMapper;
-
     }
 
     @Override
@@ -34,16 +33,11 @@ public class OrderMapper implements RequestDtoMapper<Order, OrderRequestDto> {
         order.setShippingDetails(user.getShippingDetails());
         order.setOrderStatus(OrderStatus.Status.CREATED);
         order.setOrderDate(LocalDateTime.now());
-//        Map<Product, Integer> products = new HashMap<>();
-//        for(Map.Entry<Long, Integer> entry: orderRequestDto.getProducts().entrySet()) {
-//            products.put(productService.getById(entry.getKey()),entry.getValue());
-//        }
         Map<Product, Integer> products = orderRequestDto.getProducts()
                 .entrySet().stream()
                 .collect(Collectors.toMap(entry -> productService.getById(entry.getKey()),
                         Map.Entry::getValue));
         order.setProducts(products);
         return order;
-
     }
 }

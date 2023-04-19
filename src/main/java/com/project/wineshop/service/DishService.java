@@ -1,7 +1,6 @@
 package com.project.wineshop.service;
 
 import com.project.wineshop.model.Dish;
-
 import java.util.List;
 
 public interface DishService {

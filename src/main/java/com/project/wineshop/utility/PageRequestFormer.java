@@ -1,19 +1,19 @@
 package com.project.wineshop.utility;
 
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
 import java.util.ArrayList;
 import java.util.List;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 
 public class PageRequestFormer {
 
     public static PageRequest formPageRequest(Integer page, Integer size, String sortBy) {
         List<Sort.Order> orders = new ArrayList<>();
-        if(sortBy.contains(":")) {
+        if (sortBy.contains(":")) {
             String[] sortingFields = sortBy.split(";");
             for (String field : sortingFields) {
                 Sort.Order order;
-                if(field.contains(":")) {
+                if (field.contains(":")) {
                     String[] fieldsAndDirections = field.split(":");
                     order = new Sort.Order(Sort.Direction.valueOf(fieldsAndDirections[1]),
                             fieldsAndDirections[0]);

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 public class ProductEventInSpecification implements SpecificationProvider<Product> {
     private static final String FILTER_KEY = "event";
     private static final String FIELD_NAME = "event";
+
     @Override
     public Specification<Product> getSpecification(String[] events) {
         return (root, query, criteriaBuilder) -> {

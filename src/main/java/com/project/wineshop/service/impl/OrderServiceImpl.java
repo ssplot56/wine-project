@@ -1,17 +1,11 @@
 package com.project.wineshop.service.impl;
 
 import com.project.wineshop.model.Order;
-import com.project.wineshop.model.User;
-import com.project.wineshop.model.enums.OrderPayment;
-import com.project.wineshop.model.enums.OrderStatus;
 import com.project.wineshop.repository.OrderRepository;
 import com.project.wineshop.service.OrderService;
 import com.project.wineshop.service.ShippingDetailsService;
 import com.project.wineshop.service.UserService;
 import org.springframework.stereotype.Service;
-
-import java.time.LocalDateTime;
-import java.util.Optional;
 
 @Service
 public class OrderServiceImpl implements OrderService {

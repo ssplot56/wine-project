@@ -3,9 +3,8 @@ package com.project.wineshop.service.impl;
 import com.project.wineshop.model.WineDishPairing;
 import com.project.wineshop.repository.WineDishPairingRepository;
 import com.project.wineshop.service.WineDishPairingService;
-import org.springframework.stereotype.Service;
-
 import java.util.List;
+import org.springframework.stereotype.Service;
 
 @Service
 public class WineDishPairingServiceImpl implements WineDishPairingService {

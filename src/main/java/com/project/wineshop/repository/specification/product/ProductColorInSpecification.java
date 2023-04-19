@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 public class ProductColorInSpecification implements SpecificationProvider<Product> {
     private static final String FILTER_KEY = "color";
     private static final String FIELD_NAME = "color";
+
     @Override
     public Specification<Product> getSpecification(String[] colors) {
         return (root, query, criteriaBuilder) -> {

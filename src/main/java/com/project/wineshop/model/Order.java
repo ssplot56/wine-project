@@ -2,12 +2,27 @@ package com.project.wineshop.model;
 
 import com.project.wineshop.model.enums.OrderPayment;
 import com.project.wineshop.model.enums.OrderStatus;
-import jakarta.persistence.*;
-import lombok.*;
-import org.hibernate.Hibernate;
+import jakarta.persistence.CollectionTable;
+import jakarta.persistence.Column;
+import jakarta.persistence.ElementCollection;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.MapKeyJoinColumn;
+import jakarta.persistence.Table;
 import java.time.LocalDateTime;
 import java.util.Map;
 import java.util.Objects;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+import org.hibernate.Hibernate;
 
 @Getter
 @Setter
@@ -49,8 +64,12 @@ public class Order {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) {
+            return false;
+        }
         Order order = (Order) o;
         return id != null && Objects.equals(id, order.id);
     }

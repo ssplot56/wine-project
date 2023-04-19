@@ -3,9 +3,8 @@ package com.project.wineshop.service.impl;
 import com.project.wineshop.model.ShippingDetails;
 import com.project.wineshop.repository.ShippingDetailsRepository;
 import com.project.wineshop.service.ShippingDetailsService;
-import org.springframework.stereotype.Service;
-
 import java.util.List;
+import org.springframework.stereotype.Service;
 
 @Service
 public class ShippingDetailsServiceImpl implements ShippingDetailsService {
@@ -41,7 +40,6 @@ public class ShippingDetailsServiceImpl implements ShippingDetailsService {
     public void deleteById(Long id) {
         shippingDetailsRepository.deleteById(id);
     }
-
 
     @Override
     public ShippingDetails findShippingDetailsByRegionAndCityAndDeliveryServiceAndWarehouse(String region,

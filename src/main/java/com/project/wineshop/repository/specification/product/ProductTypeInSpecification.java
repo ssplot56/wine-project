@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 public class ProductTypeInSpecification implements SpecificationProvider<Product> {
     private static final String FILTER_KEY = "type";
     private static final String FIELD_NAME = "type";
+
     @Override
     public Specification<Product> getSpecification(String[] types) {
         return (root, query, criteriaBuilder) -> {

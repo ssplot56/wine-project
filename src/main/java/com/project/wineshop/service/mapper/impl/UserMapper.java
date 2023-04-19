@@ -11,20 +11,21 @@ import com.project.wineshop.service.RoleService;
 import com.project.wineshop.service.UserService;
 import com.project.wineshop.service.mapper.RequestDtoMapper;
 import com.project.wineshop.service.mapper.ResponseDtoMapper;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Service;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
 
 @Service
 public class UserMapper implements RequestDtoMapper<User, UserRequestDto>,
         ResponseDtoMapper<User, UserResponseDto> {
+    private static final Set<Role.RoleName> roleNames
+            = Set.of(Role.RoleName.USER, Role.RoleName.ADMIN);
     private final RoleService roleService;
     private final UserService userService;
     private final PasswordEncoder passwordEncoder;
     private final ShippingDetailsMapper shippingDetailsMapper;
-    private static final Set<Role.RoleName> roleNames = Set.of(Role.RoleName.USER, Role.RoleName.ADMIN);
 
     public UserMapper(RoleService roleService,
                       ShippingDetailsMapper shippingDetailsMapper,
@@ -38,9 +39,11 @@ public class UserMapper implements RequestDtoMapper<User, UserRequestDto>,
 
     @Override
     public User mapToModel(UserRequestDto requestDto) {
-        Optional<User> userOptional = Optional.ofNullable(userService.findByEmail(requestDto.getEmail()));
+        Optional<User> userOptional
+                = Optional.ofNullable(userService.findByEmail(requestDto.getEmail()));
 //        boolean isUserOrAdmin = userOptional.isPresent() && isUserOrAdmin(userOptional.get());
-        if (requestDto.getPassword() != null && userOptional.isPresent() && isUserOrAdmin(userOptional.get())) {
+        if (requestDto.getPassword() != null
+                && userOptional.isPresent() && isUserOrAdmin(userOptional.get())) {
             throw new UserAlreadyExistException("This email is already used");
         }
         User user = createUserByData(userOptional, requestDto);
@@ -89,8 +92,8 @@ public class UserMapper implements RequestDtoMapper<User, UserRequestDto>,
         }
         user.setRoles(roleSet);
         if (userService.findByPhoneNumber(user.getPhoneNumber()) != null && isUserOrAdmin(user)) {
-            throw new UserWithSuchPhoneNumberExistException("The user with such phone number" +
-                    " already exist!");
+            throw new UserWithSuchPhoneNumberExistException("The user with such phone number"
+                    + " already exist!");
         }
 
         if (Optional.ofNullable(requestDto.getBirthDate()).isPresent()) {

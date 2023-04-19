@@ -6,14 +6,17 @@ import com.project.wineshop.model.Role;
 import com.project.wineshop.model.ShippingDetails;
 import com.project.wineshop.model.User;
 import com.project.wineshop.security.jwt.JwtTokenProvider;
-import com.project.wineshop.service.*;
+import com.project.wineshop.service.AuthenticationService;
+import com.project.wineshop.service.RoleService;
+import com.project.wineshop.service.ShippingDetailsService;
+import com.project.wineshop.service.UserService;
+import java.util.Set;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import java.util.Set;
 
 @Service
 public class AuthenticationServiceImpl implements AuthenticationService {
@@ -25,7 +28,8 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     private final JwtTokenProvider tokenProvider;
 
     public AuthenticationServiceImpl(AuthenticationManager authenticationManager,
-                                     ShippingDetailsService shippingDetailsService, UserService userService,
+                                     ShippingDetailsService shippingDetailsService,
+                                     UserService userService,
                                      RoleService roleService,
                                      PasswordEncoder passwordEncoder,
                                      JwtTokenProvider tokenProvider) {

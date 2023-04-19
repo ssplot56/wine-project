@@ -5,14 +5,13 @@ import com.project.wineshop.repository.ProductRepository;
 import com.project.wineshop.repository.specification.SpecificationManager;
 import com.project.wineshop.service.ProductService;
 import com.project.wineshop.utility.PageRequestFormer;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -214,7 +213,6 @@ public class ProductServiceImpl implements ProductService {
 
         return Sort.by(orders);
     }
-
 
     @Override
     public Product update(Long id, Product product) {

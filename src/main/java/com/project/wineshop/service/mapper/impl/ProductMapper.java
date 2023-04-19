@@ -7,12 +7,11 @@ import com.project.wineshop.model.Product;
 import com.project.wineshop.service.DishService;
 import com.project.wineshop.service.mapper.RequestDtoMapper;
 import com.project.wineshop.service.mapper.ResponseDtoMapper;
-import org.springframework.stereotype.Component;
-
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import org.springframework.stereotype.Component;
 
 @Component
 public class ProductMapper implements

@@ -12,6 +12,4 @@ public interface GenericService<K> {
     K update(Long id, K k);
 
     void deleteById(Long id);
-
-
 }

@@ -1,10 +1,9 @@
 package com.project.wineshop.service;
 
 import com.project.wineshop.model.Product;
-import org.springframework.data.domain.PageRequest;
-
 import java.util.List;
 import java.util.Map;
+import org.springframework.data.domain.PageRequest;
 
 public interface ProductService {
     Product save(Product product);
@@ -17,7 +16,8 @@ public interface ProductService {
 
     List<Product> findAll(Map<String, String> params);
 
-    //List<Product> findAll(String type, String color, String event, String dish, PageRequest pageRequest);
+    //List<Product> findAll(String type, String color, String event, String dish,
+    // PageRequest pageRequest);
 
     Product update(Long id, Product product);
 

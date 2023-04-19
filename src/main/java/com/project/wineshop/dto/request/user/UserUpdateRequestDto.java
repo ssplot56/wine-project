@@ -1,9 +1,9 @@
 package com.project.wineshop.dto.request.user;
 
 import jakarta.validation.constraints.Email;
+import java.time.LocalDate;
 import lombok.Getter;
 import lombok.Setter;
-import java.time.LocalDate;
 
 @Getter
 @Setter

@@ -8,21 +8,24 @@ import com.project.wineshop.service.RoleService;
 import com.project.wineshop.service.ShippingDetailsService;
 import com.project.wineshop.service.UserService;
 import com.project.wineshop.service.mapper.RequestDtoMapper;
+import java.util.Set;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import java.util.Set;
 
 @Service
 public class UserUpdateMapper implements RequestDtoMapper<User, UserUpdateRequestDto> {
     private final RoleService roleService;
     private final ShippingDetailsService shippingDetailsService;
+    private final ShippingDetailsMapper shippingDetailsMapper;
     private final UserService userService;
     private final PasswordEncoder passwordEncoder;
 
     public UserUpdateMapper(RoleService roleService, ShippingDetailsService shippingDetailsService,
+                            ShippingDetailsMapper shippingDetailsMapper,
                             UserService userService, PasswordEncoder passwordEncoder) {
         this.roleService = roleService;
         this.shippingDetailsService = shippingDetailsService;
+        this.shippingDetailsMapper = shippingDetailsMapper;
         this.userService = userService;
         this.passwordEncoder = passwordEncoder;
     }
@@ -46,7 +49,6 @@ public class UserUpdateMapper implements RequestDtoMapper<User, UserUpdateReques
         if (requestDto.getOldPassword() != null && isOldPasswordRight(requestDto)) {
             user.setPassword(passwordEncoder.encode(requestDto.getNewPassword()));
         }
-
         ShippingDetails shippingDetails = new ShippingDetails(requestDto.getRegion(),
                 requestDto.getCity(), requestDto.getWarehouse(),requestDto.getDeliveryService());
         shippingDetails.setId(userService.findByEmail(requestDto

@@ -3,14 +3,14 @@ package com.project.wineshop.security;
 import com.project.wineshop.model.Role;
 import com.project.wineshop.model.User;
 import com.project.wineshop.service.UserService;
+import java.util.Collection;
+import java.util.Set;
+import java.util.stream.Collectors;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
-import java.util.Collection;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 @Service
 public class CustomUserDetailsService implements UserDetailsService {

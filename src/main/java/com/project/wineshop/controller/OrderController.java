@@ -34,7 +34,8 @@ public class OrderController {
         return ResponseEntity.ok().build();
     }
 
-    @ExceptionHandler({UserAlreadyExistException.class, UserWithSuchPhoneNumberExistException.class})
+    @ExceptionHandler({UserAlreadyExistException.class,
+            UserWithSuchPhoneNumberExistException.class})
     public ResponseEntity exceptionHandler(RuntimeException ex) {
         return ResponseEntity.badRequest().body(ex.getMessage());
     }

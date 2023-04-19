@@ -1,7 +1,5 @@
 package com.project.wineshop.model;
 
-import java.time.LocalDate;
-import java.util.Set;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -13,6 +11,8 @@ import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import java.time.LocalDate;
+import java.util.Set;
 import lombok.Data;
 
 @Data

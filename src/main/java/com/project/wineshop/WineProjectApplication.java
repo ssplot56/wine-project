@@ -8,14 +8,5 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class WineProjectApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(WineProjectApplication.class, args);
-        try {
-            File file = new File("images/pink1.png");
-            String absolutePath = file.getAbsolutePath();
-            System.out.println(absolutePath);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
     }
-
 }

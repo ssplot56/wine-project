@@ -16,16 +16,15 @@ import org.springframework.stereotype.Service;
 public class UserUpdateMapper implements RequestDtoMapper<User, UserUpdateRequestDto> {
     private final RoleService roleService;
     private final ShippingDetailsService shippingDetailsService;
-    private final ShippingDetailsMapper shippingDetailsMapper;
     private final UserService userService;
     private final PasswordEncoder passwordEncoder;
 
-    public UserUpdateMapper(RoleService roleService, ShippingDetailsService shippingDetailsService,
-                            ShippingDetailsMapper shippingDetailsMapper,
-                            UserService userService, PasswordEncoder passwordEncoder) {
+    public UserUpdateMapper(RoleService roleService,
+                            ShippingDetailsService shippingDetailsService,
+                            UserService userService,
+                            PasswordEncoder passwordEncoder) {
         this.roleService = roleService;
         this.shippingDetailsService = shippingDetailsService;
-        this.shippingDetailsMapper = shippingDetailsMapper;
         this.userService = userService;
         this.passwordEncoder = passwordEncoder;
     }
@@ -49,6 +48,7 @@ public class UserUpdateMapper implements RequestDtoMapper<User, UserUpdateReques
         if (requestDto.getOldPassword() != null && isOldPasswordRight(requestDto)) {
             user.setPassword(passwordEncoder.encode(requestDto.getNewPassword()));
         }
+
         ShippingDetails shippingDetails = new ShippingDetails(requestDto.getRegion(),
                 requestDto.getCity(), requestDto.getWarehouse(),requestDto.getDeliveryService());
         shippingDetails.setId(userService.findByEmail(requestDto

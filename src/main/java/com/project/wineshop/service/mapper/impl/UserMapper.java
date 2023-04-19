@@ -24,7 +24,8 @@ public class UserMapper implements RequestDtoMapper<User, UserRequestDto>,
     private final UserService userService;
     private final PasswordEncoder passwordEncoder;
     private final ShippingDetailsMapper shippingDetailsMapper;
-    private static final Set<Role.RoleName> roleNames = Set.of(Role.RoleName.USER, Role.RoleName.ADMIN);
+    private static final Set<Role.RoleName> roleNames =
+            Set.of(Role.RoleName.USER, Role.RoleName.ADMIN);
 
     public UserMapper(RoleService roleService,
                       ShippingDetailsMapper shippingDetailsMapper,
@@ -38,9 +39,10 @@ public class UserMapper implements RequestDtoMapper<User, UserRequestDto>,
 
     @Override
     public User mapToModel(UserRequestDto requestDto) {
-        Optional<User> userOptional = Optional.ofNullable(userService.findByEmail(requestDto.getEmail()));
-//        boolean isUserOrAdmin = userOptional.isPresent() && isUserOrAdmin(userOptional.get());
-        if (requestDto.getPassword() != null && userOptional.isPresent() && isUserOrAdmin(userOptional.get())) {
+        Optional<User> userOptional =
+                Optional.ofNullable(userService.findByEmail(requestDto.getEmail()));
+        if (requestDto.getPassword() != null && userOptional.isPresent()
+                && isUserOrAdmin(userOptional.get())) {
             throw new UserAlreadyExistException("This email is already used");
         }
         User user = createUserByData(userOptional, requestDto);
@@ -63,14 +65,11 @@ public class UserMapper implements RequestDtoMapper<User, UserRequestDto>,
         return responseDto;
     }
 
-//    private boolean isUserOrAdmin(User user) {
-//        return user.getRoles().contains(roleService.findByName(Role.RoleName.USER))
-//                || user.getRoles().contains(roleService.findByName(Role.RoleName.ADMIN));
-//    }
-
     private boolean isUserOrAdmin(User user) {
-//        Set<Role.RoleName> roleNames = Set.of(Role.RoleName.USER, Role.RoleName.ADMIN);
-        return user.getRoles().stream().map(Role::getName).anyMatch(roleNames::contains);
+        return user.getRoles()
+                .stream()
+                .map(Role::getName)
+                .anyMatch(roleNames::contains);
     }
 
     private User createUserByData(Optional<User> userOptional,
@@ -92,7 +91,6 @@ public class UserMapper implements RequestDtoMapper<User, UserRequestDto>,
             throw new UserWithSuchPhoneNumberExistException("The user with such phone number" +
                     " already exist!");
         }
-
         if (Optional.ofNullable(requestDto.getBirthDate()).isPresent()) {
             user.setBirthDate(requestDto.getBirthDate());
         }

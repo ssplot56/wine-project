@@ -42,11 +42,11 @@ public class ShippingDetailsServiceImpl implements ShippingDetailsService {
     }
 
     @Override
-    public ShippingDetails findShippingDetailsByRegionAndCityAndDeliveryServiceAndWarehouse(String region,
-                                                                                            String city,
-                                                                                            String deliveryService,
-                                                                                            String warehouse) {
-        return shippingDetailsRepository.findShippingDetailsByRegionAndCityAndDeliveryServiceAndWarehouse(region,
+    public ShippingDetails findShippingDetailsByAllFields(String region,
+                                                          String city,
+                                                          String deliveryService,
+                                                          String warehouse) {
+        return shippingDetailsRepository.findShippingDetailsByAllFields(region,
                 city,deliveryService,warehouse);
     }
 }

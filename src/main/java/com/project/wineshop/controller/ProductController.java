@@ -112,12 +112,20 @@ public class ProductController {
         requestDto.setType(ProductType.Type.SEMISWEET.name());
         requestDto.setColor(ProductColor.Color.PINK.name());
         requestDto.setEvent(ProductEvent.Event.FOR_PRESENT.name());
-        requestDto.setPairing("Perfect with pasta, tender meat, cheese, seafood, rice and also as an aperitif.");
+        requestDto.setPairing("Perfect with pasta, tender meat, "
+                + "cheese, seafood, rice and also as an aperitif.");
         requestDto.setVintage(2020);
         requestDto.setCountry("Italy");
         requestDto.setRegion("Toscana");
         requestDto.setGrape("100% Cabernet Sauvignon");
-        requestDto.setTaste("Bright cherry-coloured rosé wine. Forms legs when swirled in the glass. Intense and very pleasant first impression, with the fruity aromas that are typical of the Cabernet Sauvignon variety. The aromas on the palate are intense. It is very round, fresh and elegant, with notes of strawberry and caramel. The finish is very long and complex. This is a very aromatic wine, with a complex palate and a long aromatic finish, qualities that promise very good development in the bottle.");
+        requestDto.setTaste("Bright cherry-coloured rosé wine. Forms legs "
+                + "when swirled in the glass. Intense and very pleasant first "
+                + "impression, with the fruity aromas that are typical of the "
+                + "Cabernet Sauvignon variety. The aromas on the palate are intense. "
+                + "It is very round, fresh and elegant, with notes of strawberry and "
+                + "caramel. The finish is very long and complex. This is a very " 
+                + "aromatic wine, with a complex palate and a long aromatic finish, "
+                + "qualities that promise very good development in the bottle.");
         requestDto.setTemperature("Serve between 6-8ºC");
         requestDto.setImageLink("images/products/pink1.png");
         List<String> wineDishPairing = List.of("Pasta", "Meat", "Cheese", "Seafood", "Rice");
@@ -135,10 +143,16 @@ public class ProductController {
         requestDto.setCountry("Italy");
         requestDto.setRegion("Toscana");
         requestDto.setGrape("Xarel·lo, Macabeu, Parellada");
-        requestDto.setTaste("Red crianza wine of garnet red hue with hints of russet. First impression is pleasant and refined. Varietal aromas and aromas from barrel ageing can be detected. It is powerful, pleasant and direct on the palate, with notes of vanilla and oak that do not mask the characteristics of the grape varieties from which it is made. Good intensity and finish.");
+        requestDto.setTaste("Red crianza wine of garnet red hue with hints of russet. "
+                + "First impression is pleasant and refined. Varietal aromas and aromas "
+                + "from barrel ageing can be detected. It is powerful, pleasant and direct "
+                + "on the palate, with notes of vanilla and oak that do "
+                + "not mask the characteristics of the grape varieties "
+                + "from which it is made. Good intensity and finish.");
         requestDto.setTemperature("Serve between 6-8ºC");
         requestDto.setEvent(ProductEvent.Event.PARTY_WITH_FRIENDS.name());
-        requestDto.setPairing("Perfect as an aperitif and to accompany rice, fish, seafood and braised white and red meat.");
+        requestDto.setPairing("Perfect as an aperitif and to accompany rice, fish, "
+                + "seafood and braised white and red meat.");
         requestDto.setImageLink("images/products/pink2.png");
         List<String> wineDishPairing = List.of("Rice", "Fish", "Seafood", "Meat");
         requestDto.setDishes(wineDishPairing);
@@ -155,10 +169,14 @@ public class ProductController {
         requestDto.setCountry("Italy");
         requestDto.setRegion("Toscana");
         requestDto.setGrape("Xarel·lo, Macabeu, Parellada");
-        requestDto.setTaste("Pale yellow with green reflections has a splendid effervescencia with rosaries of very fine bubbles that form a crown. The nose is fresh, with notes of peach and apricot. In the mouth it is round, very pleasant with a finish reminiscent of ripe fruit and pastry.");
+        requestDto.setTaste("Pale yellow with green reflections has a splendid effervescencia "
+                + "with rosaries of very fine bubbles that form a crown. The nose is fresh, with "
+                + "notes of peach and apricot. In the mouth it is round, very pleasant with "
+                + "a finish reminiscent of ripe fruit and pastry.");
         requestDto.setTemperature("Serve between 6-8ºC");
         requestDto.setEvent(ProductEvent.Event.FOR_SPECIAL_EVENTS.name());
-        requestDto.setPairing("Perfect with pasta, tender meat, cheese, seafood, rice and also as an aperitif.");
+        requestDto.setPairing("Perfect with pasta, tender meat, cheese, seafood, " 
+                + "rice and also as an aperitif.");
         requestDto.setImageLink("images/products/pink3.png");
         List<String> wineDishPairing = List.of("Pasta", "Meat", "Cheese", "Seafood", "Rice");
         requestDto.setDishes(wineDishPairing);
@@ -175,7 +193,11 @@ public class ProductController {
         requestDto.setCountry("Italy");
         requestDto.setRegion("Toscana");
         requestDto.setGrape("Tempranillo, Merlot");
-        requestDto.setTaste("Cherry-red rosé wine with crystalline aspect. Nice first impression of fine fruity aromas. It's nice on the palate, fresh, good, balanced, round, and with a good acidity. The after taste is elegant and fruity. It is an harmonic Rosé wine , correct and with a medium persistence.");
+        requestDto.setTaste("Cherry-red rosé wine with crystalline aspect. Nice first "
+                + "impression of fine fruity aromas. It's nice on the palate, fresh, good, "
+                + "balanced, round, and with a good acidity. The after taste is elegant "
+                + "and fruity. It is an harmonic Rosé wine, "
+                + "correct and with a medium persistence.");
         requestDto.setTemperature("Serve between 16-18ºC");
         requestDto.setEvent(ProductEvent.Event.FOR_SPECIAL_EVENTS.name());
         requestDto.setPairing("Perfect with salads, chicken, rise, tender meats and barbeques.");
@@ -195,10 +217,14 @@ public class ProductController {
         requestDto.setCountry("Italy");
         requestDto.setRegion("Toscana");
         requestDto.setGrape("Xarel·lo, Macabeu, Parellada");
-        requestDto.setTaste("Pale yellow with green reflections has a splendid effervescencia with rosaries of very fine bubbles that form a crown. The nose is fresh, with notes of peach and apricot. In the mouth it is round, very pleasant with a finish reminiscent of ripe fruit and pastry.");
+        requestDto.setTaste("Pale yellow with green reflections has a splendid effervescencia "
+                + "with rosaries of very fine bubbles that form a crown. The nose is fresh, "
+                + "with notes of peach and apricot. In the mouth it is round, very pleasant "
+                + "with a finish reminiscent of ripe fruit and pastry.");
         requestDto.setTemperature("Serve between 6-8ºC");
         requestDto.setEvent(ProductEvent.Event.FOR_LONELY_EVENING.name());
-        requestDto.setPairing("Perfect with pasta, tender meat, cheese, seafood, rice and also as an aperitif.");
+        requestDto.setPairing("Perfect with pasta, tender meat, cheese, "
+                + "seafood, rice and also as an aperitif.");
         requestDto.setImageLink("images/products/pink5.png");
         List<String> wineDishPairing = List.of("Pasta", "Meat", "Cheese", "Seafood", "Rice");
         requestDto.setDishes(wineDishPairing);
@@ -215,10 +241,15 @@ public class ProductController {
         requestDto.setCountry("Italy");
         requestDto.setRegion("Toscana");
         requestDto.setGrape("100% Trepat");
-        requestDto.setTaste("Lively and bright, intense pink hue. Good release of small bubbles that rise to form a distinct crown. First impression: pleasant and powerful, followed by aromas reminiscent of red berries. It is clean and sweet on the palate, with a good, long-lasting finish. Balanced, full of flavour, and very fruity.");
+        requestDto.setTaste("Lively and bright, intense pink hue. Good release of small bubbles "
+                + "that rise to form a distinct crown. First impression: pleasant and powerful, "
+                + "followed by aromas reminiscent of red berries. It is clean and sweet on the "
+                + "palate, with a good, long-lasting finish. Balanced, full of "
+                + "flavour, and very fruity.");
         requestDto.setTemperature("Serve between 6-8ºC");
         requestDto.setEvent(ProductEvent.Event.FOR_PRESENT.name());
-        requestDto.setPairing("Perfect as an aperitif or dessert. It can, also, accompany mild cheeses and rices.");
+        requestDto.setPairing("Perfect as an aperitif or dessert. It can, also, "
+                + "accompany mild cheeses and rices.");
         requestDto.setImageLink("images/products/pink6.png");
         List<String> wineDishPairing = List.of("Cheese", "Rice");
         requestDto.setDishes(wineDishPairing);
@@ -235,10 +266,18 @@ public class ProductController {
         requestDto.setCountry("Italy");
         requestDto.setRegion("Toscana");
         requestDto.setGrape("100% Cabernet Sauvignon");
-        requestDto.setTaste("Young red wine with an intense red hue flecked with purple. Forms legs when swirled in the glass. Very pleasant first impression, very intense and complex aromas which include notes of jam, ripe red fruit, and liquorice. The aromas on the palate are distinctly varietal in character. The wine round, unctuous, long-lingering, with sweet tannins that make for a long and flavoursome finish. This is a powerful, pleasant wine. It has fruit and a very long-lingering finish, qualities that promise very good development in the bottle.");
+        requestDto.setTaste("Young red wine with an intense red hue flecked with purple. "
+                + "Forms legs when swirled in the glass. Very pleasant first impression, very "
+                + "intense and complex aromas which include notes of jam, ripe red fruit, and "
+                + "liquorice. The aromas on the palate are distinctly varietal in character. "
+                + "The wine round, unctuous, long-lingering, with sweet tannins that make for a "
+                + "long and flavoursome finish. This is a powerful, pleasant wine. It has fruit "
+                + "and a very long-lingering finish, qualities that promise "
+                + "very good development in the bottle.");
         requestDto.setTemperature("Serve between 12-14ºC");
         requestDto.setEvent(ProductEvent.Event.PARTY_WITH_FRIENDS.name());
-        requestDto.setPairing("Perfect with stewed meat, cured cheese, sausages, and dishes with personality.");
+        requestDto.setPairing("Perfect with stewed meat, cured cheese, sausages, "
+                + "and dishes with personality.");
         requestDto.setImageLink("images/products/red1.png");
         List<String> wineDishPairing = List.of("Meat", "Cheese", "Sausages");
         requestDto.setDishes(wineDishPairing);
@@ -255,10 +294,18 @@ public class ProductController {
         requestDto.setCountry("Italy");
         requestDto.setRegion("Toscana");
         requestDto.setGrape("100% Merlot");
-        requestDto.setTaste("Young red wine with an intense red hue flecked with purple. Forms legs when swirled in the glass. Very pleasant first impression, very intense and complex aromas which include notes of jam, ripe red fruit, and liquorice. The aromas on the palate are distinctly varietal in character. The wine round, unctuous, long-lingering, with sweet tannins that make for a long and flavoursome finish. This is a powerful, pleasant wine. It has fruit and a very long-lingering finish, qualities that promise very good development in the bottle.");
+        requestDto.setTaste("Young red wine with an intense red hue flecked with purple. "
+                + "Forms legs when swirled in the glass. Very pleasant first impression, "
+                + "very intense and complex aromas which include notes of jam, ripe red "
+                + "fruit, and liquorice. The aromas on the palate are distinctly varieta "
+                + "in character. The wine round, unctuous, long-lingering, with sweet "
+                + "tannins that make for a long and flavoursome finish. This is a powerful, "
+                + "pleasant wine. It has fruit and a very long-lingerig finish, qualities "
+                + "that promise very good development in the bottle.");
         requestDto.setTemperature("Serve between 12-14ºC");
         requestDto.setEvent(ProductEvent.Event.FOR_PRESENT.name());
-        requestDto.setPairing("Combine this wine with risottos, cheese, sausages, poultry, and stewed meats.");
+        requestDto.setPairing("Combine this wine with risottos, cheese, sausages, "
+                + "poultry, and stewed meats.");
         requestDto.setImageLink("images/products/red2.png");
         List<String> wineDishPairing = List.of("Risottos", "Cheese", "Sausages", "Poultry", "Meat");
         requestDto.setDishes(wineDishPairing);
@@ -275,10 +322,16 @@ public class ProductController {
         requestDto.setCountry("Italy");
         requestDto.setRegion("Toscana");
         requestDto.setGrape("100% Merlot");
-        requestDto.setTaste("Red crianza wine of garnet red hue with hints of russet. First impression is pleasant and refined. Varietal aromas and aromas from barrel ageing can be detected. It is powerful, pleasant and direct on the palate, with notes of vanilla and oak that do not mask the characteristics of the grape varieties from which it is made. Good intensity and finish.");
+        requestDto.setTaste("Red crianza wine of garnet red hue with hints of russet. "
+                + "First impression is pleasant and refined. Varietal aromas and aromas "
+                + "from barrel ageing can be detected. It is powerful, pleasant and direct "
+                + "on the palate, with notes of vanilla and oak that do not mask the "
+                + "characteristics of the grape varieties from which it is made. "
+                + "Good intensity and finish.");
         requestDto.setTemperature("Serve between 16-18ºC");
         requestDto.setEvent(ProductEvent.Event.FOR_SPECIAL_EVENTS.name());
-        requestDto.setPairing("Combine this wine with risottos, cheese, sausages, poultry, and stewed meats.");
+        requestDto.setPairing("Combine this wine with risottos, cheese, sausages, "
+                + "poultry, and stewed meats.");
         requestDto.setImageLink("images/products/red3.png");
         List<String> wineDishPairing = List.of("Risottos", "Cheese", "Sausages", "Poultry", "Meat");
         requestDto.setDishes(wineDishPairing);
@@ -295,10 +348,16 @@ public class ProductController {
         requestDto.setCountry("Italy");
         requestDto.setRegion("Toscana");
         requestDto.setGrape("100% Cabernet Sauvignon");
-        requestDto.setTaste("Red crianza wine of garnet red hue with hints of russet. First impression is pleasant with a nice aroma. Powerful and complex, has some spices and varietal aromas, rounded because of the oak. In the mouth is warm, good tannin presence but balanced with the acidity. With round body and a long and tasty after taste. Well-balanced, powerful, full body, persistent, and nice tannin balance.");
+        requestDto.setTaste("Red crianza wine of garnet red hue with hints of russet. "
+                + "First impression is pleasant with a nice aroma. Powerful and complex, "
+                + "has some spices and varietal aromas, rounded because of the oak. In "
+                + "the mouth is warm, good tannin presence but balanced with the acidity. "
+                + "With round body and a long and tasty after taste. Well-balanced, "
+                + "powerful, full body, persistent, and nice tannin balance.");
         requestDto.setTemperature("Serve between 16-18ºC");
         requestDto.setEvent(ProductEvent.Event.FOR_SPECIAL_EVENTS.name());
-        requestDto.setPairing("This wine is perfect with cured cheeses, red meats, sausages and strong dishes.");
+        requestDto.setPairing("This wine is perfect with cured cheeses, red meats, "
+                + "sausages and strong dishes.");
         requestDto.setImageLink("images/products/red4.png");
         List<String> wineDishPairing = List.of("Cheese", "Meat", "Sausages", "Strong dishes");
         requestDto.setDishes(wineDishPairing);
@@ -315,10 +374,16 @@ public class ProductController {
         requestDto.setCountry("Italy");
         requestDto.setRegion("Toscana");
         requestDto.setGrape("Xarel·lo, Macabeu, Parellada");
-        requestDto.setTaste("Red crianza wine of garnet red hue with hints of russet. First impression is pleasant with a nice aroma. Powerful and complex, has some spices and varietal aromas, rounded because of the oak. In the mouth is warm, good tannin presence but balanced with the acidity. With round body and a long and tasty after taste. Well-balanced, powerful, full body, persistent, and nice tannin balance.");
+        requestDto.setTaste("Red crianza wine of garnet red hue with hints of russet. "
+                + "First impression is pleasant with a nice aroma. Powerful and complex, "
+                + "has some spices and varietal aromas, rounded because of the oak. In "
+                + "the mouth is warm, good tannin presence but balanced with the acidity. "
+                + "With round body and a long and tasty after taste. Well-balanced, "
+                + "powerful, full body, persistent, and nice tannin balance.");
         requestDto.setTemperature("Serve between 16-18ºC");
         requestDto.setEvent(ProductEvent.Event.FOR_PRESENT.name());
-        requestDto.setPairing("This wine is perfect with cured cheeses, red meats, sausages and strong dishes.");
+        requestDto.setPairing("This wine is perfect with cured cheeses, red meats, "
+                + "sausages and strong dishes.");
         requestDto.setImageLink("images/products/red5.png");
         List<String> wineDishPairing = List.of("Cheese", "Meat", "Sausages", "Strong dishes");
         requestDto.setDishes(wineDishPairing);
@@ -335,12 +400,21 @@ public class ProductController {
         requestDto.setCountry("Italy");
         requestDto.setRegion("Toscana");
         requestDto.setGrape("100% Cabernet Sauvignon");
-        requestDto.setTaste("Young red wine with an intense red hue flecked with purple. Forms legs when swirled in the glass. Very pleasant first impression, very intense and complex aromas which include notes of jam, ripe red fruit, and liquorice. The aromas on the palate are distinctly varietal in character. The wine round, unctuous, long-lingering, with sweet tannins that make for a long and flavoursome finish. This is a powerful, pleasant wine. It has fruit and a very long-lingering finish, qualities that promise very good development in the bottle.");
+        requestDto.setTaste("Young red wine with an intense red hue flecked with purple. "
+                + "Forms legs when swirled in the glass. Very pleasant first impression, very "
+                + "intense and complex aromas which include notes of jam, ripe red fruit, and "
+                + "liquorice. The aromas on the palate are distinctly varietal in character. "
+                + "The wine round, unctuous, long-lingering, with sweet tannins that make for "
+                + "a long and flavoursome finish. This is a powerful, pleasant wine. It has "
+                + "fruit and a very long-lingering finish, qualities that promise "
+                + "very good development in the bottle.");
         requestDto.setTemperature("Serve between 12-14ºC");
         requestDto.setEvent(ProductEvent.Event.FOR_LONELY_EVENING.name());
-        requestDto.setPairing("Perfect with stewed meat, cured cheese, sausages, and dishes with personality.");
+        requestDto.setPairing("Perfect with stewed meat, cured cheese, "
+                + "sausages, and dishes with personality.");
         requestDto.setImageLink("images/products/red6.png");
-        List<String> wineDishPairing = List.of("Meat", "Cheese", "Sausages", "Dishes with personality");
+        List<String> wineDishPairing = List.of("Meat", "Cheese", "Sausages",
+                "Dishes with personality");
         requestDto.setDishes(wineDishPairing);
         create(requestDto);
     }
@@ -355,7 +429,15 @@ public class ProductController {
         requestDto.setCountry("Italy");
         requestDto.setRegion("Toscana");
         requestDto.setGrape("100% Xarel·lo");
-        requestDto.setTaste("Pale yellow white wine lightly flecked with green. Forms legs when swirled in the glass. Very pleasant upon first impression, with intense aromas reminiscent of white flowers with hints of ripe fruit. The aromas carry over to the palate, which is distinctly fruity in character, with the Xarel·lo characteristics coming through in the tasting. On the palate, the wine is dry, fresh, and flavoursome, with good acidity. This wine has a significant aromatic potential, with fruit on the palate and a lingering and very pleasant finish, qualities that ensure good development in the bottle.");
+        requestDto.setTaste("Pale yellow white wine lightly flecked with green. "
+                + "Forms legs when swirled in the glass. Very pleasant upon first "
+                + "impression, with intense aromas reminiscent of white flowers with "
+                + "hints of ripe fruit. The aromas carry over to the palate, which is "
+                + "distinctly fruity in character, with the Xarel·lo characteristics "
+                + "coming through in the tasting. On the palate, the wine is dry, fresh, "
+                + "and flavoursome, with good acidity. This wine has a significant "
+                + "aromatic potential, with fruit on the palate and a lingering and very "
+                + "pleasant finish, qualities that ensure good development in the bottle.");
         requestDto.setTemperature("Serve between 6-8ºC");
         requestDto.setEvent(ProductEvent.Event.PARTY_WITH_FRIENDS.name());
         requestDto.setPairing("Perfect with fish, mild cheese, rice and white meats.");
@@ -375,10 +457,15 @@ public class ProductController {
         requestDto.setCountry("Italy");
         requestDto.setRegion("Toscana");
         requestDto.setGrape("Xarel·lo, Macabeu, Parellada");
-        requestDto.setTaste("White wine with a bright yellow hue flecked with gold. Very pleasant first impression, with subtle vanilla and smoky aromas as well as floral and honey notes. It is warm, creamy, and very pleasant on the palate. Fermentation and ageing of the lees have given this wine personality");
+        requestDto.setTaste("White wine with a bright yellow hue flecked with gold. "
+                + "Very pleasant first impression, with subtle vanilla and smoky aromas "
+                + "as well as floral and honey notes. It is warm, creamy, and very pleasant "
+                + "on the palate. Fermentation and ageing of the lees have given "
+                + "this wine personality");
         requestDto.setTemperature("Serve between 10-12ºC");
         requestDto.setEvent(ProductEvent.Event.FOR_LONELY_EVENING.name());
-        requestDto.setPairing("Perfect for all types of aperitifs, fish, rice, smoked dishes, white meat and cheese.");
+        requestDto.setPairing("Perfect for all types of aperitifs, fish, rice, "
+                + "smoked dishes, white meat and cheese.");
         requestDto.setImageLink("images/products/white2.png");
         List<String> wineDishPairing = List.of("Fish", "Rice", "Smoked dishes", "Meat", "Cheese");
         requestDto.setDishes(wineDishPairing);
@@ -395,10 +482,15 @@ public class ProductController {
         requestDto.setCountry("Italy");
         requestDto.setRegion("Toscana");
         requestDto.setGrape("Xarel·lo, Macabeu, Parellada");
-        requestDto.setTaste("Pale yellow white wine with a bright, clear appearance. Powerful and pleasant first impression, with complex, predominant fruity aromas. It is sweet, fresh and round on the palate, with a fruity taste and a lingering bouquet. Aromatic, with a fruity palate, character and a long-lingering finish.");
+        requestDto.setTaste("Pale yellow white wine with a bright, clear appearance. "
+                + "Powerful and pleasant first impression, with complex, predominant fruity "
+                + "aromas. It is sweet, fresh and round on the palate, with a fruity taste "
+                + "and a lingering bouquet. Aromatic, with a fruity palate, character and "
+                + "a long-lingering finish.");
         requestDto.setTemperature("Serve between 6-8ºC");
         requestDto.setEvent(ProductEvent.Event.FOR_SPECIAL_EVENTS.name());
-        requestDto.setPairing("Combine this wine with risottos, cheese, sausages, poultry, and stewed meats.");
+        requestDto.setPairing("Combine this wine with risottos, cheese, sausages, "
+                + "poultry, and stewed meats.");
         requestDto.setImageLink("images/products/white3.png");
         List<String> wineDishPairing = List.of("Risottos", "Cheese", "Sausages", "Poultry", "Meat");
         requestDto.setDishes(wineDishPairing);
@@ -415,10 +507,15 @@ public class ProductController {
         requestDto.setCountry("Italy");
         requestDto.setRegion("Toscana");
         requestDto.setGrape("100% Cabernet Sauvignon");
-        requestDto.setTaste("Pale yellow white wine with a bright, clear appearance. Powerful and pleasant first impression, with complex, predominant fruity aromas. It is sweet, fresh and round on the palate, with a fruity taste and a lingering bouquet. Aromatic, with a fruity palate, character and a long-lingering finish.");
+        requestDto.setTaste("Pale yellow white wine with a bright, clear appearance. "
+                + "Powerful and pleasant first impression, with complex, predominant "
+                + "fruity aromas. It is sweet, fresh and round on the palate, with a "
+                + "fruity taste and a lingering bouquet. Aromatic, with a fruity palate, "
+                + "character and a long-lingering finish.");
         requestDto.setTemperature("Serve between 6-8ºC");
         requestDto.setEvent(ProductEvent.Event.PARTY_WITH_FRIENDS.name());
-        requestDto.setPairing("This wine is perfect with cured cheeses, red meats, sausages and strong dishes.");
+        requestDto.setPairing("This wine is perfect with cured cheeses, red meats, "
+                + "sausages and strong dishes.");
         requestDto.setImageLink("images/products/white4.png");
         List<String> wineDishPairing = List.of("Cheese", "Meat", "Sausages", "Strong dishes");
         requestDto.setDishes(wineDishPairing);
@@ -435,10 +532,16 @@ public class ProductController {
         requestDto.setCountry("Italy");
         requestDto.setRegion("Toscana");
         requestDto.setGrape("Chardonnay, Xarel·lo, Macabeu");
-        requestDto.setTaste("Pale yellow flecked with gold, with a steady stream of small bubbles forming beads. First impression: good, powerful and refined; aromas from bottle-ageing, as well as ripe fruit and flowers, can be detected. It is round, pleasant, long-lingering and fresh on the palate. Well-balanced, harmonious, direct, dry, with a long-lingering and pleasant finish.");
+        requestDto.setTaste("Pale yellow flecked with gold, with a steady stream "
+                + "of small bubbles forming beads. First impression: good, powerful "
+                + "and refined; aromas from bottle-ageing, as well as ripe fruit and "
+                + "flowers, can be detected. It is round, pleasant, long-lingering and "
+                + "fresh on the palate. Well-balanced, harmonious, direct, dry, with a "
+                + "long-lingering and pleasant finish.");
         requestDto.setTemperature("Serve between 6-8ºC");
         requestDto.setEvent(ProductEvent.Event.FOR_SPECIAL_EVENTS.name());
-        requestDto.setPairing("Perfect for salads, vegetables, fishes and mild cheeses. It can also be taken as an aperitif.");
+        requestDto.setPairing("Perfect for salads, vegetables, fishes and mild cheeses. "
+                + "It can also be taken as an aperitif.");
         requestDto.setImageLink("images/products/white5.png");
         List<String> wineDishPairing = List.of("Salads", "Vegetables", "Fish", "Cheese");
         requestDto.setDishes(wineDishPairing);
@@ -455,14 +558,22 @@ public class ProductController {
         requestDto.setCountry("Italy");
         requestDto.setRegion("Toscana");
         requestDto.setGrape("Chardonnay, Xarel·lo, Macabeu");
-        requestDto.setTaste("Pale yellow white wine lightly flecked with green. Forms legs when swirled in the glass. Very pleasant upon first impression, with intense aromas reminiscent of white flowers with hints of ripe fruit. The aromas carry over to the palate, which is distinctly fruity in character, with the Xarel·lo characteristics coming through in the tasting. On the palate, the wine is dry, fresh, and flavoursome, with good acidity. This wine has a significant aromatic potential, with fruit on the palate and a lingering and very pleasant finish, qualities that ensure good development in the bottle.");
+        requestDto.setTaste("Pale yellow white wine lightly flecked with green. "
+                + "Forms legs when swirled in the glass. Very pleasant upon first "
+                + "impression, with intense aromas reminiscent of white flowers with "
+                + "hints of ripe fruit. The aromas carry over to the palate, which is "
+                + "distinctly fruity in character, with the Xarel·lo characteristics "
+                + "coming through in the tasting. On the palate, the wine is dry, fresh, "
+                + "and flavoursome, with good acidity. This wine has a significant aromatic "
+                + "potential, with fruit on the palate and a lingering and very pleasant "
+                + "finish, qualities that ensure good development in the bottle.");
         requestDto.setTemperature("Serve between 6-8ºC");
         requestDto.setEvent(ProductEvent.Event.FOR_PRESENT.name());
-        requestDto.setPairing("The great personality: stewed meats and fish, cheese, foie, and smoked foods");
+        requestDto.setPairing("The great personality: stewed meats and fish, "
+                + "cheese, foie, and smoked foods");
         requestDto.setImageLink("images/products/white6.png");
         List<String> wineDishPairing = List.of("Meat", "Fish", "Cheese", "Foie", "Smoked dishes");
         requestDto.setDishes(wineDishPairing);
         create(requestDto);
     }
-
 }

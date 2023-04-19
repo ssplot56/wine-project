@@ -1,5 +1,6 @@
 package com.project.wineshop.service.impl;
 
+import com.project.wineshop.exception.DataNotFoundException;
 import com.project.wineshop.model.ShippingDetails;
 import com.project.wineshop.repository.ShippingDetailsRepository;
 import com.project.wineshop.service.ShippingDetailsService;
@@ -22,7 +23,7 @@ public class ShippingDetailsServiceImpl implements ShippingDetailsService {
     @Override
     public ShippingDetails findById(Long id) {
         return shippingDetailsRepository.findById(id).orElseThrow(
-                () -> new RuntimeException("Can't find shippingDetails with id: " + id));
+                () -> new DataNotFoundException("Can't find shippingDetails with id: " + id));
     }
 
     @Override

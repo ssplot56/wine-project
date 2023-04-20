@@ -2,7 +2,10 @@ package com.project.wineshop.dto.request.user;
 
 import jakarta.validation.constraints.Email;
 import java.time.LocalDate;
+
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 @Data
 public class UserUpdateRequestDto {

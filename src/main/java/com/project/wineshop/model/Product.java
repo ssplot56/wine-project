@@ -53,5 +53,6 @@ public class Product {
 
     private String temperature;
 
+    @Column(length = 2000)
     private String imageLink;
 }

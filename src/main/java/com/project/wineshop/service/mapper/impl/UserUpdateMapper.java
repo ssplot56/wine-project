@@ -52,8 +52,8 @@ public class UserUpdateMapper implements RequestDtoMapper<User, UserUpdateReques
         ShippingDetails shippingDetails = new ShippingDetails(
                 requestDto.getRegion(),
                 requestDto.getCity(),
-                requestDto.getWarehouse(),
-                requestDto.getDeliveryService());
+                requestDto.getDeliveryService(),
+                requestDto.getWarehouse());
         shippingDetails.setId(userService.findByEmail(requestDto.getEmail())
                 .getShippingDetails().getId());
         user.setShippingDetails(shippingDetailsService.save(shippingDetails));

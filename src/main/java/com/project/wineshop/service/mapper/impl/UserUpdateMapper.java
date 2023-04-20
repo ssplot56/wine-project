@@ -49,12 +49,14 @@ public class UserUpdateMapper implements RequestDtoMapper<User, UserUpdateReques
             user.setPassword(passwordEncoder.encode(requestDto.getNewPassword()));
         }
 
-        ShippingDetails shippingDetails = new ShippingDetails(requestDto.getRegion(),
-                requestDto.getCity(), requestDto.getWarehouse(),requestDto.getDeliveryService());
-        shippingDetails.setId(userService.findByEmail(requestDto
-                .getEmail()).getShippingDetails().getId());
-        user.setShippingDetails(shippingDetailsService
-                .save(shippingDetails));
+        ShippingDetails shippingDetails = new ShippingDetails(
+                requestDto.getRegion(),
+                requestDto.getCity(),
+                requestDto.getWarehouse(),
+                requestDto.getDeliveryService());
+        shippingDetails.setId(userService.findByEmail(requestDto.getEmail())
+                .getShippingDetails().getId());
+        user.setShippingDetails(shippingDetailsService.save(shippingDetails));
 
         user.setRoles(Set.of(roleService.findByName(Role.RoleName.USER)));
         return user;

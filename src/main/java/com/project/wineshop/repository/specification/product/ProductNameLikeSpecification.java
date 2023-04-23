@@ -21,6 +21,7 @@ public class ProductNameLikeSpecification implements SpecificationProvider<Produ
             return criteriaBuilder.and(predicates);
         };
     }
+
     @Override
     public String getFilterKey() {
         return FILTER_KEY;

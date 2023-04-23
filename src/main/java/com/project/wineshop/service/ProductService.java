@@ -10,14 +10,7 @@ public interface ProductService {
 
     Product getById(Long id);
 
-    List<Product> findAll();
-
-    List<Product> findAll(PageRequest pageRequest);
-
     List<Product> findAll(Map<String, String> params);
-
-    //List<Product> findAll(String type, String color, String event, String dish,
-    // PageRequest pageRequest);
 
     Product update(Long id, Product product);
 

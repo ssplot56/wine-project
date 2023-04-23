@@ -1,7 +1,6 @@
 package com.project.wineshop.repository.specification.product;
 
 import com.project.wineshop.model.Product;
-import com.project.wineshop.repository.specification.SpecificationProvider;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Component;

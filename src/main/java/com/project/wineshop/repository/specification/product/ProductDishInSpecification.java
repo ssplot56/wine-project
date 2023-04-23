@@ -2,7 +2,6 @@ package com.project.wineshop.repository.specification.product;
 
 import com.project.wineshop.model.Dish;
 import com.project.wineshop.model.Product;
-import com.project.wineshop.repository.specification.SpecificationProvider;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.JoinType;
 import jakarta.persistence.criteria.SetJoin;

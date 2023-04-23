@@ -1,4 +1,4 @@
-package com.project.wineshop.repository.specification;
+package com.project.wineshop.repository.specification.product;
 
 import org.springframework.data.jpa.domain.Specification;
 

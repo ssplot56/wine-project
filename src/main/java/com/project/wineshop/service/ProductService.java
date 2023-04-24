@@ -3,7 +3,6 @@ package com.project.wineshop.service;
 import com.project.wineshop.model.Product;
 import java.util.List;
 import java.util.Map;
-import org.springframework.data.domain.PageRequest;
 
 public interface ProductService {
     Product save(Product product);

@@ -5,11 +5,9 @@ import com.project.wineshop.repository.ProductRepository;
 import com.project.wineshop.repository.specification.SpecificationManager;
 import com.project.wineshop.service.ProductService;
 import com.project.wineshop.utility.PageRequestFormer;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
@@ -61,7 +59,8 @@ public class ProductServiceImpl implements ProductService {
             for (Map.Entry<String, String> entry : params.entrySet()) {
                 Specification<Product> sp = productSpecificationManager.get(entry.getKey(),
                         entry.getValue().split(","));
-                specification = specification == null ? Specification.where(sp) : specification.and(sp);
+                specification = specification == null ? Specification.where(sp)
+                        : specification.and(sp);
             }
         }
         if (specification == null) {

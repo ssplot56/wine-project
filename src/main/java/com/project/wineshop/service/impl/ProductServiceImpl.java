@@ -5,11 +5,9 @@ import com.project.wineshop.repository.ProductRepository;
 import com.project.wineshop.repository.specification.SpecificationManager;
 import com.project.wineshop.service.ProductService;
 import com.project.wineshop.utility.PageRequestFormer;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
@@ -31,7 +29,10 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Product getById(Long id) {
-        return productRepository.findById(id).orElseThrow();
+        Product product = productRepository.findById(id).orElseThrow();
+        product.setPopularity(product.getPopularity() + 1L);
+        productRepository.save(product);
+        return product;
     }
 
     @Override
@@ -58,8 +59,8 @@ public class ProductServiceImpl implements ProductService {
             for (Map.Entry<String, String> entry : params.entrySet()) {
                 Specification<Product> sp = productSpecificationManager.get(entry.getKey(),
                         entry.getValue().split(","));
-                specification = specification == null
-                        ? Specification.where(sp) : specification.and(sp);
+                specification = specification == null ? Specification.where(sp)
+                        : specification.and(sp);
             }
         }
         if (specification == null) {
@@ -67,21 +68,6 @@ public class ProductServiceImpl implements ProductService {
         } else {
             return productRepository.findAll(specification, pageRequest).toList();
         }
-    }
-
-    private Sort getSort(String sortBy) {
-        String[] sortArray = sortBy.split(";");
-        List<Sort.Order> orders = new ArrayList<>();
-        for (String sortProperty : sortArray) {
-            String[] parts = sortProperty.split(":");
-            String property = parts[0];
-            Sort.Direction direction = Sort.Direction.ASC;
-            if (parts.length > 1 && parts[1].equalsIgnoreCase("DESC")) {
-                direction = Sort.Direction.DESC;
-            }
-            orders.add(new Sort.Order(direction, property));
-        }
-        return Sort.by(orders);
     }
 
     @Override

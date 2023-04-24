@@ -77,6 +77,7 @@ public class ProductMapper implements
         responseDto.setTaste(product.getTaste());
         responseDto.setTemperature(product.getTemperature());
         responseDto.setImageLink(product.getImageLink());
+        responseDto.setPopularity(product.getPopularity());
         return responseDto;
     }
 

@@ -31,7 +31,10 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Product getById(Long id) {
-        return productRepository.findById(id).orElseThrow();
+        Product product = productRepository.findById(id).orElseThrow();
+        product.setPopularity(product.getPopularity() + 1L);
+        productRepository.save(product);
+        return product;
     }
 
     @Override
@@ -66,21 +69,6 @@ public class ProductServiceImpl implements ProductService {
         } else {
             return productRepository.findAll(specification, pageRequest).toList();
         }
-    }
-
-    private Sort getSort(String sortBy) {
-        String[] sortArray = sortBy.split(";");
-        List<Sort.Order> orders = new ArrayList<>();
-        for (String sortProperty : sortArray) {
-            String[] parts = sortProperty.split(":");
-            String property = parts[0];
-            Sort.Direction direction = Sort.Direction.ASC;
-            if (parts.length > 1 && parts[1].equalsIgnoreCase("DESC")) {
-                direction = Sort.Direction.DESC;
-            }
-            orders.add(new Sort.Order(direction, property));
-        }
-        return Sort.by(orders);
     }
 
     @Override

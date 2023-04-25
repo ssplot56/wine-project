@@ -5,12 +5,10 @@ import com.project.wineshop.repository.ProductRepository;
 import com.project.wineshop.repository.specification.SpecificationManager;
 import com.project.wineshop.service.ProductService;
 import com.project.wineshop.utility.PageRequestFormer;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
-
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;

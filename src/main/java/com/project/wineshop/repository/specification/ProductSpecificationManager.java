@@ -1,6 +1,7 @@
 package com.project.wineshop.repository.specification;
 
 import com.project.wineshop.model.Product;
+import com.project.wineshop.repository.specification.product.SpecificationProvider;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;

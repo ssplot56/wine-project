@@ -31,32 +31,44 @@ public class UserUpdateMapper implements RequestDtoMapper<User, UserUpdateReques
 
     @Override
     public User mapToModel(UserUpdateRequestDto requestDto) {
-        if (!userService.phoneNumberIsAvailable(requestDto.getPhoneNumber(),
+        if (requestDto.getPhoneNumber() != null
+                && !userService.phoneNumberIsAvailable(requestDto.getPhoneNumber(),
                 requestDto.getEmail())) {
             throw new RuntimeException("User with this phone number: "
                     + requestDto.getPhoneNumber()
                     + " already exists. Use another one.");
         }
 
+        User userInDb = userService.findByEmail(requestDto.getEmail());
+
         User user = new User();
-        user.setFirstName(requestDto.getFirstName());
-        user.setLastName(requestDto.getLastName());
+        user.setFirstName(requestDto.getFirstName() == null
+                ? userInDb.getFirstName() : requestDto.getFirstName());
+        user.setLastName(requestDto.getLastName() == null
+                ? userInDb.getLastName() : requestDto.getLastName());
         user.setEmail(requestDto.getEmail());
-        user.setPhoneNumber(requestDto.getPhoneNumber());
-        user.setBirthDate(requestDto.getBirthDate());
+        user.setPhoneNumber(requestDto.getPhoneNumber() == null
+                ? userInDb.getPhoneNumber() : requestDto.getPhoneNumber());
+        user.setBirthDate(requestDto.getBirthDate() == null
+                ? userInDb.getBirthDate() : requestDto.getBirthDate());
 
         if (requestDto.getOldPassword() != null && isOldPasswordRight(requestDto)) {
             user.setPassword(passwordEncoder.encode(requestDto.getNewPassword()));
         }
 
-        ShippingDetails shippingDetails = new ShippingDetails(
-                requestDto.getRegion(),
-                requestDto.getCity(),
-                requestDto.getDeliveryService(),
-                requestDto.getWarehouse());
-        shippingDetails.setId(userService.findByEmail(requestDto.getEmail())
-                .getShippingDetails().getId());
-        user.setShippingDetails(shippingDetailsService.save(shippingDetails));
+        String region = requestDto.getRegion() == null
+                ? userInDb.getShippingDetails().getRegion() : requestDto.getRegion();
+        String city = requestDto.getCity() == null
+                ? userInDb.getShippingDetails().getCity() : requestDto.getCity();
+        String deliveryService = requestDto.getDeliveryService() == null
+                ? userInDb.getShippingDetails().getDeliveryService()
+                : requestDto.getDeliveryService();
+        String warehouse = requestDto.getWarehouse() == null
+                ? userInDb.getShippingDetails().getWarehouse() : requestDto.getWarehouse();
+
+        ShippingDetails details = new ShippingDetails(region, city, deliveryService, warehouse);
+        details.setId(userInDb.getShippingDetails().getId());
+        user.setShippingDetails(shippingDetailsService.save(details));
 
         user.setRoles(Set.of(roleService.findByName(Role.RoleName.USER)));
         return user;

@@ -55,4 +55,6 @@ public class Product {
 
     @Column(length = 2000)
     private String imageLink;
+
+    private Long popularity = 0L;
 }

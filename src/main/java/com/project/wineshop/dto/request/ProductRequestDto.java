@@ -53,6 +53,5 @@ public class ProductRequestDto {
 
     private String temperature;
 
-    @Size(min = 4, max = 2000, message = "imageLink must be between 4 and 2000 characters")
-    private String imageLink;
+    private byte[] image;
 }

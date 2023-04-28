@@ -8,6 +8,7 @@ import com.project.wineshop.model.enums.ProductEvent;
 import com.project.wineshop.model.enums.ProductType;
 import com.project.wineshop.service.ProductService;
 import com.project.wineshop.service.mapper.impl.ProductMapper;
+import com.project.wineshop.utility.ImageReader;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Positive;
 import java.math.BigDecimal;
@@ -124,7 +125,7 @@ public class ProductController {
                 + "with a complex palate and a long aromatic finish, qualities that promise very "
                 + "good development in the bottle.");
         requestDto.setTemperature("Serve between 6-8ºC");
-        requestDto.setImageLink("https://s3.eu-north-1.amazonaws.com/wine-shop-images/products/pink1.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20230421T075852Z&X-Amz-SignedHeaders=host&X-Amz-Expires=604799&X-Amz-Credential=AKIAW3DYPUZUMGLJJDXC%2F20230421%2Feu-north-1%2Fs3%2Faws4_request&X-Amz-Signature=30bc614b6f9c12c7f99e832ab26ce77dd41a1d347be013e889ad05fab1d1c2ab");
+        requestDto.setImage(ImageReader.getImageBytes("images/products/pink1.png"));
         List<String> wineDishPairing = List.of("Pasta", "Meat", "Cheese", "Seafood", "Rice");
         requestDto.setDishes(wineDishPairing);
         create(requestDto);
@@ -149,7 +150,7 @@ public class ProductController {
         requestDto.setEvent(ProductEvent.Event.PARTY_WITH_FRIENDS.name());
         requestDto.setPairing("Perfect as an aperitif and to accompany rice, fish, seafood and "
                 + "braised white and red meat.");
-        requestDto.setImageLink("https://s3.eu-north-1.amazonaws.com/wine-shop-images/products/pink2.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20230421T080018Z&X-Amz-SignedHeaders=host&X-Amz-Expires=604799&X-Amz-Credential=AKIAW3DYPUZUMGLJJDXC%2F20230421%2Feu-north-1%2Fs3%2Faws4_request&X-Amz-Signature=e7528ad5f364d960ea5c5b805700c588ffc170386477abf4886869b63d1080d0");
+        requestDto.setImage(ImageReader.getImageBytes("images/products/pink2.png"));
         List<String> wineDishPairing = List.of("Rice", "Fish", "Seafood", "Meat");
         requestDto.setDishes(wineDishPairing);
         create(requestDto);
@@ -173,7 +174,7 @@ public class ProductController {
         requestDto.setEvent(ProductEvent.Event.FOR_SPECIAL_EVENTS.name());
         requestDto.setPairing("Perfect with pasta, tender meat, cheese, seafood, rice and also as"
                 + "an aperitif.");
-        requestDto.setImageLink("https://s3.eu-north-1.amazonaws.com/wine-shop-images/products/pink3.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20230421T080111Z&X-Amz-SignedHeaders=host&X-Amz-Expires=604799&X-Amz-Credential=AKIAW3DYPUZUMGLJJDXC%2F20230421%2Feu-north-1%2Fs3%2Faws4_request&X-Amz-Signature=5ee5eb90f7f5dcadb7e7faee82e5f601b30751fa655b81e8d9b014a92626c5a8");
+        requestDto.setImage(ImageReader.getImageBytes("images/products/pink3.png"));
         List<String> wineDishPairing = List.of("Pasta", "Meat", "Cheese", "Seafood", "Rice");
         requestDto.setDishes(wineDishPairing);
         create(requestDto);
@@ -196,7 +197,7 @@ public class ProductController {
         requestDto.setTemperature("Serve between 16-18ºC");
         requestDto.setEvent(ProductEvent.Event.FOR_SPECIAL_EVENTS.name());
         requestDto.setPairing("Perfect with salads, chicken, rise, tender meats and barbeques.");
-        requestDto.setImageLink("https://s3.eu-north-1.amazonaws.com/wine-shop-images/products/pink4.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20230421T080152Z&X-Amz-SignedHeaders=host&X-Amz-Expires=604799&X-Amz-Credential=AKIAW3DYPUZUMGLJJDXC%2F20230421%2Feu-north-1%2Fs3%2Faws4_request&X-Amz-Signature=6900a9ec96b834ff195ffd746bdf9f1fe8aa36766edd2df1e7d11bc82a2aaa19");
+        requestDto.setImage(ImageReader.getImageBytes("images/products/pink4.png"));
         List<String> wineDishPairing = List.of("Salads", "Chicken", "Rice", "Meat", "Barbeques");
         requestDto.setDishes(wineDishPairing);
         create(requestDto);
@@ -220,7 +221,7 @@ public class ProductController {
         requestDto.setEvent(ProductEvent.Event.FOR_LONELY_EVENING.name());
         requestDto.setPairing("Perfect with pasta, tender meat, cheese, seafood, rice and also "
                 + "as an aperitif.");
-        requestDto.setImageLink("https://s3.eu-north-1.amazonaws.com/wine-shop-images/products/pink5.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20230421T080245Z&X-Amz-SignedHeaders=host&X-Amz-Expires=604799&X-Amz-Credential=AKIAW3DYPUZUMGLJJDXC%2F20230421%2Feu-north-1%2Fs3%2Faws4_request&X-Amz-Signature=bab78c9b49860f4d8c407a093efafb6d875187db455a0f9c52cad2c84857f0ae");
+        requestDto.setImage(ImageReader.getImageBytes("images/products/pink5.png"));
         List<String> wineDishPairing = List.of("Pasta", "Meat", "Cheese", "Seafood", "Rice");
         requestDto.setDishes(wineDishPairing);
         create(requestDto);
@@ -245,7 +246,7 @@ public class ProductController {
         requestDto.setEvent(ProductEvent.Event.FOR_PRESENT.name());
         requestDto.setPairing("Perfect as an aperitif or dessert. It can, also, accompany mild "
                 + "cheeses and rices.");
-        requestDto.setImageLink("https://s3.eu-north-1.amazonaws.com/wine-shop-images/products/pink6.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20230421T080327Z&X-Amz-SignedHeaders=host&X-Amz-Expires=604799&X-Amz-Credential=AKIAW3DYPUZUMGLJJDXC%2F20230421%2Feu-north-1%2Fs3%2Faws4_request&X-Amz-Signature=23cd0f1068f6b366da87ea87c71ff9ec4cadd95c319d94aea7bd84bc3a4e6bee");
+        requestDto.setImage(ImageReader.getImageBytes("images/products/pink6.png"));
         List<String> wineDishPairing = List.of("Cheese", "Rice");
         requestDto.setDishes(wineDishPairing);
         create(requestDto);
@@ -273,7 +274,7 @@ public class ProductController {
         requestDto.setEvent(ProductEvent.Event.PARTY_WITH_FRIENDS.name());
         requestDto.setPairing("Perfect with stewed meat, cured cheese, sausages, and dishes with "
                 + "personality.");
-        requestDto.setImageLink("https://s3.eu-north-1.amazonaws.com/wine-shop-images/products/red1.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20230421T080447Z&X-Amz-SignedHeaders=host&X-Amz-Expires=604799&X-Amz-Credential=AKIAW3DYPUZUMGLJJDXC%2F20230421%2Feu-north-1%2Fs3%2Faws4_request&X-Amz-Signature=a8505994b675ecbdab03c74ea4dc36ed9a756063349ba393f04ad8e4ba889637");
+        requestDto.setImage(ImageReader.getImageBytes("images/products/red1.png"));
         List<String> wineDishPairing = List.of("Meat", "Cheese", "Sausages");
         requestDto.setDishes(wineDishPairing);
         create(requestDto);
@@ -301,7 +302,7 @@ public class ProductController {
         requestDto.setEvent(ProductEvent.Event.FOR_PRESENT.name());
         requestDto.setPairing("Combine this wine with risottos, cheese, sausages, poultry, and "
                 + "stewed meats.");
-        requestDto.setImageLink("https://s3.eu-north-1.amazonaws.com/wine-shop-images/products/red2.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20230421T080525Z&X-Amz-SignedHeaders=host&X-Amz-Expires=604799&X-Amz-Credential=AKIAW3DYPUZUMGLJJDXC%2F20230421%2Feu-north-1%2Fs3%2Faws4_request&X-Amz-Signature=c09d8b8bd56a879af19d09d737a7a49c5ac2bfcebeea083f60ce601684888b94");
+        requestDto.setImage(ImageReader.getImageBytes("images/products/red2.png"));
         List<String> wineDishPairing = List.of("Risottos", "Cheese", "Sausages", "Poultry", "Meat");
         requestDto.setDishes(wineDishPairing);
         create(requestDto);
@@ -326,7 +327,7 @@ public class ProductController {
         requestDto.setEvent(ProductEvent.Event.FOR_SPECIAL_EVENTS.name());
         requestDto.setPairing("Combine this wine with risottos, cheese, sausages, poultry, and "
                 + "stewed meats.");
-        requestDto.setImageLink("https://s3.eu-north-1.amazonaws.com/wine-shop-images/products/red3.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20230421T080603Z&X-Amz-SignedHeaders=host&X-Amz-Expires=604799&X-Amz-Credential=AKIAW3DYPUZUMGLJJDXC%2F20230421%2Feu-north-1%2Fs3%2Faws4_request&X-Amz-Signature=c4792dbc40900c8e5b0e795d874907f0d2cec9568e85aa2fdbed13783858613a");
+        requestDto.setImage(ImageReader.getImageBytes("images/products/red3.png"));
         List<String> wineDishPairing = List.of("Risottos", "Cheese", "Sausages", "Poultry", "Meat");
         requestDto.setDishes(wineDishPairing);
         create(requestDto);
@@ -352,7 +353,7 @@ public class ProductController {
         requestDto.setEvent(ProductEvent.Event.FOR_SPECIAL_EVENTS.name());
         requestDto.setPairing("This wine is perfect with cured cheeses, red meats, sausages and "
                 + "strong dishes.");
-        requestDto.setImageLink("https://s3.eu-north-1.amazonaws.com/wine-shop-images/products/red4.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20230421T080652Z&X-Amz-SignedHeaders=host&X-Amz-Expires=604799&X-Amz-Credential=AKIAW3DYPUZUMGLJJDXC%2F20230421%2Feu-north-1%2Fs3%2Faws4_request&X-Amz-Signature=04933c74633a1e2afc10fd82ec78cf7752ba0ee7e25475f8eadebb1982434ac6");
+        requestDto.setImage(ImageReader.getImageBytes("images/products/red4.png"));
         List<String> wineDishPairing = List.of("Cheese", "Meat", "Sausages", "Strong dishes");
         requestDto.setDishes(wineDishPairing);
         create(requestDto);
@@ -378,7 +379,7 @@ public class ProductController {
         requestDto.setEvent(ProductEvent.Event.FOR_PRESENT.name());
         requestDto.setPairing("This wine is perfect with cured cheeses, red meats, sausages and "
                 + "strong dishes.");
-        requestDto.setImageLink("https://s3.eu-north-1.amazonaws.com/wine-shop-images/products/red5.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20230421T080735Z&X-Amz-SignedHeaders=host&X-Amz-Expires=604799&X-Amz-Credential=AKIAW3DYPUZUMGLJJDXC%2F20230421%2Feu-north-1%2Fs3%2Faws4_request&X-Amz-Signature=013072a41562fd4b718b7d50dc0f4f8f9d7a7232bac6d1af2a323c0ee37ec924");
+        requestDto.setImage(ImageReader.getImageBytes("images/products/red5.png"));
         List<String> wineDishPairing = List.of("Cheese", "Meat", "Sausages", "Strong dishes");
         requestDto.setDishes(wineDishPairing);
         create(requestDto);
@@ -406,7 +407,7 @@ public class ProductController {
         requestDto.setEvent(ProductEvent.Event.FOR_LONELY_EVENING.name());
         requestDto.setPairing("Perfect with stewed meat, cured cheese, sausages, and dishes with "
                 + "personality.");
-        requestDto.setImageLink("https://s3.eu-north-1.amazonaws.com/wine-shop-images/products/red6.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20230421T080813Z&X-Amz-SignedHeaders=host&X-Amz-Expires=604799&X-Amz-Credential=AKIAW3DYPUZUMGLJJDXC%2F20230421%2Feu-north-1%2Fs3%2Faws4_request&X-Amz-Signature=ff57f5b13dfaaaf23559ab84ef52f72c3f07b55941d62cf429022df5d83ce9ca");
+        requestDto.setImage(ImageReader.getImageBytes("images/products/red6.png"));
         List<String> wineDishPairing = List.of("Meat", "Cheese", "Sausages",
                 "Dishes with personality");
         requestDto.setDishes(wineDishPairing);
@@ -434,7 +435,7 @@ public class ProductController {
         requestDto.setTemperature("Serve between 6-8ºC");
         requestDto.setEvent(ProductEvent.Event.PARTY_WITH_FRIENDS.name());
         requestDto.setPairing("Perfect with fish, mild cheese, rice and white meats.");
-        requestDto.setImageLink("https://s3.eu-north-1.amazonaws.com/wine-shop-images/products/white1.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20230421T080908Z&X-Amz-SignedHeaders=host&X-Amz-Expires=604799&X-Amz-Credential=AKIAW3DYPUZUMGLJJDXC%2F20230421%2Feu-north-1%2Fs3%2Faws4_request&X-Amz-Signature=5f6ca1718e4bd8e04fa7a5a82a53e39475eb861482a2fa18fa7e82d98161f0fe");
+        requestDto.setImage(ImageReader.getImageBytes("images/products/white1.png"));
         List<String> wineDishPairing = List.of("Fish", "Cheese", "Rice", "Meat");
         requestDto.setDishes(wineDishPairing);
         create(requestDto);
@@ -458,7 +459,7 @@ public class ProductController {
         requestDto.setEvent(ProductEvent.Event.FOR_LONELY_EVENING.name());
         requestDto.setPairing("Perfect for all types of aperitifs, fish, rice, smoked dishes, "
                 + "white meat and cheese.");
-        requestDto.setImageLink("https://s3.eu-north-1.amazonaws.com/wine-shop-images/products/white2.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20230421T080952Z&X-Amz-SignedHeaders=host&X-Amz-Expires=604799&X-Amz-Credential=AKIAW3DYPUZUMGLJJDXC%2F20230421%2Feu-north-1%2Fs3%2Faws4_request&X-Amz-Signature=9a4e1e469d58afc6faabe71321bf71f5b22fc1724865cf0adf86ed9c44646cc6");
+        requestDto.setImage(ImageReader.getImageBytes("images/products/white2.png"));
         List<String> wineDishPairing = List.of("Fish", "Rice", "Smoked dishes", "Meat", "Cheese");
         requestDto.setDishes(wineDishPairing);
         create(requestDto);
@@ -483,7 +484,7 @@ public class ProductController {
         requestDto.setEvent(ProductEvent.Event.FOR_SPECIAL_EVENTS.name());
         requestDto.setPairing("Combine this wine with risottos, cheese, sausages, poultry, and "
                 + "stewed meats.");
-        requestDto.setImageLink("https://s3.eu-north-1.amazonaws.com/wine-shop-images/products/white3.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20230421T081039Z&X-Amz-SignedHeaders=host&X-Amz-Expires=604799&X-Amz-Credential=AKIAW3DYPUZUMGLJJDXC%2F20230421%2Feu-north-1%2Fs3%2Faws4_request&X-Amz-Signature=e8d2edcc43d3c77dc12dead62ff3b3a8dce145d5547e37da44bf2cb12056f4aa");
+        requestDto.setImage(ImageReader.getImageBytes("images/products/white3.png"));
         List<String> wineDishPairing = List.of("Risottos", "Cheese", "Sausages", "Poultry", "Meat");
         requestDto.setDishes(wineDishPairing);
         create(requestDto);
@@ -508,7 +509,7 @@ public class ProductController {
         requestDto.setEvent(ProductEvent.Event.PARTY_WITH_FRIENDS.name());
         requestDto.setPairing("This wine is perfect with cured cheeses, red meats, sausages and "
                 + "strong dishes.");
-        requestDto.setImageLink("https://s3.eu-north-1.amazonaws.com/wine-shop-images/products/white4.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20230421T081127Z&X-Amz-SignedHeaders=host&X-Amz-Expires=604799&X-Amz-Credential=AKIAW3DYPUZUMGLJJDXC%2F20230421%2Feu-north-1%2Fs3%2Faws4_request&X-Amz-Signature=8eaaa17749e249d9f21ed5fa629f3cb8bdfae8ec2360366fe71a27c155887757");
+        requestDto.setImage(ImageReader.getImageBytes("images/products/white4.png"));
         List<String> wineDishPairing = List.of("Cheese", "Meat", "Sausages", "Strong dishes");
         requestDto.setDishes(wineDishPairing);
         create(requestDto);
@@ -533,7 +534,7 @@ public class ProductController {
         requestDto.setEvent(ProductEvent.Event.FOR_SPECIAL_EVENTS.name());
         requestDto.setPairing("Perfect for salads, vegetables, fishes and mild cheeses. It can "
                 + "also be taken as an aperitif.");
-        requestDto.setImageLink("https://s3.eu-north-1.amazonaws.com/wine-shop-images/products/white5.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20230421T081204Z&X-Amz-SignedHeaders=host&X-Amz-Expires=604799&X-Amz-Credential=AKIAW3DYPUZUMGLJJDXC%2F20230421%2Feu-north-1%2Fs3%2Faws4_request&X-Amz-Signature=4703cb54bc9026b60952f93f79ec72b66068e4eec088fe4f8b79127efe091638");
+        requestDto.setImage(ImageReader.getImageBytes("images/products/white5.png"));
         List<String> wineDishPairing = List.of("Salads", "Vegetables", "Fish", "Cheese");
         requestDto.setDishes(wineDishPairing);
         create(requestDto);
@@ -561,7 +562,7 @@ public class ProductController {
         requestDto.setEvent(ProductEvent.Event.FOR_PRESENT.name());
         requestDto.setPairing("The great personality: stewed meats and fish, cheese, foie, and "
                 + "smoked foods");
-        requestDto.setImageLink("https://s3.eu-north-1.amazonaws.com/wine-shop-images/products/white6.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20230421T081242Z&X-Amz-SignedHeaders=host&X-Amz-Expires=604799&X-Amz-Credential=AKIAW3DYPUZUMGLJJDXC%2F20230421%2Feu-north-1%2Fs3%2Faws4_request&X-Amz-Signature=0965929e07e16805667d93916aa2dc75275daceb7440c84a084269acf263847b");
+        requestDto.setImage(ImageReader.getImageBytes("images/products/white6.png"));
         List<String> wineDishPairing = List.of("Meat", "Fish", "Cheese", "Foie", "Smoked dishes");
         requestDto.setDishes(wineDishPairing);
         create(requestDto);

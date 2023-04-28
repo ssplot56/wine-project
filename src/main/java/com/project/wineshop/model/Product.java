@@ -5,6 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import java.math.BigDecimal;
@@ -53,8 +54,9 @@ public class Product {
 
     private String temperature;
 
-    @Column(length = 2000)
-    private String imageLink;
+    @Lob // Використовуйте анотацію @Lob для зберігання масиву байтів у вигляді BLOB
+    @Column(name = "image", nullable = true, columnDefinition="MEDIUMBLOB")
+    private byte[] image;
 
     private Long popularity = 0L;
 }

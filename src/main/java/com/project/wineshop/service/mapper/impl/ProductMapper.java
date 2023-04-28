@@ -8,6 +8,7 @@ import com.project.wineshop.service.DishService;
 import com.project.wineshop.service.mapper.RequestDtoMapper;
 import com.project.wineshop.service.mapper.ResponseDtoMapper;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -50,7 +51,7 @@ public class ProductMapper implements
         product.setGrape(productRequestDto.getGrape());
         product.setTaste(productRequestDto.getTaste());
         product.setTemperature(productRequestDto.getTemperature());
-        product.setImageLink(productRequestDto.getImageLink());
+        product.setImage(productRequestDto.getImage());
         return product;
     }
 
@@ -76,7 +77,9 @@ public class ProductMapper implements
         responseDto.setGrape(product.getGrape());
         responseDto.setTaste(product.getTaste());
         responseDto.setTemperature(product.getTemperature());
-        responseDto.setImageLink(product.getImageLink());
+        byte[] image = product.getImage();
+        String base64Image = Base64.getEncoder().encodeToString(image);
+        responseDto.setImage(base64Image);
         responseDto.setPopularity(product.getPopularity());
         return responseDto;
     }

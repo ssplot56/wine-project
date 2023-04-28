@@ -34,7 +34,7 @@ public class ProductResponseDto {
 
     private String temperature;
 
-    private String imageLink;
+    private String image;
 
     private Long popularity;
 }

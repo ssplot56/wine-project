@@ -1,27 +1,54 @@
 package com.project.wineshop.service.mapper.impl;
 
-import com.project.wineshop.dto.request.UserRequestDto;
+import com.project.wineshop.dto.request.user.UserRequestDto;
 import com.project.wineshop.dto.response.UserResponseDto;
+import com.project.wineshop.exception.UserAlreadyExistException;
+import com.project.wineshop.exception.UserWithSuchPhoneNumberExistException;
+import com.project.wineshop.model.Role;
+import com.project.wineshop.model.ShippingDetails;
 import com.project.wineshop.model.User;
+import com.project.wineshop.service.RoleService;
+import com.project.wineshop.service.UserService;
 import com.project.wineshop.service.mapper.RequestDtoMapper;
 import com.project.wineshop.service.mapper.ResponseDtoMapper;
-import org.springframework.stereotype.Component;
+import java.util.HashSet;
+import java.util.Optional;
+import java.util.Set;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
 
-@Component
+@Service
 public class UserMapper implements RequestDtoMapper<User, UserRequestDto>,
         ResponseDtoMapper<User, UserResponseDto> {
+    private static final Set<Role.RoleName> roleNames =
+            Set.of(Role.RoleName.USER, Role.RoleName.ADMIN);
+    private final RoleService roleService;
+    private final UserService userService;
+    private final PasswordEncoder passwordEncoder;
+    private final ShippingDetailsMapper shippingDetailsMapper;
+
+    public UserMapper(RoleService roleService,
+                      ShippingDetailsMapper shippingDetailsMapper,
+                      UserService userService,
+                      PasswordEncoder passwordEncoder) {
+        this.roleService = roleService;
+        this.shippingDetailsMapper = shippingDetailsMapper;
+        this.userService = userService;
+        this.passwordEncoder = passwordEncoder;
+    }
+
     @Override
     public User mapToModel(UserRequestDto requestDto) {
-        User user = new User();
-        user.setFirstName(requestDto.getFirstName());
-        user.setLastName(requestDto.getLastName());
-        user.setEmail(requestDto.getEmail());
-        user.setPassword(requestDto.getPassword());
-        user.setPhoneNumber(requestDto.getPhoneNumber());
-        user.setBirthDate(requestDto.getBirthDate());
-        user.setAddress(requestDto.getAddress());
-        user.setShoppingCart(requestDto.getShoppingCart());
-        user.setRoles(requestDto.getRoles());
+        Optional<User> userOptional =
+                Optional.ofNullable(userService.findByEmail(requestDto.getEmail()));
+        if (requestDto.getPassword() != null && userOptional.isPresent()
+                && isUserOrAdmin(userOptional.get())) {
+            throw new UserAlreadyExistException("This email is already used");
+        }
+        User user = createUserByData(userOptional, requestDto);
+        ShippingDetails shippingDetails =
+                shippingDetailsMapper.mapToModel(requestDto.getShippingDetailsRequest());
+        user.setShippingDetails(shippingDetails);
         return user;
     }
 
@@ -32,12 +59,41 @@ public class UserMapper implements RequestDtoMapper<User, UserRequestDto>,
         responseDto.setFirstName(user.getFirstName());
         responseDto.setLastName(user.getLastName());
         responseDto.setEmail(user.getEmail());
-        responseDto.setPassword(user.getPassword());
         responseDto.setPhoneNumber(user.getPhoneNumber());
         responseDto.setBirthDate(user.getBirthDate());
-        responseDto.setAddress(user.getAddress());
-        responseDto.setShoppingCart(user.getShoppingCart());
-        responseDto.setRoles(user.getRoles());
+        responseDto.setShippingDetails(user.getShippingDetails());
         return responseDto;
+    }
+
+    private boolean isUserOrAdmin(User user) {
+        return user.getRoles()
+                .stream()
+                .map(Role::getName)
+                .anyMatch(roleNames::contains);
+    }
+
+    private User createUserByData(Optional<User> userOptional,
+                                  UserRequestDto requestDto) {
+        User user = userOptional.orElse(new User());
+        user.setFirstName(requestDto.getFirstName());
+        user.setLastName(requestDto.getLastName());
+        user.setEmail(requestDto.getEmail());
+        user.setPhoneNumber(requestDto.getPhoneNumber());
+        Set<Role> roleSet = new HashSet<>();
+        if (Optional.ofNullable(requestDto.getPassword()).isPresent()) {
+            user.setPassword(passwordEncoder.encode(requestDto.getPassword()));
+            roleSet.add(roleService.findByName(Role.RoleName.USER));
+        } else {
+            roleSet.add(roleService.findByName(Role.RoleName.GUEST));
+        }
+        user.setRoles(roleSet);
+        if (userService.findByPhoneNumber(user.getPhoneNumber()) != null && isUserOrAdmin(user)) {
+            throw new UserWithSuchPhoneNumberExistException("The user with such phone number"
+                    + " already exist!");
+        }
+        if (Optional.ofNullable(requestDto.getBirthDate()).isPresent()) {
+            user.setBirthDate(requestDto.getBirthDate());
+        }
+        return user;
     }
 }

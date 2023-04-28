@@ -1,6 +1,10 @@
 package com.project.wineshop.model;
 
+import com.project.wineshop.model.enums.OrderPayment;
+import com.project.wineshop.model.enums.OrderStatus;
+import jakarta.persistence.CollectionTable;
 import jakarta.persistence.Column;
+import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -9,14 +13,21 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.MapKeyJoinColumn;
 import jakarta.persistence.Table;
-import lombok.Data;
-
 import java.time.LocalDateTime;
-import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+import org.hibernate.Hibernate;
 
-@Data
+@Getter
+@Setter
+@ToString
+@RequiredArgsConstructor
 @Entity
 @Table(name = "orders")
 public class Order {
@@ -24,21 +35,47 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToMany
-    private List<Product> products;
+    @ElementCollection
+    @CollectionTable(name = "order_products", joinColumns = @JoinColumn(name = "order_id"))
+    @MapKeyJoinColumn(name = "product_id")
+    @Column(name = "quantity")
+    @ToString.Exclude
+    private Map<Product,Integer> products;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
 
+    @Column(name = "order_time")
     private LocalDateTime orderDate;
 
     @Column(length = 20)
     @Enumerated(EnumType.STRING)
-    private Status status = Status.CREATED;
+    private OrderStatus.Status orderStatus;
 
-    public enum Status {
-        CREATED,
-        FULFILLED
+    @Column(length = 20)
+    @Enumerated(EnumType.STRING)
+    private OrderPayment.Payment payment;
+
+    private Boolean isGift;
+
+    @ManyToOne
+    private ShippingDetails shippingDetails;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) {
+            return false;
+        }
+        Order order = (Order) o;
+        return id != null && Objects.equals(id, order.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
     }
 }

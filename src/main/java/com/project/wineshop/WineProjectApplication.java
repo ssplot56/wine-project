@@ -9,5 +9,4 @@ public class WineProjectApplication {
     public static void main(String[] args) {
         SpringApplication.run(WineProjectApplication.class, args);
     }
-
 }

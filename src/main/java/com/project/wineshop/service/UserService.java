@@ -1,18 +1,14 @@
 package com.project.wineshop.service;
 
 import com.project.wineshop.model.User;
-import java.util.List;
 
-public interface UserService {
-    User save(User user);
-
-    User update(Long id, User user);
-
-    User findById(Long id);
-
-    List<User> findAll();
-
-    void deleteById(Long id);
-
+public interface UserService extends GenericService<User> {
     User findByEmail(String email);
+
+    User findByPhoneNumber(String phoneNumber);
+
+    boolean mailIsAvailable(String email);
+
+    boolean phoneNumberIsAvailable(String phoneNumber, String email);
 }
+

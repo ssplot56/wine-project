@@ -55,7 +55,7 @@ public class Product {
     private String temperature;
 
     @Lob // Використовуйте анотацію @Lob для зберігання масиву байтів у вигляді BLOB
-    @Column(name = "image", nullable = true, columnDefinition="MEDIUMBLOB")
+    @Column(name = "image", nullable = true, columnDefinition = "MEDIUMBLOB")
     private byte[] image;
 
     private Long popularity = 0L;

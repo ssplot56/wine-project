@@ -52,11 +52,3 @@ Also, the app supports registration for new customers and *CRUD* operations.
 - Configure [/src/main/resources/application.properties](./src/main/resources/application.properties) with your URL, USERNAME, PASSWORD, DRIVER-CLASS-NAME;
 - Enjoy the application.
 
-```properties
-spring_profiles_active=prod
-PROD_DB_HOST=containers-us-west-201.railway.app
-PROD_DB_PORT=5447
-PROD_DB_NAME=railway
-PROD_DB_PASSWORD=f9LhuRGYC30Tg5Pm4a01
-PROD_DB_USERNAME=root
-```

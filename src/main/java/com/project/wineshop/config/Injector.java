@@ -10,12 +10,11 @@ import com.project.wineshop.repository.RoleRepository;
 import com.project.wineshop.service.ProductService;
 import com.project.wineshop.service.mapper.impl.ProductMapper;
 import jakarta.annotation.PostConstruct;
-import org.springframework.stereotype.Component;
-
 import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.springframework.stereotype.Component;
 
 @Component
 public class Injector {

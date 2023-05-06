@@ -24,10 +24,10 @@ public class Dish {
 
     @Override
     public String toString() {
-        return "Dish{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                '}';
+        return "Dish{"
+                + "id=" + id
+                + ", name='" + name + '\''
+                + '}';
     }
 
     @Override

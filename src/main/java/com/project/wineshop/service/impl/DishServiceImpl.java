@@ -5,6 +5,7 @@ import com.project.wineshop.repository.DishRepository;
 import com.project.wineshop.service.DishService;
 import java.util.List;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class DishServiceImpl implements DishService {

@@ -1,4 +1,4 @@
-package com.project.wineshop.model.enums;
+package com.project.wineshop.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -11,22 +11,19 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "product_type")
-public class ProductType {
+@Table(name = "product_event")
+public class ProductEvent {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Enumerated(EnumType.STRING)
-    private Type type;
+    private ProductEvent.Event event;
 
-    public enum Type {
-        DRY,
-        SEMIDRY,
-        SEMISWEET,
-        SWEET,
-        BRUT,
-        SPARCLING
+    public enum Event {
+        PARTY_WITH_FRIENDS,
+        FOR_SPECIAL_EVENTS,
+        FOR_PRESENT,
+        FOR_LONELY_EVENING
     }
-
 }

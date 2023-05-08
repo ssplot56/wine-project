@@ -1,4 +1,4 @@
-package com.project.wineshop.model.enums;
+package com.project.wineshop.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;

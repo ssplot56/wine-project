@@ -1,7 +1,5 @@
 package com.project.wineshop.model;
 
-import com.project.wineshop.model.enums.OrderPayment;
-import com.project.wineshop.model.enums.OrderStatus;
 import jakarta.persistence.CollectionTable;
 import jakarta.persistence.Column;
 import jakarta.persistence.ElementCollection;

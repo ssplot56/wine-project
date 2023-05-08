@@ -4,24 +4,17 @@ import com.project.wineshop.dto.request.ProductRequestDto;
 import com.project.wineshop.dto.response.ProductResponseDto;
 import com.project.wineshop.model.Dish;
 import com.project.wineshop.model.Product;
-import com.project.wineshop.service.DishService;
 import com.project.wineshop.service.mapper.RequestDtoMapper;
 import com.project.wineshop.service.mapper.ResponseDtoMapper;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 import org.springframework.stereotype.Component;
 
 @Component
 public class ProductMapper implements
         RequestDtoMapper<Product, ProductRequestDto>,
         ResponseDtoMapper<Product, ProductResponseDto> {
-    private final DishService dishService;
-
-    public ProductMapper(DishService dishService) {
-        this.dishService = dishService;
-    }
 
     @Override
     public Product mapToModel(ProductRequestDto productRequestDto) {
@@ -32,17 +25,9 @@ public class ProductMapper implements
         product.setColor(productRequestDto.getColor());
         product.setEvent(productRequestDto.getEvent());
         product.setPairing(productRequestDto.getPairing());
-        List<Dish> dishes = new ArrayList<>();
-        List<String> names = productRequestDto.getDishes();
-        for (String name : names) {
-            Dish dish = dishService.getByName(name);
-            if (dish == null) {
-                dish = new Dish();
-                dish.setName(name);
-                dishService.save(dish);
-            }
-            dishes.add(dish);
-        }
+        Set<Dish> dishes = productRequestDto.getDishes().stream()
+                .map(name -> Dish.builder().name(name).build())
+                        .collect(Collectors.toSet());
         product.setDishes(new HashSet<>(dishes));
         product.setVintage(productRequestDto.getVintage());
         product.setCountry(productRequestDto.getCountry());

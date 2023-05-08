@@ -7,8 +7,8 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ShippingDetailsRepository extends JpaRepository<ShippingDetails, Long> {
-    @Query("from ShippingDetails p where p.region=?1 and p.city=?2 "
-            + "and p.deliveryService=?3 and p.warehouse=?4")
+    @Query("FROM ShippingDetails p WHERE p.region=?1 AND p.city=?2 "
+            + "AND p.deliveryService=?3 AND p.warehouse=?4")
     ShippingDetails findShippingDetailsByAllFields(String region, String city,
                                                    String deliveryService,
                                                    String warehouse);

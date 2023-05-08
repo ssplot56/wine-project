@@ -27,14 +27,14 @@ public class OrderController {
     }
 
     @PostMapping("/complete")
-    public ResponseEntity completeOrder(@RequestBody @Valid OrderRequestDto orderRequestDto) {
+    public ResponseEntity<Void> completeOrder(@RequestBody @Valid OrderRequestDto orderRequestDto) {
         orderService.completeOrder(requestDtoMapper.mapToModel(orderRequestDto));
         return ResponseEntity.ok().build();
     }
 
     @ExceptionHandler({UserAlreadyExistException.class,
             UserWithSuchPhoneNumberExistException.class})
-    public ResponseEntity exceptionHandler(RuntimeException ex) {
+    public ResponseEntity<String> exceptionHandler(RuntimeException ex) {
         return ResponseEntity.badRequest().body(ex.getMessage());
     }
 }

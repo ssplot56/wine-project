@@ -1,8 +1,8 @@
 package com.project.wineshop.dto.request;
 
-import com.project.wineshop.model.enums.ProductColor;
-import com.project.wineshop.model.enums.ProductEvent;
-import com.project.wineshop.model.enums.ProductType;
+import com.project.wineshop.model.ProductColor;
+import com.project.wineshop.model.ProductEvent;
+import com.project.wineshop.model.ProductType;
 import com.project.wineshop.validation.EnumValue;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;

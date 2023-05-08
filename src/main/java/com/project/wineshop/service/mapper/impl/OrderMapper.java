@@ -2,10 +2,10 @@ package com.project.wineshop.service.mapper.impl;
 
 import com.project.wineshop.dto.request.OrderRequestDto;
 import com.project.wineshop.model.Order;
+import com.project.wineshop.model.OrderPayment;
+import com.project.wineshop.model.OrderStatus;
 import com.project.wineshop.model.Product;
 import com.project.wineshop.model.User;
-import com.project.wineshop.model.enums.OrderPayment;
-import com.project.wineshop.model.enums.OrderStatus;
 import com.project.wineshop.service.ProductService;
 import com.project.wineshop.service.mapper.RequestDtoMapper;
 import java.time.LocalDateTime;

@@ -7,11 +7,13 @@ import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import java.util.Set;
+import lombok.Builder;
 import lombok.Data;
 
 @Data
 @Entity
 @Table(name = "dishes")
+@Builder
 public class Dish {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

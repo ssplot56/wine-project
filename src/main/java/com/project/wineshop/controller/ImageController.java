@@ -34,7 +34,7 @@ public class ImageController {
     public ResponseEntity<?> findImageByProductId(@PathVariable Long productId) {
         byte[] imageData = imageService.findByProductId(productId).getImageData();
         return ResponseEntity.status(HttpStatus.OK)
-                .contentType(MediaType.valueOf("image/png"))
+                .contentType(MediaType.IMAGE_PNG)
                 .body(imageData);
     }
 
